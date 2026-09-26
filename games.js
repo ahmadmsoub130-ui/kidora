@@ -1,98 +1,135 @@
 const GAMES = [
+
   {
     id: 1,
-    title: "Neon Runner",
-    description: "اركض وتجنب العقبات واجمع أكبر عدد من النقاط.",
-    category: "arcade",
-    icon: "🏃",
-    type: "runner"
+    title: "Action Games",
+    titleAr: "ألعاب أكشن",
+    description: "مجموعة ألعاب أكشن سريعة وممتعة.",
+    category: "action",
+    icon: "⚔️",
+    color: "purple",
+    featured: true
   },
+
   {
     id: 2,
-    title: "Memory Cards",
-    description: "اختبر ذاكرتك وطابق البطاقات بأسرع وقت.",
-    category: "puzzle",
-    icon: "🧠",
-    type: "memory"
-  },
-  {
-    id: 3,
-    title: "Quick Tap",
-    description: "اضغط بسرعة واجمع أكبر عدد من النقاط.",
-    category: "casual",
-    icon: "⚡",
-    type: "tap"
-  },
-  {
-    id: 4,
-    title: "Number Challenge",
-    description: "حل العمليات الحسابية قبل انتهاء الوقت.",
-    category: "puzzle",
-    icon: "🔢",
-    type: "math"
-  },
-  {
-    id: 5,
-    title: "Space Defender",
-    description: "دافع عن مركبتك ضد الأعداء.",
-    category: "action",
-    icon: "🚀",
-    type: "space"
-  },
-  {
-    id: 6,
-    title: "Goal Master",
-    description: "حاول تسجيل أكبر عدد من الأهداف.",
-    category: "sports",
-    icon: "⚽",
-    type: "goal"
-  },
-  {
-    id: 7,
-    title: "Color Match",
-    description: "طابق الألوان بأسرع وقت.",
-    category: "puzzle",
-    icon: "🎨",
-    type: "color"
-  },
-  {
-    id: 8,
-    title: "Coin Hunter",
-    description: "اجمع العملات وتجنب العقبات.",
-    category: "adventure",
-    icon: "🪙",
-    type: "runner"
-  },
-  {
-    id: 9,
-    title: "Fast Racer",
-    description: "تجنب السيارات وحاول الوصول لأبعد مسافة.",
+    title: "Racing Games",
+    titleAr: "ألعاب سباق",
+    description: "انطلق في سباقات سريعة وتحدى خصومك.",
     category: "racing",
     icon: "🏎️",
-    type: "racing"
+    color: "red",
+    featured: true
   },
+
+  {
+    id: 3,
+    title: "Puzzle Games",
+    titleAr: "ألعاب ألغاز",
+    description: "اختبر ذكاءك مع مجموعة من ألعاب الألغاز.",
+    category: "puzzle",
+    icon: "🧩",
+    color: "blue",
+    featured: true
+  },
+
+  {
+    id: 4,
+    title: "Sports Games",
+    titleAr: "ألعاب رياضية",
+    description: "كرة قدم ورياضات مختلفة مباشرة من المتصفح.",
+    category: "sports",
+    icon: "⚽",
+    color: "green",
+    featured: true
+  },
+
+  {
+    id: 5,
+    title: "Arcade Games",
+    titleAr: "ألعاب أركيد",
+    description: "ألعاب أركيد سريعة مناسبة لجميع الأجهزة.",
+    category: "arcade",
+    icon: "👾",
+    color: "cyan",
+    featured: true
+  },
+
+  {
+    id: 6,
+    title: "Adventure Games",
+    titleAr: "ألعاب مغامرات",
+    description: "استكشف عوالم جديدة وخوض مغامرات مختلفة.",
+    category: "adventure",
+    icon: "🗺️",
+    color: "orange",
+    featured: true
+  },
+
+  {
+    id: 7,
+    title: "Strategy Games",
+    titleAr: "ألعاب استراتيجية",
+    description: "خطط جيدًا واتخذ القرارات الصحيحة.",
+    category: "strategy",
+    icon: "♟️",
+    color: "gold",
+    featured: false
+  },
+
+  {
+    id: 8,
+    title: "Casual Games",
+    titleAr: "ألعاب خفيفة",
+    description: "ألعاب سهلة وسريعة للعب في أي وقت.",
+    category: "casual",
+    icon: "🎯",
+    color: "pink",
+    featured: false
+  },
+
+  {
+    id: 9,
+    title: "Football Stars",
+    titleAr: "نجوم كرة القدم",
+    description: "اختبر مهارتك في تسجيل الأهداف.",
+    category: "sports",
+    icon: "⚽",
+    color: "green",
+    featured: false
+  },
+
   {
     id: 10,
-    title: "Brain Test",
-    description: "أسئلة وتحديات قصيرة لاختبار سرعة التفكير.",
-    category: "strategy",
-    icon: "🧩",
-    type: "quiz"
+    title: "Highway Racer",
+    titleAr: "سباق الطريق",
+    description: "قد سيارتك بأقصى سرعة وتجنب السيارات.",
+    category: "racing",
+    icon: "🚗",
+    color: "red",
+    featured: false
   },
+
   {
     id: 11,
-    title: "Galaxy Attack",
-    description: "معركة فضائية سريعة ومليئة بالأعداء.",
+    title: "Space Attack",
+    titleAr: "هجوم الفضاء",
+    description: "دافع عن مركبتك في معركة فضائية.",
     category: "action",
-    icon: "👾",
-    type: "space"
+    icon: "🚀",
+    color: "purple",
+    featured: false
   },
+
   {
     id: 12,
-    title: "Lucky Box",
-    description: "اختر الصندوق الصحيح واجمع النقاط.",
-    category: "casual",
-    icon: "🎁",
-    type: "box"
+    title: "Memory Challenge",
+    titleAr: "تحدي الذاكرة",
+    description: "اختبر قوة ذاكرتك وطابق البطاقات.",
+    category: "puzzle",
+    icon: "🧠",
+    color: "blue",
+    featured: false
   }
+
 ];
