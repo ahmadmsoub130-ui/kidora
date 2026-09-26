@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>اللعبة | ODDORA Arcade</title>
+
+  <meta
+    name="description"
+    content="العب ألعاب المتصفح مجانًا على ODDORA Arcade."
+  >
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    .game-page {
+      min-height: 80vh;
+      padding: 40px 0 80px;
+    }
+
+    .game-breadcrumb {
+      margin-bottom: 25px;
+    }
+
+    .game-breadcrumb a {
+      color: var(--cyan);
+    }
+
+    .game-detail {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .game-detail-header {
+      padding: 30px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .game-detail-header h1 {
+      margin: 8px 0;
+      font-size: 32px;
+    }
+
+    .game-detail-header p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .game-category-label {
+      color: var(--cyan);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .game-screen {
+      min-height: 500px;
+      background:
+        radial-gradient(
+          circle at center,
+          #182541,
+          #070b14 70%
+        );
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    .game-loading {
+      text-align: center;
+    }
+
+    .game-loading-icon {
+      font-size: 90px;
+      margin-bottom: 20px;
+    }
+
+    .game-loading h2 {
+      margin-bottom: 10px;
+    }
+
+    .game-loading p {
+      color: var(--muted);
+    }
+
+    .play-real-button {
+      margin-top: 25px;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .game-info {
+      padding: 30px;
+      border-top: 1px solid var(--border);
+    }
+
+    .game-info h2 {
+      margin-bottom: 12px;
+    }
+
+    .game-info p {
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .game-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+
+      .game-page {
+        padding-top: 20px;
+      }
+
+      .game-detail-header h1 {
+        font-size: 26px;
+      }
+
+      .game-screen {
+        min-height: 400px;
+      }
+
+      .game-loading-icon {
+        font-size: 70px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+  <div class="container header-inner">
+
+    <a href="index.html" class="logo">
+      ODDORA
+      <span>ARCADE</span>
+    </a>
+
+    <nav class="main-nav">
+
+      <a href="index.html#home">
+        الرئيسية
+      </a>
+
+      <a href="index.html#games">
+        الألعاب
+      </a>
+
+      <a href="index.html#categories">
+        التصنيفات
+      </a>
+
+      <a href="index.html#new">
+        جديد
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main class="game-page">
+
+  <div class="container">
+
+    <a
+      href="index.html"
+      class="secondary-button back-button"
+    >
+      ← العودة للألعاب
+    </a>
+
+
+    <article class="game-detail">
+
+      <header class="game-detail-header">
+
+        <span
+          id="gameCategory"
+          class="game-category-label"
+        >
+          ألعاب
+        </span>
+
+        <h1 id="gameTitle">
+          تحميل اللعبة...
+        </h1>
+
+        <p id="gameDescription">
+          جاري تجهيز اللعبة...
+        </p>
+
+      </header>
+
+
+      <section class="game-screen">
+
+        <div class="game-loading">
+
+          <div
+            id="gameIcon"
+            class="game-loading-icon"
+          >
+            🎮
+          </div>
+
+          <h2>
+            جاهز للعب؟
+          </h2>
+
+          <p>
+            اضغط على الزر لبدء اللعبة.
+          </p>
+
+          <button
+            id="playButton"
+            class="primary-button play-real-button"
+          >
+            ▶ ابدأ اللعب
+          </button>
+
+          <div
+            id="gameContainer"
+            style="display:none;"
+          ></div>
+
+        </div>
+
+      </section>
+
+
+      <section class="game-info">
+
+        <h2>
+          عن اللعبة
+        </h2>
+
+        <p id="gameInfo">
+          استمتع باللعبة مباشرة من المتصفح بدون الحاجة
+          إلى تحميل تطبيق إضافي.
+        </p>
+
+        <div class="game-actions">
+
+          <button
+            id="favoriteButton"
+            class="secondary-button"
+          >
+            ☆ إضافة للمفضلة
+          </button>
+
+          <a
+            href="index.html#games"
+            class="secondary-button"
+          >
+            ألعاب أخرى
+          </a>
+
+        </div>
+
+      </section>
+
+    </article>
+
+  </div>
+
+</main>
+
+
+<footer class="site-footer">
+
+  <div class="container footer-grid">
+
+    <div>
+
+      <a href="index.html" class="logo">
+        ODDORA
+        <span>ARCADE</span>
+      </a>
+
+      <p>
+        منصة عربية لاكتشاف ألعاب المتصفح واللعب مباشرة.
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h3>
+        المنصة
+      </h3>
+
+      <a href="index.html#games">
+        الألعاب
+      </a>
+
+      <a href="index.html#categories">
+        التصنيفات
+      </a>
+
+      <a href="index.html#new">
+        الألعاب الجديدة
+      </a>
+
+    </div>
+
+
+    <div>
+
+      <h3>
+        معلومات
+      </h3>
+
+      <a href="privacy.html">
+        الخصوصية
+      </a>
+
+      <a href="terms.html">
+        الشروط
+      </a>
+
+      <a href="contact.html">
+        تواصل معنا
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <div class="container">
+
+      ©
+      <span id="year"></span>
+      ODDORA Arcade
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script src="games.js"></script>
+
+
+<script>
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    const id =
+      Number(
+        params.get("id")
+      );
+
+    const game =
+      GAMES.find(
+        item => item.id === id
+      );
+
+
+    const title =
+      document.getElementById(
+        "gameTitle"
+      );
+
+    const description =
+      document.getElementById(
+        "gameDescription"
+      );
+
+    const category =
+      document.getElementById(
+        "gameCategory"
+      );
+
+    const icon =
+      document.getElementById(
+        "gameIcon"
+      );
+
+    const info =
+      document.getElementById(
+        "gameInfo"
+      );
+
+
+    const categoryNames = {
+
+      action: "أكشن",
+
+      racing: "سباقات",
+
+      puzzle: "ألغاز",
+
+      sports: "رياضة",
+
+      arcade: "أركيد",
+
+      strategy: "استراتيجية",
+
+      adventure: "مغامرات",
+
+      casual: "خفيفة"
+
+    };
+
+
+    if (!game) {
+
+      title.textContent =
+        "اللعبة غير موجودة";
+
+      description.textContent =
+        "لم يتم العثور على اللعبة المطلوبة.";
+
+      category.textContent =
+        "ODDORA Arcade";
+
+      icon.textContent =
+        "❌";
+
+      return;
+
+    }
+
+
+    document.title =
+      `${game.titleAr || game.title} | ODDORA Arcade`;
+
+
+    title.textContent =
+      game.titleAr || game.title;
+
+
+    description.textContent =
+      game.description;
+
+
+    category.textContent =
+      categoryNames[game.category] ||
+      "ألعاب";
+
+
+    icon.textContent =
+      game.icon;
+
+
+    info.textContent =
+      `${game.description} العب مباشرة من المتصفح واستمتع بتجربة ODDORA Arcade.`;
+
+
+    const playButton =
+      document.getElementById(
+        "playButton"
+      );
+
+
+    const gameContainer =
+      document.getElementById(
+        "gameContainer"
+      );
+
+
+    playButton.addEventListener(
+      "click",
+      () => {
+
+        playButton.style.display =
+          "none";
+
+        gameContainer.style.display =
+          "block";
+
+        gameContainer.innerHTML = `
+
+          <div
+            style="
+              background:#101827;
+              border:1px solid #1d2a40;
+              border-radius:20px;
+              padding:30px;
+              max-width:500px;
+              margin:auto;
+            "
+          >
+
+            <div
+              style="
+                font-size:70px;
+                margin-bottom:15px;
+              "
+            >
+              ${game.icon}
+            </div>
+
+            <h2>
+              ${game.titleAr || game.title}
+            </h2>
+
+            <p
+              style="
+                color:#94a3b8;
+                line-height:1.8;
+              "
+            >
+              تم تشغيل اللعبة.
+              نظام الألعاب الحقيقي سيتم ربطه
+              بهذه الصفحة في المرحلة التالية.
+            </p>
+
+            <div
+              style="
+                margin-top:20px;
+                font-size:18px;
+              "
+            >
+              🎮 اللعبة تعمل داخل ODDORA Arcade
+            </div>
+
+          </div>
+
+        `;
+
+      });
+
+
+    const favoriteButton =
+      document.getElementById(
+        "favoriteButton"
+      );
+
+
+    favoriteButton.addEventListener(
+      "click",
+      () => {
+
+        const key =
+          "oddora_favorite_" +
+          game.id;
+
+        const saved =
+          localStorage.getItem(
+            key
+          );
+
+        if (saved) {
+
+          localStorage.removeItem(
+            key
+          );
+
+          favoriteButton.textContent =
+            "☆ إضافة للمفضلة";
+
+        } else {
+
+          localStorage.setItem(
+            key,
+            "true"
+          );
+
+          favoriteButton.textContent =
+            "★ تمت الإضافة للمفضلة";
+
+        }
+
+      }
+    );
+
+
+    const year =
+      document.getElementById(
+        "year"
+      );
+
+    if (year) {
+
+      year.textContent =
+        new Date().getFullYear();
+
+    }
+
+  }
+
+);
+
+</script>
+
+</body>
+</html>
