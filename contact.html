@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>تواصل معنا | ODDORA Arcade</title>
+
+  <meta
+    name="description"
+    content="تواصل مع فريق ODDORA Arcade."
+  >
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .contact-page {
+      min-height: 70vh;
+      padding: 80px 0;
+    }
+
+    .contact-card {
+      max-width: 850px;
+      margin: auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+    }
+
+    .contact-card h1 {
+      margin-bottom: 15px;
+    }
+
+    .contact-card > p {
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 30px;
+    }
+
+    .contact-info {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .contact-item {
+      padding: 20px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .contact-item a {
+      color: var(--cyan);
+      word-break: break-word;
+    }
+
+    .back-home {
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+
+    <a href="index.html" class="logo">
+      ODDORA
+      <span>ARCADE</span>
+    </a>
+
+    <nav class="main-nav">
+      <a href="index.html#home">الرئيسية</a>
+      <a href="index.html#games">الألعاب</a>
+      <a href="index.html#categories">التصنيفات</a>
+      <a href="index.html#new">جديد</a>
+    </nav>
+
+  </div>
+</header>
+
+<main class="contact-page">
+
+  <div class="container">
+
+    <a href="index.html" class="secondary-button back-home">
+      ← العودة للرئيسية
+    </a>
+
+    <section class="contact-card">
+
+      <span class="section-label">ODDORA ARCADE</span>
+
+      <h1>تواصل معنا</h1>
+
+      <p>
+        لديك اقتراح، مشكلة في لعبة، أو تريد الإبلاغ عن خطأ؟
+        يمكنك التواصل معنا عبر البريد الإلكتروني.
+      </p>
+
+      <div class="contact-info">
+
+        <div class="contact-item">
+          <strong>البريد الإلكتروني</strong>
+          <a href="mailto:ahmadmsoub130@gmail.com">
+            ahmadmsoub130@gmail.com
+          </a>
+        </div>
+
+        <div class="contact-item">
+          <strong>اقتراح لعبة</strong>
+          <p>
+            إذا كانت لديك فكرة للعبة أو تريد اقتراح لعبة جديدة
+            للمنصة، أرسل تفاصيلها عبر البريد الإلكتروني.
+          </p>
+        </div>
+
+        <div class="contact-item">
+          <strong>الإبلاغ عن مشكلة</strong>
+          <p>
+            عند مواجهة مشكلة في الموقع أو إحدى الألعاب، اذكر اسم
+            اللعبة ووصف المشكلة حتى نتمكن من مراجعتها.
+          </p>
+        </div>
+
+      </div>
+
+      <a
+        href="mailto:ahmadmsoub130@gmail.com?subject=تواصل مع ODDORA Arcade"
+        class="primary-button"
+      >
+        إرسال بريد إلكتروني
+      </a>
+
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+
+  <div class="container footer-grid">
+
+    <div>
+      <a href="index.html" class="logo">
+        ODDORA <span>ARCADE</span>
+      </a>
+
+      <p>
+        منصة عربية لاكتشاف ألعاب المتصفح واللعب مباشرة.
+      </p>
+    </div>
+
+    <div>
+      <h3>المنصة</h3>
+      <a href="index.html#games">الألعاب</a>
+      <a href="index.html#categories">التصنيفات</a>
+      <a href="index.html#new">الألعاب الجديدة</a>
+    </div>
+
+    <div>
+      <h3>معلومات</h3>
+      <a href="privacy.html">الخصوصية</a>
+      <a href="terms.html">الشروط</a>
+      <a href="contact.html">تواصل معنا</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      © <span id="year"></span> ODDORA Arcade
+    </div>
+  </div>
+
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
