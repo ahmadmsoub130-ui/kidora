@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ODDORA Arcade | ألعاب المتصفح العربية</title>
+
+  <meta
+    name="description"
+    content="ODDORA Arcade منصة عربية لاكتشاف ألعاب المتصفح المجانية."
+  >
+
+  <meta name="theme-color" content="#070b14">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+
+    <div class="container header-inner">
+
+      <a href="index.html" class="logo">
+        ODDORA
+        <span>ARCADE</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="#home">الرئيسية</a>
+        <a href="#games">الألعاب</a>
+        <a href="#categories">التصنيفات</a>
+        <a href="#new">جديد</a>
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          class="icon-button"
+          id="searchButton"
+          aria-label="بحث"
+        >
+          🔍
+        </button>
+
+        <button
+          class="login-button"
+          id="loginButton"
+        >
+          تسجيل الدخول
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- HERO -->
+  <main>
+
+    <section class="hero" id="home">
+
+      <div class="container hero-content">
+
+        <div class="hero-text">
+
+          <div class="hero-badge">
+            🎮 منصة ألعاب المتصفح العربية
+          </div>
+
+          <h1>
+            اكتشف
+            <span>ألعابًا جديدة</span>
+            والعبها مباشرة
+          </h1>
+
+          <p>
+            آلاف الألعاب والتجارب الممتعة في مكان واحد.
+            بدون تحميل، وبدون تعقيد.
+          </p>
+
+          <div class="hero-buttons">
+
+            <a href="#games" class="primary-button">
+              ابدأ اللعب
+            </a>
+
+            <a href="#categories" class="secondary-button">
+              استكشف التصنيفات
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+          <div class="hero-card hero-card-main">
+
+            <div class="hero-card-image">
+              🎮
+            </div>
+
+            <div class="hero-card-info">
+              <strong>ألعاب المتصفح</strong>
+              <span>العب الآن</span>
+            </div>
+
+          </div>
+
+          <div class="floating-card floating-one">
+            🏆 ألعاب رائجة
+          </div>
+
+          <div class="floating-card floating-two">
+            ⚡ ألعاب جديدة
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SEARCH -->
+    <section class="search-section">
+
+      <div class="container">
+
+        <div class="search-box">
+
+          <span>🔍</span>
+
+          <input
+            type="search"
+            id="gameSearch"
+            placeholder="ابحث عن لعبة..."
+            autocomplete="off"
+          >
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CATEGORIES -->
+    <section class="section" id="categories">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-label">
+              استكشف
+            </span>
+
+            <h2>
+              التصنيفات
+            </h2>
+          </div>
+
+        </div>
+
+
+        <div class="categories-grid">
+
+          <button class="category-card" data-category="action">
+            <span>⚔️</span>
+            <strong>أكشن</strong>
+            <small>ألعاب الحركة</small>
+          </button>
+
+          <button class="category-card" data-category="racing">
+            <span>🏎️</span>
+            <strong>سباقات</strong>
+            <small>سرعة ومنافسة</small>
+          </button>
+
+          <button class="category-card" data-category="puzzle">
+            <span>🧩</span>
+            <strong>ألغاز</strong>
+            <small>اختبر ذكاءك</small>
+          </button>
+
+          <button class="category-card" data-category="sports">
+            <span>⚽</span>
+            <strong>رياضة</strong>
+            <small>نافس واربح</small>
+          </button>
+
+          <button class="category-card" data-category="arcade">
+            <span>👾</span>
+            <strong>أركيد</strong>
+            <small>ألعاب كلاسيكية</small>
+          </button>
+
+          <button class="category-card" data-category="strategy">
+            <span>♟️</span>
+            <strong>استراتيجية</strong>
+            <small>خطط ونافس</small>
+          </button>
+
+          <button class="category-card" data-category="adventure">
+            <span>🗺️</span>
+            <strong>مغامرات</strong>
+            <small>اكتشف عوالم جديدة</small>
+          </button>
+
+          <button class="category-card" data-category="casual">
+            <span>🎯</span>
+            <strong>خفيفة</strong>
+            <small>العب بسرعة</small>
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- POPULAR GAMES -->
+    <section class="section games-section" id="games">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+
+            <span class="section-label">
+              الأكثر شعبية
+            </span>
+
+            <h2>
+              ألعاب رائجة
+            </h2>
+
+          </div>
+
+          <button
+            class="view-all"
+            id="showAllGames"
+          >
+            عرض الكل
+          </button>
+
+        </div>
+
+
+        <div
+          class="games-grid"
+          id="gamesGrid"
+        >
+
+          <!-- سيتم تحميل الألعاب هنا -->
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- NEW GAMES -->
+    <section class="section" id="new">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+
+            <span class="section-label">
+              وصلت حديثًا
+            </span>
+
+            <h2>
+              ألعاب جديدة
+            </h2>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="games-grid"
+          id="newGamesGrid"
+        >
+
+          <!-- سيتم تحميل الألعاب هنا -->
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta-section">
+
+      <div class="container">
+
+        <div class="cta-box">
+
+          <div>
+
+            <span class="section-label">
+              ODDORA ARCADE
+            </span>
+
+            <h2>
+              عالم كامل من ألعاب المتصفح
+            </h2>
+
+            <p>
+              اكتشف ألعابًا جديدة كل يوم والعب مباشرة من المتصفح.
+            </p>
+
+          </div>
+
+          <a
+            href="#games"
+            class="primary-button"
+          >
+            اكتشف الألعاب
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+
+    <div class="container footer-grid">
+
+      <div>
+
+        <a href="index.html" class="logo">
+          ODDORA
+          <span>ARCADE</span>
+        </a>
+
+        <p>
+          منصة عربية لاكتشاف ألعاب المتصفح واللعب مباشرة.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3>
+          المنصة
+        </h3>
+
+        <a href="#games">
+          الألعاب
+        </a>
+
+        <a href="#categories">
+          التصنيفات
+        </a>
+
+        <a href="#new">
+          الألعاب الجديدة
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h3>
+          معلومات
+        </h3>
+
+        <a href="privacy.html">
+          الخصوصية
+        </a>
+
+        <a href="terms.html">
+          الشروط
+        </a>
+
+        <a href="contact.html">
+          تواصل معنا
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <div class="container">
+
+        © <span id="year"></span>
+        ODDORA Arcade
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- LOGIN MODAL -->
+  <div
+    class="modal"
+    id="loginModal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-content">
+
+      <button
+        class="modal-close"
+        id="closeLogin"
+        aria-label="إغلاق"
+      >
+        ×
+      </button>
+
+      <h2>
+        تسجيل الدخول
+      </h2>
+
+      <p>
+        سجّل دخولك لحفظ ألعابك ومفضلاتك.
+      </p>
+
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="البريد الإلكتروني"
+      >
+
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="كلمة المرور"
+      >
+
+      <button class="primary-button full">
+        دخول
+      </button>
+
+      <p class="modal-note">
+        نظام الحسابات سيتم ربطه بالمنصة لاحقًا.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <script src="games.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
