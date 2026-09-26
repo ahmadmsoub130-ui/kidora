@@ -32,12 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
 
           <div class="game-overlay">
+
             <button
               class="play-game"
               data-game-id="${game.id}"
             >
               ▶ العب الآن
             </button>
+
           </div>
 
         </div>
@@ -48,13 +50,24 @@ document.addEventListener("DOMContentLoaded", () => {
             ${categoryNames[game.category] || "ألعاب"}
           </div>
 
-          <h3>${game.titleAr || game.title}</h3>
+          <h3>
+            ${game.titleAr || game.title}
+          </h3>
 
-          <p>${game.description}</p>
+          <p>
+            ${game.description}
+          </p>
 
           <div class="game-card-bottom">
-            <span>🎮 متصفح</span>
-            <span>⭐ جديد</span>
+
+            <span>
+              🎮 متصفح
+            </span>
+
+            <span>
+              ⭐ جديد
+            </span>
+
           </div>
 
         </div>
@@ -63,6 +76,35 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
+
+  function attachGameButtons() {
+
+    document
+      .querySelectorAll(".play-game")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          event => {
+
+            event.stopPropagation();
+
+            const id =
+              Number(
+                button.dataset.gameId
+              );
+
+            window.location.href =
+              `game.html?id=${id}`;
+
+          }
+        );
+
+      });
+
+  }
+
+
   function renderGames(list, element) {
 
     if (!element) return;
@@ -70,85 +112,128 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!list.length) {
 
       element.innerHTML = `
+
         <div class="empty-games">
-          <div>🔍</div>
-          <h3>لم نجد ألعابًا</h3>
-          <p>جرّب البحث بكلمة أخرى.</p>
+
+          <div>
+            🔍
+          </div>
+
+          <h3>
+            لم نجد ألعابًا
+          </h3>
+
+          <p>
+            جرّب البحث بكلمة أخرى.
+          </p>
+
         </div>
+
       `;
 
       return;
     }
 
-    element.innerHTML = list.map(createGameCard).join("");
 
-    element.querySelectorAll(".play-game").forEach(button => {
+    element.innerHTML =
+      list
+        .map(createGameCard)
+        .join("");
 
-      button.addEventListener("click", event => {
 
-        event.stopPropagation();
-
-        const id = Number(button.dataset.gameId);
-
-        const game = GAMES.find(item => item.id === id);
-
-        if (game) {
-          openGame(game);
-        }
-
-      });
-
-    });
+    attachGameButtons();
 
   }
+
 
   function renderHome() {
 
-    const featured = GAMES.filter(game => game.featured);
+    const featured =
+      GAMES.filter(
+        game => game.featured
+      );
 
-    const newest = [...GAMES]
-      .reverse()
-      .slice(0, 6);
 
-    renderGames(featured, gamesGrid);
-    renderGames(newest, newGamesGrid);
+    const newest =
+      [...GAMES]
+        .reverse()
+        .slice(0, 6);
+
+
+    renderGames(
+      featured,
+      gamesGrid
+    );
+
+
+    renderGames(
+      newest,
+      newGamesGrid
+    );
+
   }
+
 
   function filterGames() {
 
-    const value = searchInput.value.trim().toLowerCase();
+    const value =
+      searchInput.value
+        .trim()
+        .toLowerCase();
+
 
     if (!value) {
 
       renderHome();
 
       return;
+
     }
 
-    const results = GAMES.filter(game => {
 
-      const text = `
-        ${game.title}
-        ${game.titleAr}
-        ${game.description}
-        ${categoryNames[game.category] || ""}
-      `.toLowerCase();
+    const results =
+      GAMES.filter(game => {
 
-      return text.includes(value);
+        const text = `
 
-    });
+          ${game.title}
 
-    renderGames(results, gamesGrid);
+          ${game.titleAr}
+
+          ${game.description}
+
+          ${categoryNames[game.category] || ""}
+
+        `.toLowerCase();
+
+
+        return text.includes(value);
+
+      });
+
+
+    renderGames(
+      results,
+      gamesGrid
+    );
+
 
     if (newGamesGrid) {
-      newGamesGrid.innerHTML = "";
+
+      newGamesGrid.innerHTML =
+        "";
+
     }
 
-    document.getElementById("games")?.scrollIntoView({
-      behavior: "smooth"
-    });
+
+    document
+      .getElementById("games")
+      ?.scrollIntoView({
+        behavior: "smooth"
+      });
 
   }
+
 
   if (searchInput) {
 
@@ -159,39 +244,99 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
-  if (searchButton && searchInput) {
 
-    searchButton.addEventListener("click", () => {
+  if (
+    searchButton &&
+    searchInput
+  ) {
 
-      searchInput.focus();
+    searchButton.addEventListener(
+      "click",
+      () => {
 
-      document
-        .querySelector(".search-section")
-        ?.scrollIntoView({
-          behavior: "smooth"
-        });
+        searchInput.focus();
 
-    });
+        document
+          .querySelector(
+            ".search-section"
+          )
+          ?.scrollIntoView({
+            behavior: "smooth"
+          });
+
+      }
+    );
 
   }
 
+
   document
-    .querySelectorAll(".category-card")
+    .querySelectorAll(
+      ".category-card"
+    )
     .forEach(button => {
 
-      button.addEventListener("click", () => {
+      button.addEventListener(
+        "click",
+        () => {
 
-        const category = button.dataset.category;
+          const category =
+            button.dataset.category;
 
-        const results = GAMES.filter(
-          game => game.category === category
+
+          const results =
+            GAMES.filter(
+              game =>
+                game.category ===
+                category
+            );
+
+
+          renderGames(
+            results,
+            gamesGrid
+          );
+
+
+          if (newGamesGrid) {
+
+            newGamesGrid.innerHTML =
+              "";
+
+          }
+
+
+          document
+            .getElementById("games")
+            ?.scrollIntoView({
+              behavior: "smooth"
+            });
+
+        }
+      );
+
+    });
+
+
+  if (showAllButton) {
+
+    showAllButton.addEventListener(
+      "click",
+      () => {
+
+        renderGames(
+          GAMES,
+          gamesGrid
         );
 
-        renderGames(results, gamesGrid);
 
         if (newGamesGrid) {
-          newGamesGrid.innerHTML = "";
+
+          newGamesGrid.innerHTML =
+            "";
+
         }
+
 
         document
           .getElementById("games")
@@ -199,67 +344,48 @@ document.addEventListener("DOMContentLoaded", () => {
             behavior: "smooth"
           });
 
-      });
-
-    });
-
-  if (showAllButton) {
-
-    showAllButton.addEventListener("click", () => {
-
-      renderGames(GAMES, gamesGrid);
-
-      if (newGamesGrid) {
-        newGamesGrid.innerHTML = "";
       }
-
-      document
-        .getElementById("games")
-        ?.scrollIntoView({
-          behavior: "smooth"
-        });
-
-    });
+    );
 
   }
 
-  if (loginButton && loginModal) {
 
-    loginButton.addEventListener("click", () => {
+  if (
+    loginButton &&
+    loginModal
+  ) {
 
-      loginModal.classList.add("active");
+    loginButton.addEventListener(
+      "click",
+      () => {
 
-      loginModal.setAttribute(
-        "aria-hidden",
-        "false"
-      );
+        loginModal.classList.add(
+          "active"
+        );
 
-    });
+        loginModal.setAttribute(
+          "aria-hidden",
+          "false"
+        );
 
-  }
-
-  if (closeLogin && loginModal) {
-
-    closeLogin.addEventListener("click", () => {
-
-      loginModal.classList.remove("active");
-
-      loginModal.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-    });
+      }
+    );
 
   }
 
-  if (loginModal) {
 
-    loginModal.addEventListener("click", event => {
+  if (
+    closeLogin &&
+    loginModal
+  ) {
 
-      if (event.target === loginModal) {
+    closeLogin.addEventListener(
+      "click",
+      () => {
 
-        loginModal.classList.remove("active");
+        loginModal.classList.remove(
+          "active"
+        );
 
         loginModal.setAttribute(
           "aria-hidden",
@@ -267,161 +393,53 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
       }
-
-    });
-
-  }
-
-  function openGame(game) {
-
-    const existing = document.getElementById(
-      "gamePlayerOverlay"
     );
 
-    if (existing) {
-      existing.remove();
-    }
+  }
 
-    const overlay = document.createElement("div");
 
-    overlay.id = "gamePlayerOverlay";
+  if (loginModal) {
 
-    overlay.innerHTML = `
+    loginModal.addEventListener(
+      "click",
+      event => {
 
-      <div class="game-player">
+        if (
+          event.target ===
+          loginModal
+        ) {
 
-        <div class="game-player-header">
-
-          <div>
-            <span class="game-player-category">
-              ${categoryNames[game.category] || "ألعاب"}
-            </span>
-
-            <h2>${game.titleAr || game.title}</h2>
-          </div>
-
-          <button
-            class="close-game"
-            aria-label="إغلاق اللعبة"
-          >
-            ×
-          </button>
-
-        </div>
-
-        <div class="game-player-content">
-
-          <div class="real-game-area">
-
-            <div class="big-game-icon">
-              ${game.icon}
-            </div>
-
-            <h2>${game.titleAr || game.title}</h2>
-
-            <p>
-              ${game.description}
-            </p>
-
-            <button
-              class="primary-button start-demo-game"
-            >
-              ▶ تشغيل اللعبة
-            </button>
-
-            <div
-              class="demo-game-container"
-              hidden
-            ></div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    `;
-
-    document.body.appendChild(overlay);
-
-    document
-      .querySelector(".close-game")
-      .addEventListener("click", () => {
-        overlay.remove();
-      });
-
-    document
-      .querySelector(".start-demo-game")
-      .addEventListener("click", event => {
-
-        const button = event.currentTarget;
-
-        const container =
-          document.querySelector(
-            ".demo-game-container"
+          loginModal.classList.remove(
+            "active"
           );
 
-        button.style.display = "none";
-
-        container.hidden = false;
-
-        container.innerHTML = `
-
-          <div class="demo-score">
-            النقاط: <strong>0</strong>
-          </div>
-
-          <button class="demo-target">
-            اضغط هنا!
-          </button>
-
-          <p>
-            هذه مساحة تشغيل اللعبة.
-          </p>
-
-        `;
-
-        const scoreElement =
-          container.querySelector(
-            ".demo-score strong"
+          loginModal.setAttribute(
+            "aria-hidden",
+            "true"
           );
 
-        const target =
-          container.querySelector(
-            ".demo-target"
-          );
+        }
 
-        let score = 0;
-
-        target.addEventListener(
-          "click",
-          () => {
-
-            score++;
-
-            scoreElement.textContent =
-              score;
-
-            target.style.transform =
-              `translate(
-                ${(Math.random() * 160) - 80}px,
-                ${(Math.random() * 120) - 60}px
-              )`;
-
-          }
-        );
-
-      });
+      }
+    );
 
   }
+
 
   renderHome();
 
-  const year = document.getElementById("year");
+
+  const year =
+    document.getElementById(
+      "year"
+    );
+
 
   if (year) {
+
     year.textContent =
       new Date().getFullYear();
+
   }
 
 });
