@@ -1,1277 +1,403 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#6c5ce7">
 
-  <title>KIDORA | قصص أطفال ممتعة</title>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <meta
     name="description"
-    content="KIDORA عالم قصص ممتعة للأطفال بالعربية والإنجليزية."
+    content="KIDORA - قصص أطفال عربية وإنجليزية ممتعة قبل النوم، قصص رمضان، الحيوانات، المغامرات والتعلم."
   >
 
-  <style>
-    :root {
-      --purple: #7657e8;
-      --purple-dark: #5b42c7;
-      --yellow: #ffd95a;
-      --orange: #ff9f43;
-      --pink: #ff7eb6;
-      --blue: #63c7ff;
-      --green: #61d69b;
+  <meta
+    name="keywords"
+    content="قصص أطفال, قصص قبل النوم, قصص رمضان, قصص عربية, kids stories, bedtime stories"
+  >
+
+  <meta
+    name="theme-color"
+    content="#7657e8"
+  >
+
+  <title>KIDORA - قصص أطفال ممتعة</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
-      --cream: #fffaf0;
-      --white: #ffffff;
-      --text: #29304a;
-      --muted: #747b91;
-
-      --radius: 24px;
-      --shadow: 0 15px 40px rgba(67, 54, 120, .12);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at 10% 10%, #fff0a8 0 7%, transparent 20%),
-        radial-gradient(circle at 90% 15%, #d9f4ff 0 8%, transparent 21%),
-        linear-gradient(180deg, #fffaf0 0%, #f8f5ff 100%);
-      color: var(--text);
-      font-family:
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-      line-height: 1.6;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .container {
-      width: min(1120px, 92%);
-      margin: auto;
-    }
-
-    /* HEADER */
-
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 250, 240, .88);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(91, 66, 199, .08);
-    }
-
-    .header-inner {
-      min-height: 74px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 25px;
-      font-weight: 1000;
-      color: var(--purple-dark);
-      letter-spacing: -1px;
-    }
-
-    .logo-icon {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      background: var(--yellow);
-      border-radius: 15px;
-      font-size: 24px;
-      box-shadow: 0 7px 18px rgba(255, 217, 90, .3);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .nav a {
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .nav a:hover {
-      color: var(--purple);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .language-btn,
-    .menu-btn {
-      border: 0;
-      background: var(--white);
-      color: var(--purple-dark);
-      border-radius: 13px;
-      padding: 9px 13px;
-      font-weight: 900;
-      box-shadow: 0 5px 18px rgba(67, 54, 120, .08);
-    }
-
-    .menu-btn {
-      display: none;
-      font-size: 20px;
-    }
-
-    /* HERO */
-
-    .hero {
-      padding: 55px 0 35px;
-    }
-
-    .hero-box {
-      min-height: 455px;
-      position: relative;
-      overflow: hidden;
-
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      align-items: center;
-      gap: 35px;
-
-      padding: 45px;
-
-      border-radius: 35px;
-
-      background:
-        radial-gradient(circle at 90% 10%, rgba(255,255,255,.45), transparent 25%),
-        linear-gradient(135deg, #e8ddff, #dff5ff 52%, #fff3bf);
-
-      box-shadow: var(--shadow);
-    }
-
-    .hero-text {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-label {
-      display: inline-block;
-      background: rgba(255,255,255,.72);
-      color: var(--purple-dark);
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 900;
-      margin-bottom: 15px;
-    }
-
-    .hero h1 {
-      font-size: clamp(42px, 7vw, 72px);
-      line-height: 1.05;
-      letter-spacing: -3px;
-      color: #302b55;
-    }
-
-    .hero h1 span {
-      color: var(--purple);
-    }
-
-    .hero p {
-      max-width: 570px;
-      margin-top: 17px;
-      color: #626980;
-      font-size: 17px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 25px;
-    }
-
-    .primary-btn,
-    .secondary-btn {
-      border: 0;
-      border-radius: 15px;
-      min-height: 50px;
-      padding: 0 22px;
-      font-weight: 950;
-    }
-
-    .primary-btn {
-      color: white;
-      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
-      box-shadow: 0 10px 25px rgba(108, 92, 231, .28);
-    }
-
-    .secondary-btn {
-      background: white;
-      color: var(--purple-dark);
-      box-shadow: 0 8px 20px rgba(67, 54, 120, .08);
-    }
-
-    .hero-art {
-      min-height: 340px;
-      position: relative;
-      display: grid;
-      place-items: center;
-    }
-
-    .cloud {
-      position: absolute;
-      background: rgba(255,255,255,.7);
-      border-radius: 999px;
-      width: 130px;
-      height: 45px;
-    }
-
-    .cloud::before,
-    .cloud::after {
-      content: "";
-      position: absolute;
-      background: inherit;
-      border-radius: 50%;
-    }
-
-    .cloud::before {
-      width: 60px;
-      height: 60px;
-      left: 22px;
-      top: -25px;
-    }
-
-    .cloud::after {
-      width: 75px;
-      height: 75px;
-      right: 18px;
-      top: -35px;
-    }
-
-    .cloud-one {
-      top: 55px;
-      left: 15px;
-    }
-
-    .cloud-two {
-      bottom: 65px;
-      right: 10px;
-      transform: scale(.7);
-    }
-
-    .moon {
-      width: 175px;
-      height: 175px;
-      border-radius: 50%;
-      background: var(--yellow);
-      position: relative;
-      box-shadow: 0 20px 55px rgba(255, 191, 45, .3);
-    }
-
-    .moon::after {
-      content: "";
-      position: absolute;
-      width: 175px;
-      height: 175px;
-      background: #e8ddff;
-      border-radius: 50%;
-      left: 48px;
-      top: -20px;
-    }
-
-    .star {
-      position: absolute;
-      color: #fff;
-      font-size: 25px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .star-one {
-      top: 55px;
-      right: 70px;
-    }
-
-    .star-two {
-      bottom: 80px;
-      left: 70px;
-      animation-delay: 1s;
-    }
-
-    .book {
-      position: absolute;
-      bottom: 15px;
-      width: 180px;
-      height: 100px;
-      background: var(--purple);
-      border-radius: 12px 22px 22px 12px;
-      transform: rotate(-8deg);
-      box-shadow: 0 15px 35px rgba(91, 66, 199, .25);
-    }
-
-    .book::before {
-      content: "KIDORA";
-      position: absolute;
-      inset: 15px;
-      display: grid;
-      place-items: center;
-      color: white;
-      font-weight: 1000;
-      border: 2px solid rgba(255,255,255,.35);
-      border-radius: 8px;
-    }
-
-    @keyframes float {
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    /* SEARCH */
-
-    .search-wrap {
-      margin: 25px 0 5px;
-    }
-
-    .search {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: white;
-      border: 1px solid rgba(91, 66, 199, .08);
-      border-radius: 17px;
-      padding: 5px 16px;
-      box-shadow: var(--shadow);
-    }
-
-    .search span {
-      font-size: 20px;
-    }
-
-    .search input {
-      width: 100%;
-      height: 48px;
-      border: 0;
-      outline: 0;
-      background: transparent;
-      color: var(--text);
-    }
-
-    /* SECTION */
-
-    .section {
-      padding: 55px 0;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .section-title small {
-      color: var(--purple);
-      font-weight: 1000;
-    }
-
-    .section-title h2 {
-      margin-top: 4px;
-      font-size: 32px;
-      color: #302b55;
-    }
-
-    .section-title p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 4px;
-    }
-
-    /* CATEGORIES */
-
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 12px;
-    }
-
-    .category {
-      border: 0;
-      min-height: 130px;
-      padding: 15px 8px;
-      border-radius: 22px;
-      background: white;
-      box-shadow: var(--shadow);
-      color: var(--text);
-      transition: .2s ease;
-    }
-
-    .category:hover {
-      transform: translateY(-5px);
-    }
-
-    .category-icon {
-      font-size: 37px;
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .category strong {
-      display: block;
-      font-size: 14px;
-    }
-
-    .category small {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    /* STORIES */
-
-    .stories {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .story {
-      background: white;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: .25s ease;
-    }
-
-    .story:hover {
-      transform: translateY(-5px);
-    }
-
-    .story-cover {
-      height: 190px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      font-size: 75px;
-    }
-
-    .cover-ramadan {
-      background: linear-gradient(135deg, #46368c, #8b70df);
-    }
-
-    .cover-sleep {
-      background: linear-gradient(135deg, #20335e, #6787c9);
-    }
-
-    .cover-animal {
-      background: linear-gradient(135deg, #a9e6bb, #68c5a0);
-    }
-
-    .cover-adventure {
-      background: linear-gradient(135deg, #ffc46b, #ff876d);
-    }
-
-    .cover-world {
-      background: linear-gradient(135deg, #73d4f4, #6986ed);
-    }
-
-    .cover-learn {
-      background: linear-gradient(135deg, #ffb4d5, #a57ff2);
-    }
-
-    .story-body {
-      padding: 17px;
-    }
-
-    .story-tag {
-      display: inline-block;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: #f0edff;
-      color: var(--purple-dark);
-      font-size: 10px;
-      font-weight: 900;
-    }
-
-    .story h3 {
-      margin-top: 9px;
-      font-size: 18px;
-    }
-
-    .story p {
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .story-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 14px;
-    }
-
-    .story-time {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .read-btn {
-      border: 0;
-      border-radius: 10px;
-      padding: 7px 12px;
-      background: var(--purple);
-      color: white;
-      font-size: 11px;
-      font-weight: 900;
-    }
-
-    /* RAMADAN */
-
-    .ramadan {
-      background:
-        radial-gradient(circle at 85% 20%, rgba(255,217,90,.22), transparent 25%),
-        linear-gradient(135deg, #342567, #634ab8);
-      color: white;
-      border-radius: 32px;
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .ramadan-content {
-      max-width: 620px;
-    }
-
-    .ramadan small {
-      color: #ffe783;
-      font-weight: 1000;
-    }
-
-    .ramadan h2 {
-      font-size: 35px;
-      margin: 5px 0;
-    }
-
-    .ramadan p {
-      color: #ddd7f4;
-      max-width: 560px;
-    }
-
-    .ramadan-btn {
-      margin-top: 20px;
-      border: 0;
-      background: var(--yellow);
-      color: #473a76;
-      padding: 12px 20px;
-      border-radius: 13px;
-      font-weight: 1000;
-    }
-
-    .ramadan-moon {
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background: var(--yellow);
-      left: 70px;
-      bottom: -35px;
-    }
-
-    .ramadan-moon::after {
-      content: "";
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      background: #483477;
-      border-radius: 50%;
-      left: 45px;
-      top: -20px;
-    }
-
-    /* FOOTER */
-
-    footer {
-      margin-top: 35px;
-      background: #292348;
-      color: white;
-      padding: 45px 0 20px;
-    }
-
-    .footer-inner {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 35px;
-    }
-
-    footer h3 {
-      margin-bottom: 8px;
-    }
-
-    footer p,
-    footer a {
-      color: #c4bfd9;
-      font-size: 13px;
-    }
-
-    footer a {
-      display: block;
-      margin: 5px 0;
-    }
-
-    .copyright {
-      margin-top: 35px;
-      padding-top: 15px;
-      border-top: 1px solid rgba(255,255,255,.1);
-      color: #9993b5;
-      font-size: 11px;
-      text-align: center;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 900px) {
-
-      .hero-box {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: 35px 25px;
-      }
-
-      .hero p {
-        margin-inline: auto;
-      }
-
-      .hero-buttons {
-        justify-content: center;
-      }
-
-      .hero-art {
-        min-height: 270px;
-      }
-
-      .categories {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .stories {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .footer-inner {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 650px) {
-
-      .nav {
-        display: none;
-      }
-
-      .menu-btn {
-        display: block;
-      }
-
-      .hero {
-        padding-top: 25px;
-      }
-
-      .hero-box {
-        border-radius: 25px;
-        min-height: auto;
-      }
-
-      .hero h1 {
-        font-size: 43px;
-        letter-spacing: -2px;
-      }
-
-      .hero-art {
-        min-height: 220px;
-      }
-
-      .moon {
-        width: 125px;
-        height: 125px;
-      }
-
-      .moon::after {
-        width: 125px;
-        height: 125px;
-      }
-
-      .book {
-        width: 145px;
-        height: 80px;
-      }
-
-      .categories {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .stories {
-        grid-template-columns: 1fr;
-      }
-
-      .ramadan {
-        padding: 28px 22px;
-      }
-
-      .ramadan h2 {
-        font-size: 28px;
-      }
-
-      .ramadan-moon {
-        display: none;
-      }
-
-      .footer-inner {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 420px) {
-
-      .logo {
-        font-size: 21px;
-      }
-
-      .logo-icon {
-        width: 37px;
-        height: 37px;
-      }
-
-      .language-btn {
-        padding: 8px 10px;
-      }
-
-      .hero h1 {
-        font-size: 37px;
-      }
-
-      .primary-btn,
-      .secondary-btn {
-        width: 100%;
-      }
-    }
-  </style>
 </head>
+
 
 <body>
 
-<header class="header">
-  <div class="container header-inner">
+  <!-- ======================================
+       HEADER
+       ====================================== -->
 
-    <a href="index.html" class="logo">
-      <span class="logo-icon">📖</span>
-      KIDORA
-    </a>
+  <header class="site-header">
 
-    <nav class="nav">
-      <a href="#stories">القصص</a>
-      <a href="#categories">التصنيفات</a>
-      <a href="#ramadan">رمضان</a>
-      <a href="#about">عن KIDORA</a>
-    </nav>
+    <div class="container header-inner">
 
-    <div class="header-actions">
-      <button class="language-btn" id="languageBtn">
-        English
-      </button>
+      <a
+        href="index.html"
+        class="logo"
+        aria-label="KIDORA"
+      >
 
-      <button class="menu-btn" onclick="toggleMenu()">
-        ☰
-      </button>
-    </div>
+        <span class="logo-icon">
+          📚
+        </span>
 
-  </div>
-</header>
+        <span>
+          KIDORA
+        </span>
+
+      </a>
 
 
-<main>
+      <nav class="main-nav">
 
-  <!-- HERO -->
+        <a
+          href="#stories"
+          data-ar="القصص"
+          data-en="Stories"
+        >
+          القصص
+        </a>
 
-  <section class="hero">
-    <div class="container">
+        <a
+          href="#categories"
+          data-ar="التصنيفات"
+          data-en="Categories"
+        >
+          التصنيفات
+        </a>
 
-      <div class="hero-box">
+        <a
+          href="#ramadan"
+          data-ar="رمضان"
+          data-en="Ramadan"
+        >
+          رمضان
+        </a>
 
-        <div class="hero-text">
+        <a
+          href="#about"
+          data-ar="عن KIDORA"
+          data-en="About"
+        >
+          عن KIDORA
+        </a>
 
-          <span class="hero-label">
-            ✨ عالم القصص للأطفال
-          </span>
-
-          <h1>
-            كل يوم
-            <span>قصة جديدة</span>
-          </h1>
-
-          <p>
-            مرحبًا بك في KIDORA، عالم مليء بالقصص الممتعة
-            والمغامرات والشخصيات الجميلة التي يحبها الأطفال.
-          </p>
-
-          <div class="hero-buttons">
-
-            <button
-              class="primary-btn"
-              onclick="scrollToStories()"
-            >
-              📖 ابدأ القراءة
-            </button>
-
-            <button
-              class="secondary-btn"
-              onclick="scrollToCategories()"
-            >
-              🌈 اكتشف القصص
-            </button>
-
-          </div>
-
-        </div>
+      </nav>
 
 
-        <div class="hero-art">
+      <div class="header-actions">
 
-          <div class="cloud cloud-one"></div>
-          <div class="cloud cloud-two"></div>
+        <button
+          id="languageToggle"
+          class="language-btn"
+          type="button"
+        >
+          English
+        </button>
 
-          <div class="star star-one">⭐</div>
-          <div class="star star-two">✨</div>
-
-          <div class="moon"></div>
-
-          <div class="book"></div>
-
-        </div>
+        <button
+          id="menuToggle"
+          class="menu-toggle"
+          type="button"
+          aria-label="Menu"
+        >
+          ☰
+        </button>
 
       </div>
 
     </div>
-  </section>
 
 
-  <!-- SEARCH -->
+    <div
+      id="mobileMenu"
+      class="mobile-menu"
+    >
 
-  <section class="search-wrap">
-    <div class="container">
+      <a
+        href="#stories"
+        data-ar="القصص"
+        data-en="Stories"
+      >
+        القصص
+      </a>
 
-      <div class="search">
+      <a
+        href="#categories"
+        data-ar="التصنيفات"
+        data-en="Categories"
+      >
+        التصنيفات
+      </a>
 
-        <span>🔎</span>
+      <a
+        href="#ramadan"
+        data-ar="رمضان"
+        data-en="Ramadan"
+      >
+        رمضان
+      </a>
+
+      <a
+        href="#about"
+        data-ar="عن KIDORA"
+        data-en="About"
+      >
+        عن KIDORA
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- ======================================
+       HERO
+       ====================================== -->
+
+  <section class="hero">
+
+    <div class="container hero-content">
+
+      <div class="hero-badge">
+
+        📖
+
+        <span
+          data-ar="عالم من القصص للأطفال"
+          data-en="A world of stories for kids"
+        >
+          عالم من القصص للأطفال
+        </span>
+
+      </div>
+
+
+      <h1>
+
+        <span
+          data-ar="كل يوم قصة جديدة"
+          data-en="A New Story Every Day"
+        >
+          كل يوم قصة جديدة
+        </span>
+
+      </h1>
+
+
+      <p
+        data-ar="قصص قصيرة وممتعة تساعد الأطفال على الخيال والتعلم والاسترخاء قبل النوم."
+        data-en="Short and fun stories that help children imagine, learn, and relax before bedtime."
+      >
+        قصص قصيرة وممتعة تساعد الأطفال على الخيال والتعلم والاسترخاء قبل النوم.
+      </p>
+
+
+      <div class="search-box">
+
+        <span class="search-icon">
+          🔍
+        </span>
 
         <input
-          id="searchInput"
+          id="storySearch"
           type="search"
           placeholder="ابحث عن قصة..."
-          oninput="searchStories()"
+          autocomplete="off"
+          aria-label="Search stories"
         >
 
       </div>
 
     </div>
+
   </section>
 
 
-  <!-- CATEGORIES -->
+  <!-- ======================================
+       CATEGORIES
+       ====================================== -->
 
-  <section class="section" id="categories">
+  <section
+    id="categories"
+    class="section"
+  >
 
     <div class="container">
 
-      <div class="section-title">
-        <small>اختر ما تحب</small>
-        <h2>عالم KIDORA</h2>
-        <p>قصص مختلفة لكل وقت ومزاج</p>
+      <div class="section-header">
+
+        <h2
+          data-ar="اختر عالمك"
+          data-en="Choose Your World"
+        >
+          اختر عالمك
+        </h2>
+
+        <p
+          data-ar="اختر نوع القصة التي تريد قراءتها."
+          data-en="Choose the kind of story you want to read."
+        >
+          اختر نوع القصة التي تريد قراءتها.
+        </p>
+
       </div>
 
 
       <div class="categories">
 
         <button
-          class="category"
-          onclick="filterStories('ramadan')"
+          class="category-card active"
+          data-category="all"
+          type="button"
         >
-          <span class="category-icon">🌙</span>
-          <strong>قصص رمضان</strong>
-          <small>قصص وقيم جميلة</small>
+
+          <div class="category-icon">
+            📚
+          </div>
+
+          <strong
+            data-ar="كل القصص"
+            data-en="All Stories"
+          >
+            كل القصص
+          </strong>
+
         </button>
 
 
         <button
-          class="category"
-          onclick="filterStories('sleep')"
-        >
-          <span class="category-icon">🌙</span>
-          <strong>قبل النوم</strong>
-          <small>قصص هادئة</small>
-        </button>
-
-
-        <button
-          class="category"
-          onclick="filterStories('animals')"
-        >
-          <span class="category-icon">🦁</span>
-          <strong>الحيوانات</strong>
-          <small>أصدقاء الغابة</small>
-        </button>
-
-
-        <button
-          class="category"
-          onclick="filterStories('adventure')"
-        >
-          <span class="category-icon">🚀</span>
-          <strong>المغامرات</strong>
-          <small>رحلات مثيرة</small>
-        </button>
-
-
-        <button
-          class="category"
-          onclick="filterStories('world')"
-        >
-          <span class="category-icon">🌍</span>
-          <strong>حول العالم</strong>
-          <small>قصص من ثقافات مختلفة</small>
-        </button>
-
-
-        <button
-          class="category"
-          onclick="filterStories('learning')"
-        >
-          <span class="category-icon">🧠</span>
-          <strong>تعلم والعب</strong>
-          <small>قصص تعليمية</small>
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- STORIES -->
-
-  <section class="section" id="stories">
-
-    <div class="container">
-
-      <div class="section-title">
-        <small>قصص مختارة</small>
-        <h2>ماذا سنقرأ اليوم؟</h2>
-        <p>اختر قصة واضغط "اقرأ القصة"</p>
-      </div>
-
-
-      <div class="stories" id="storiesGrid">
-
-
-        <article
-          class="story"
+          class="category-card"
           data-category="ramadan"
-          data-title="الهلال الصغير"
+          type="button"
         >
 
-          <div class="story-cover cover-ramadan">
+          <div class="category-icon">
             🌙
           </div>
 
-          <div class="story-body">
+          <strong
+            data-ar="رمضان"
+            data-en="Ramadan"
+          >
+            رمضان
+          </strong>
 
-            <span class="story-tag">
-              رمضان
-            </span>
-
-            <h3>
-              الهلال الصغير
-            </h3>
-
-            <p>
-              قصة لطيفة عن طفل ينتظر رؤية هلال رمضان
-              ويتعلم معنى الفرح ومساعدة الآخرين.
-            </p>
-
-            <div class="story-footer">
-
-              <span class="story-time">
-                ⏱ 5 دقائق
-              </span>
-
-              <button
-                class="read-btn"
-                onclick="openStory('الهلال الصغير')"
-              >
-                اقرأ القصة
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
+        </button>
 
 
-        <article
-          class="story"
-          data-category="sleep"
-          data-title="القمر الذي لم ينم"
+        <button
+          class="category-card"
+          data-category="bedtime"
+          type="button"
         >
 
-          <div class="story-cover cover-sleep">
-            🌜
+          <div class="category-icon">
+            😴
           </div>
 
-          <div class="story-body">
+          <strong
+            data-ar="قبل النوم"
+            data-en="Bedtime"
+          >
+            قبل النوم
+          </strong>
 
-            <span class="story-tag">
-              قبل النوم
-            </span>
-
-            <h3>
-              القمر الذي لم ينم
-            </h3>
-
-            <p>
-              ماذا يحدث عندما يشعر القمر بالتعب
-              لكنه لا يستطيع النوم؟
-            </p>
-
-            <div class="story-footer">
-
-              <span class="story-time">
-                ⏱ 4 دقائق
-              </span>
-
-              <button
-                class="read-btn"
-                onclick="openStory('القمر الذي لم ينم')"
-              >
-                اقرأ القصة
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
+        </button>
 
 
-        <article
-          class="story"
+        <button
+          class="category-card"
           data-category="animals"
-          data-title="الأرنب والنجمة"
+          type="button"
         >
 
-          <div class="story-cover cover-animal">
-            🐰
+          <div class="category-icon">
+            🐾
           </div>
 
-          <div class="story-body">
+          <strong
+            data-ar="الحيوانات"
+            data-en="Animals"
+          >
+            الحيوانات
+          </strong>
 
-            <span class="story-tag">
-              حيوانات
-            </span>
-
-            <h3>
-              الأرنب والنجمة
-            </h3>
-
-            <p>
-              أرنب صغير يرى نجمة تسقط في الغابة
-              ويقرر البحث عن صاحبها.
-            </p>
-
-            <div class="story-footer">
-
-              <span class="story-time">
-                ⏱ 5 دقائق
-              </span>
-
-              <button
-                class="read-btn"
-                onclick="openStory('الأرنب والنجمة')"
-              >
-                اقرأ القصة
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
+        </button>
 
 
-        <article
-          class="story"
-          data-category="adventure"
-          data-title="الباب الأزرق"
+        <button
+          class="category-card"
+          data-category="adventures"
+          type="button"
         >
 
-          <div class="story-cover cover-adventure">
-            🚪
+          <div class="category-icon">
+            🗺️
           </div>
 
-          <div class="story-body">
+          <strong
+            data-ar="مغامرات"
+            data-en="Adventures"
+          >
+            مغامرات
+          </strong>
 
-            <span class="story-tag">
-              مغامرات
-            </span>
-
-            <h3>
-              الباب الأزرق
-            </h3>
-
-            <p>
-              باب غامض يظهر في مكان لم يكن موجودًا فيه
-              بالأمس. أين سيقود الطفل؟
-            </p>
-
-            <div class="story-footer">
-
-              <span class="story-time">
-                ⏱ 7 دقائق
-              </span>
-
-              <button
-                class="read-btn"
-                onclick="openStory('الباب الأزرق')"
-              >
-                اقرأ القصة
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
+        </button>
 
 
-        <article
-          class="story"
+        <button
+          class="category-card"
           data-category="world"
-          data-title="رسالة من بعيد"
+          type="button"
         >
 
-          <div class="story-cover cover-world">
+          <div class="category-icon">
             🌍
           </div>
 
-          <div class="story-body">
+          <strong
+            data-ar="حول العالم"
+            data-en="Around the World"
+          >
+            حول العالم
+          </strong>
 
-            <span class="story-tag">
-              حول العالم
-            </span>
-
-            <h3>
-              رسالة من بعيد
-            </h3>
-
-            <p>
-              طفل يتلقى رسالة من صديق يعيش في بلد بعيد
-              ويتعلم أن الصداقة لا تعرف الحدود.
-            </p>
-
-            <div class="story-footer">
-
-              <span class="story-time">
-                ⏱ 6 دقائق
-              </span>
-
-              <button
-                class="read-btn"
-                onclick="openStory('رسالة من بعيد')"
-              >
-                اقرأ القصة
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
+        </button>
 
 
-        <article
-          class="story"
+        <button
+          class="category-card"
           data-category="learning"
-          data-title="مدينة الألوان"
+          type="button"
         >
 
-          <div class="story-cover cover-learn">
-            🎨
+          <div class="category-icon">
+            🧠
           </div>
 
-          <div class="story-body">
+          <strong
+            data-ar="تعلم"
+            data-en="Learning"
+          >
+            تعلم
+          </strong>
 
-            <span class="story-tag">
-              تعليم
-            </span>
-
-            <h3>
-              مدينة الألوان
-            </h3>
-
-            <p>
-              رحلة ممتعة يتعلم خلالها الطفل الألوان
-              بطريقة بسيطة ومسلية.
-            </p>
-
-            <div class="story-footer">
-
-              <span class="story-time">
-                ⏱ 5 دقائق
-              </span>
-
-              <button
-                class="read-btn"
-                onclick="openStory('مدينة الألوان')"
-              >
-                اقرأ القصة
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
-
+        </button>
 
       </div>
 
@@ -1280,38 +406,90 @@
   </section>
 
 
-  <!-- RAMADAN -->
+  <!-- ======================================
+       STORIES
+       ====================================== -->
 
-  <section class="section" id="ramadan">
+  <section
+    id="stories"
+    class="section"
+  >
 
     <div class="container">
 
-      <div class="ramadan">
+      <div class="section-header">
+
+        <h2
+          data-ar="قصص KIDORA"
+          data-en="KIDORA Stories"
+        >
+          قصص KIDORA
+        </h2>
+
+        <p
+          data-ar="اختر قصة وابدأ المغامرة."
+          data-en="Choose a story and start the adventure."
+        >
+          اختر قصة وابدأ المغامرة.
+        </p>
+
+      </div>
+
+
+      <div
+        id="continueReading"
+        class="continue-reading"
+      >
+      </div>
+
+
+      <div
+        id="storiesGrid"
+        class="stories-grid"
+      >
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================
+       RAMADAN
+       ====================================== -->
+
+  <section
+    id="ramadan"
+    class="section"
+  >
+
+    <div class="container">
+
+      <div class="ramadan-banner">
 
         <div class="ramadan-content">
 
-          <small>🌙 عالم رمضان</small>
-
-          <h2>
-            قصص جميلة لشهر جميل
+          <h2
+            data-ar="🌙 حكايات رمضان"
+            data-en="🌙 Ramadan Stories"
+          >
+            🌙 حكايات رمضان
           </h2>
 
-          <p>
-            مجموعة قصص مناسبة للأطفال تساعدهم على فهم
-            معاني الرحمة والعطاء والتعاون والصدق بطريقة
-            بسيطة وممتعة.
-          </p>
-
-          <button
-            class="ramadan-btn"
-            onclick="filterStories('ramadan')"
+          <p
+            data-ar="قصص جميلة عن الرحمة والكرم والمساعدة والمحبة في شهر رمضان."
+            data-en="Beautiful stories about kindness, generosity, helping others, and love during Ramadan."
           >
-            اكتشف قصص رمضان
-          </button>
+            قصص جميلة عن الرحمة والكرم والمساعدة والمحبة في شهر رمضان.
+          </p>
 
         </div>
 
-        <div class="ramadan-moon"></div>
+
+        <div class="ramadan-icon">
+          🏮
+        </div>
 
       </div>
 
@@ -1320,23 +498,37 @@
   </section>
 
 
-  <!-- ABOUT -->
+  <!-- ======================================
+       ABOUT
+       ====================================== -->
 
-  <section class="section" id="about">
+  <section
+    id="about"
+    class="section about"
+  >
 
     <div class="container">
 
-      <div class="section-title">
+      <div class="about-content">
 
-        <small>عن KIDORA</small>
+        <div class="about-icon">
+          🧸
+        </div>
 
-        <h2>
-          عالم صُمم ليحب الأطفال القراءة
+
+        <h2
+          data-ar="مرحبًا بك في KIDORA"
+          data-en="Welcome to KIDORA"
+        >
+          مرحبًا بك في KIDORA
         </h2>
 
-        <p>
-          قصص قصيرة، كلمات بسيطة، وشخصيات تساعد الطفل
-          على الاستمتاع بالقصة وفهمها بسهولة.
+
+        <p
+          data-ar="KIDORA هو عالم قصص بسيط وممتع للأطفال. ستجد هنا قصصًا قصيرة عن الحيوانات والمغامرات ورمضان وقبل النوم والتعلم."
+          data-en="KIDORA is a simple and fun story world for children. Here you can find short stories about animals, adventures, Ramadan, bedtime, and learning."
+        >
+          KIDORA هو عالم قصص بسيط وممتع للأطفال. ستجد هنا قصصًا قصيرة عن الحيوانات والمغامرات ورمضان وقبل النوم والتعلم.
         </p>
 
       </div>
@@ -1345,250 +537,70 @@
 
   </section>
 
-</main>
 
+  <!-- ======================================
+       FOOTER
+       ====================================== -->
 
-<footer>
+  <footer class="site-footer">
 
-  <div class="container">
+    <div class="container">
 
-    <div class="footer-inner">
-
-      <div>
-        <h3>KIDORA 📖</h3>
-
-        <p>
-          عالم قصص ممتعة للأطفال باللغة العربية والإنجليزية.
-        </p>
+      <div class="footer-logo">
+        📚 KIDORA
       </div>
 
-      <div>
-        <h3>استكشف</h3>
 
-        <a href="#stories">القصص</a>
-        <a href="#categories">التصنيفات</a>
-        <a href="#ramadan">رمضان</a>
-      </div>
+      <p
+        data-ar="قصص جميلة للأطفال في كل وقت."
+        data-en="Beautiful stories for children."
+      >
+        قصص جميلة للأطفال في كل وقت.
+      </p>
 
-      <div>
-        <h3>اللغة</h3>
 
-        <a href="#" onclick="switchLanguage();return false;">
-          English
+      <div class="footer-links">
+
+        <a
+          href="privacy.html"
+          data-ar="الخصوصية"
+          data-en="Privacy"
+        >
+          الخصوصية
         </a>
 
-        <a href="#">
-          العربية
+        <a
+          href="contact.html"
+          data-ar="تواصل معنا"
+          data-en="Contact"
+        >
+          تواصل معنا
         </a>
+
       </div>
+
+
+      <p class="copyright">
+
+        ©
+        <span data-year></span>
+        KIDORA
+
+      </p>
 
     </div>
 
-    <div class="copyright">
-      © 2026 KIDORA — جميع الحقوق محفوظة
-    </div>
-
-  </div>
-
-</footer>
+  </footer>
 
 
-<script>
+  <!-- ======================================
+       SCRIPTS
+       ====================================== -->
 
-  /* =========================
-     MOBILE MENU
-  ========================= */
+  <script src="games.js"></script>
 
-  function toggleMenu() {
-
-    const nav = document.querySelector(".nav");
-
-    if (nav.style.display === "flex") {
-      nav.style.display = "";
-    } else {
-      nav.style.display = "flex";
-      nav.style.position = "absolute";
-      nav.style.top = "74px";
-      nav.style.right = "4%";
-      nav.style.left = "4%";
-      nav.style.padding = "18px";
-      nav.style.background = "white";
-      nav.style.borderRadius = "18px";
-      nav.style.flexDirection = "column";
-      nav.style.boxShadow = "0 15px 40px rgba(0,0,0,.12)";
-    }
-  }
-
-
-  /* =========================
-     SCROLL
-  ========================= */
-
-  function scrollToStories() {
-    document
-      .getElementById("stories")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
-  }
-
-
-  function scrollToCategories() {
-    document
-      .getElementById("categories")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
-  }
-
-
-  /* =========================
-     SEARCH
-  ========================= */
-
-  function searchStories() {
-
-    const input =
-      document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
-
-    const stories =
-      document.querySelectorAll(".story");
-
-    stories.forEach(story => {
-
-      const title =
-        story
-          .dataset
-          .title
-          .toLowerCase();
-
-      const text =
-        story
-          .innerText
-          .toLowerCase();
-
-      if (
-        !input ||
-        title.includes(input) ||
-        text.includes(input)
-      ) {
-
-        story.style.display = "";
-
-      } else {
-
-        story.style.display = "none";
-
-      }
-
-    });
-
-  }
-
-
-  /* =========================
-     FILTER
-  ========================= */
-
-  function filterStories(category) {
-
-    const stories =
-      document.querySelectorAll(".story");
-
-    stories.forEach(story => {
-
-      if (
-        story.dataset.category === category
-      ) {
-
-        story.style.display = "";
-
-      } else {
-
-        story.style.display = "none";
-
-      }
-
-    });
-
-    document
-      .getElementById("stories")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
-
-  }
-
-
-  /* =========================
-     STORY
-  ========================= */
-
-  function openStory(title) {
-
-    /*
-      مؤقتًا نعرض رسالة واضحة.
-      في الخطوة التالية سنربط كل قصة
-      بصفحة القراءة داخل نفس موقع KIDORA.
-    */
-
-    alert(
-      "📖 " +
-      title +
-      "\n\nالقصة ستفتح داخل KIDORA."
-    );
-
-  }
-
-
-  /* =========================
-     LANGUAGE
-  ========================= */
-
-  function switchLanguage() {
-
-    const current =
-      document.documentElement.lang;
-
-    if (current === "ar") {
-
-      localStorage.setItem(
-        "kidora_language",
-        "en"
-      );
-
-      alert(
-        "English version will be activated in the next step."
-      );
-
-    } else {
-
-      localStorage.setItem(
-        "kidora_language",
-        "ar"
-      );
-
-      alert(
-        "سيتم تفعيل النسخة العربية."
-      );
-
-    }
-
-  }
-
-
-  document
-    .getElementById("languageBtn")
-    .addEventListener(
-      "click",
-      switchLanguage
-    );
-
-</script>
+  <script src="app.js"></script>
 
 </body>
+
 </html>
