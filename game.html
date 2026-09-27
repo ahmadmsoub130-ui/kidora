@@ -1,1149 +1,888 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#070912">
-<title>ODDORA GAMES</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6c5ce7">
 
-<style>
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:#060811;color:#fff}
-body{overflow-x:hidden;background:
-radial-gradient(circle at 20% 10%,rgba(0,220,255,.12),transparent 30%),
-radial-gradient(circle at 80% 80%,rgba(130,0,255,.12),transparent 35%),
-#060811}
-button{font:inherit}
-.top{
-position:sticky;top:0;z-index:20;
-display:flex;align-items:center;justify-content:space-between;
-padding:14px 18px;
-background:rgba(5,7,15,.88);
-backdrop-filter:blur(16px);
-border-bottom:1px solid rgba(255,255,255,.08)
-}
-.logo{font-size:24px;font-weight:900;letter-spacing:3px;color:#fff}
-.logo span{color:#00e5ff}
-.back{
-border:1px solid rgba(255,255,255,.15);
-background:rgba(255,255,255,.06);
-color:#fff;padding:9px 15px;border-radius:12px;
-cursor:pointer
-}
-.wrap{width:min(1100px,94%);margin:auto;padding:25px 0 50px}
-.head{text-align:center;margin-bottom:20px}
-.head h1{font-size:clamp(28px,6vw,54px);margin:10px 0}
-.head p{color:#9ca6bb;margin:0}
-.game-box{
-position:relative;width:100%;max-width:900px;margin:auto;
-background:rgba(12,16,29,.9);
-border:1px solid rgba(255,255,255,.1);
-border-radius:22px;padding:14px;
-box-shadow:0 25px 80px rgba(0,0,0,.45)
-}
-#game{
-display:block;width:100%;height:auto;
-background:#02040a;border-radius:15px;
-touch-action:none
-}
-.info{
-display:flex;justify-content:space-between;gap:10px;
-margin-top:12px;flex-wrap:wrap
-}
-.stat{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.08);
-padding:9px 14px;border-radius:12px;
-min-width:110px;text-align:center
-}
-.stat b{display:block;font-size:20px}
-.stat small{color:#8993a9}
-.controls{
-display:flex;justify-content:center;gap:10px;
-margin-top:15px;flex-wrap:wrap
-}
-.controls button,.action{
-border:0;border-radius:12px;
-padding:12px 20px;
-background:linear-gradient(135deg,#00b8ff,#6948ff);
-color:#fff;font-weight:800;cursor:pointer;
-box-shadow:0 8px 25px rgba(0,180,255,.18)
-}
-.pad{
-display:grid;
-grid-template-columns:60px 60px 60px;
-grid-template-rows:60px 60px 60px;
-justify-content:center;gap:6px;margin-top:15px
-}
-.pad button{
-border:1px solid rgba(255,255,255,.1);
-background:rgba(255,255,255,.07);
-color:#fff;border-radius:13px;font-size:22px;
-cursor:pointer
-}
-.pad .up{grid-column:2}
-.pad .left{grid-column:1;grid-row:2}
-.pad .down{grid-column:2;grid-row:2}
-.pad .right{grid-column:3;grid-row:2}
-.overlay{
-position:absolute;inset:14px;
-display:none;align-items:center;justify-content:center;
-background:rgba(2,4,10,.76);backdrop-filter:blur(6px);
-border-radius:15px;text-align:center;padding:20px
-}
-.overlay.show{display:flex}
-.overlay-box{
-background:#0d1220;border:1px solid rgba(255,255,255,.12);
-padding:25px;border-radius:20px;max-width:420px;width:90%
-}
-.overlay h2{margin-top:0}
-.hidden{display:none!important}
-.instructions{text-align:center;color:#8f99ae;margin-top:14px;line-height:1.7}
-@media(max-width:600px){
-.game-box{padding:8px;border-radius:16px}
-.overlay{inset:8px}
-.stat{flex:1;min-width:80px}
-}
-</style>
+  <title>KIDORA | قراءة القصة</title>
+
+  <style>
+    :root {
+      --purple: #7657e8;
+      --purple-dark: #5b42c7;
+      --yellow: #ffd95a;
+      --cream: #fffaf0;
+      --white: #ffffff;
+      --text: #29243f;
+      --muted: #77738a;
+      --radius: 25px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 10%, #fff0a8, transparent 23%),
+        radial-gradient(circle at 90% 20%, #dceeff, transparent 24%),
+        linear-gradient(180deg, #fffaf0, #f5f1ff);
+
+      color: var(--text);
+
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(850px, 92%);
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+
+      background: rgba(255,250,240,.9);
+      backdrop-filter: blur(15px);
+
+      border-bottom: 1px solid rgba(91,66,199,.08);
+    }
+
+    .header-inner {
+      min-height: 70px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 1000;
+      color: var(--purple-dark);
+      text-decoration: none;
+    }
+
+    .back {
+      border: 0;
+      background: white;
+      color: var(--purple-dark);
+
+      padding: 9px 14px;
+
+      border-radius: 12px;
+
+      font-weight: 900;
+
+      box-shadow:
+        0 6px 18px rgba(67,54,120,.08);
+    }
+
+    /* TOP */
+
+    .story-top {
+      padding: 35px 0 20px;
+      text-align: center;
+    }
+
+    .category {
+      display: inline-block;
+
+      padding: 6px 12px;
+
+      border-radius: 999px;
+
+      background: #eeeaff;
+
+      color: var(--purple-dark);
+
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin-top: 10px;
+
+      font-size: clamp(30px, 6vw, 48px);
+
+      line-height: 1.15;
+
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-top: 7px;
+      font-size: 14px;
+    }
+
+    /* PROGRESS */
+
+    .progress-area {
+      margin: 20px 0;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+
+      color: var(--muted);
+
+      font-size: 11px;
+
+      margin-bottom: 7px;
+    }
+
+    .progress {
+      height: 9px;
+
+      background: #e9e5f5;
+
+      border-radius: 999px;
+
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 20%;
+      height: 100%;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--purple),
+          #9a7eff
+        );
+
+      border-radius: inherit;
+
+      transition: width .35s ease;
+    }
+
+    /* SCENE */
+
+    .scene {
+      min-height: 310px;
+
+      border-radius: 30px;
+
+      display: grid;
+      place-items: center;
+
+      position: relative;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 18px 50px rgba(67,54,120,.12);
+
+      background:
+        linear-gradient(
+          135deg,
+          #e9ddff,
+          #dff4ff
+        );
+    }
+
+    .scene-emoji {
+      font-size: 125px;
+
+      animation:
+        floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .star {
+      position: absolute;
+      font-size: 22px;
+      animation: twinkle 2s infinite;
+    }
+
+    .s1 {
+      top: 35px;
+      left: 13%;
+    }
+
+    .s2 {
+      top: 70px;
+      right: 15%;
+      animation-delay: .5s;
+    }
+
+    .s3 {
+      bottom: 45px;
+      left: 23%;
+      animation-delay: 1s;
+    }
+
+    .s4 {
+      bottom: 65px;
+      right: 25%;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes twinkle {
+      50% {
+        opacity: .35;
+        transform: scale(.8);
+      }
+    }
+
+    /* STORY */
+
+    .story-card {
+      background: white;
+
+      margin-top: 20px;
+
+      border-radius: 28px;
+
+      padding: 28px;
+
+      box-shadow:
+        0 15px 45px rgba(67,54,120,.1);
+    }
+
+    .story-text {
+      font-size: 21px;
+
+      line-height: 2;
+
+      min-height: 150px;
+
+      text-align: right;
+    }
+
+    .story-text strong {
+      color: var(--purple);
+    }
+
+    /* CHOICES */
+
+    .choices {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 12px;
+
+      margin-top: 25px;
+    }
+
+    .choice {
+      border: 2px solid #e8e3f5;
+
+      background: #faf9ff;
+
+      color: var(--text);
+
+      padding: 14px;
+
+      border-radius: 15px;
+
+      font-weight: 900;
+
+      transition: .2s ease;
+    }
+
+    .choice:hover {
+      border-color: var(--purple);
+
+      background: #f2efff;
+
+      transform: translateY(-2px);
+    }
+
+    /* CONTROLS */
+
+    .controls {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      margin: 20px 0 50px;
+    }
+
+    .control {
+      border: 0;
+
+      border-radius: 14px;
+
+      padding: 13px 22px;
+
+      font-weight: 950;
+    }
+
+    .previous {
+      background: white;
+
+      color: var(--purple-dark);
+
+      box-shadow:
+        0 7px 20px rgba(67,54,120,.08);
+    }
+
+    .next {
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          var(--purple-dark)
+        );
+
+      color: white;
+
+      box-shadow:
+        0 10px 25px rgba(108,92,231,.25);
+    }
+
+    .next:disabled,
+    .previous:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #292348;
+
+      color: white;
+
+      padding: 25px 0;
+
+      text-align: center;
+
+      font-size: 12px;
+    }
+
+    footer span {
+      color: #bdb7d7;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:600px) {
+
+      .story-card {
+        padding: 20px;
+      }
+
+      .scene {
+        min-height: 230px;
+      }
+
+      .scene-emoji {
+        font-size: 90px;
+      }
+
+      .story-text {
+        font-size: 18px;
+        line-height: 1.9;
+      }
+
+      .choices {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        position: sticky;
+        bottom: 10px;
+
+        background: rgba(255,250,240,.92);
+
+        backdrop-filter: blur(10px);
+
+        padding: 8px;
+
+        border-radius: 16px;
+      }
+
+      .control {
+        width: 50%;
+      }
+
+    }
+
+  </style>
 </head>
 
 <body>
 
-<header class="top">
-<div class="logo">ODD<span>ORA</span></div>
-<button class="back" onclick="goHome()">← الرئيسية</button>
+<header>
+
+  <div class="container header-inner">
+
+    <a
+      href="index.html"
+      class="logo"
+    >
+      📖 KIDORA
+    </a>
+
+    <button
+      class="back"
+      onclick="goHome()"
+    >
+      ← العودة للقصص
+    </button>
+
+  </div>
+
 </header>
 
-<main class="wrap">
 
-<section class="head">
-<h1 id="gameTitle">ODDORA GAME</h1>
-<p id="gameDescription"></p>
-</section>
+<main>
 
-<section class="game-box">
+  <div class="container">
 
-<canvas id="game" width="900" height="520"></canvas>
+    <!-- TITLE -->
 
-<div class="overlay" id="overlay">
-<div class="overlay-box">
-<h2 id="overlayTitle">انتهت اللعبة</h2>
-<p id="overlayText"></p>
-<button class="action" onclick="restartGame()">إعادة اللعب</button>
-</div>
-</div>
+    <section class="story-top">
 
-<div class="info">
-<div class="stat">
-<b id="score">0</b>
-<small>النقاط</small>
-</div>
-<div class="stat">
-<b id="best">0</b>
-<small>أفضل نتيجة</small>
-</div>
-<div class="stat">
-<b id="level">1</b>
-<small>المستوى</small>
-</div>
-</div>
+      <span class="category" id="category">
+        🌙 رمضان
+      </span>
 
-<div class="controls">
-<button onclick="restartGame()">إعادة اللعب</button>
-<button onclick="pauseGame()">إيقاف / متابعة</button>
-</div>
+      <h1 id="storyTitle">
+        الهلال الصغير
+      </h1>
 
-<div class="pad" id="pad">
-<button class="up" data-key="ArrowUp">▲</button>
-<button class="left" data-key="ArrowLeft">◀</button>
-<button class="down" data-key="ArrowDown">▼</button>
-<button class="right" data-key="ArrowRight">▶</button>
-</div>
+      <p
+        class="subtitle"
+        id="subtitle"
+      >
+        قصة قصيرة للأطفال
+      </p>
 
-<p class="instructions" id="instructions">
-استخدم لوحة المفاتيح أو أزرار الهاتف للتحكم.
-</p>
+    </section>
 
-</section>
+
+    <!-- PROGRESS -->
+
+    <div class="progress-area">
+
+      <div class="progress-info">
+
+        <span id="pageNumber">
+          الصفحة 1 من 5
+        </span>
+
+        <span id="languageLabel">
+          العربية
+        </span>
+
+      </div>
+
+      <div class="progress">
+
+        <div
+          class="progress-bar"
+          id="progressBar"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SCENE -->
+
+    <section
+      class="scene"
+      id="scene"
+    >
+
+      <span class="star s1">✨</span>
+      <span class="star s2">⭐</span>
+      <span class="star s3">✨</span>
+      <span class="star s4">⭐</span>
+
+      <div
+        class="scene-emoji"
+        id="sceneEmoji"
+      >
+        🌙
+      </div>
+
+    </section>
+
+
+    <!-- STORY -->
+
+    <section class="story-card">
+
+      <div
+        class="story-text"
+        id="storyText"
+      ></div>
+
+
+      <div
+        class="choices"
+        id="choices"
+      ></div>
+
+    </section>
+
+
+    <!-- CONTROLS -->
+
+    <div class="controls">
+
+      <button
+        class="control previous"
+        id="previousBtn"
+        onclick="previousPage()"
+      >
+        ← السابق
+      </button>
+
+      <button
+        class="control next"
+        id="nextBtn"
+        onclick="nextPage()"
+      >
+        التالي →
+      </button>
+
+    </div>
+
+  </div>
+
 </main>
 
+
+<footer>
+
+  <div class="container">
+
+    KIDORA 📖
+
+    <br>
+
+    <span>
+      عالم القصص الممتعة للأطفال
+    </span>
+
+  </div>
+
+</footer>
+
+
 <script>
-"use strict";
-
-const canvas=document.getElementById("game");
-const ctx=canvas.getContext("2d");
-
-const titleEl=document.getElementById("gameTitle");
-const descEl=document.getElementById("gameDescription");
-const scoreEl=document.getElementById("score");
-const bestEl=document.getElementById("best");
-const levelEl=document.getElementById("level");
-const overlay=document.getElementById("overlay");
-const overlayTitle=document.getElementById("overlayTitle");
-const overlayText=document.getElementById("overlayText");
-
-const params=new URLSearchParams(location.search);
-const game=params.get("game")||"neon-runner";
-
-let score=0;
-let best=Number(localStorage.getItem("oddora_best_"+game)||0);
-let level=1;
-let paused=false;
-let over=false;
-let animation=0;
-let last=0;
-
-bestEl.textContent=best;
-
-const GAME_NAMES={
-"neon-runner":["Neon Runner","اركض وتجنب العقبات"],
-"space-shooter":["Space Shooter","دمر الأعداء وأنقذ مركبتك"],
-"ninja-jump":["Ninja Jump","اقفز وتجنب العقبات"],
-"road-racer":["Road Racer","قد السيارة وتجنب حركة المرور"],
-"brick-breaker":["Brick Breaker","حطم جميع الطوب"],
-"flappy-challenge":["Flappy Challenge","حلّق بين الأنابيب"],
-"2048":["2048","ادمج الأرقام ووصل إلى 2048"],
-"memory-cards":["Memory Cards","اعثر على الأزواج المتطابقة"],
-"zombie-survival":["Zombie Survival","اصمد أمام موجات الأعداء"]
-};
-
-if(GAME_NAMES[game]){
-titleEl.textContent=GAME_NAMES[game][0];
-descEl.textContent=GAME_NAMES[game][1];
-}
-
-function resizeCanvas(){
-const w=Math.min(900,canvas.parentElement.clientWidth-16);
-const ratio=520/900;
-canvas.style.height=(w*ratio)+"px";
-}
-window.addEventListener("resize",resizeCanvas);
-resizeCanvas();
-
-function resetUI(){
-score=0;level=1;paused=false;over=false;
-scoreEl.textContent=0;
-levelEl.textContent=1;
-overlay.classList.remove("show");
-}
-
-function addScore(n){
-score+=n;
-level=Math.max(1,Math.floor(score/10)+1);
-scoreEl.textContent=score;
-levelEl.textContent=level;
-
-if(score>best){
-best=score;
-bestEl.textContent=best;
-localStorage.setItem("oddora_best_"+game,best);
-}
-}
-
-function endGame(message="انتهت اللعبة"){
-over=true;
-overlayTitle.textContent="انتهت اللعبة";
-overlayText.textContent=message+" — نتيجتك: "+score;
-overlay.classList.add("show");
-}
-
-function pauseGame(){
-if(over)return;
-paused=!paused;
-}
-
-function restartGame(){
-cancelAnimationFrame(animation);
-resetUI();
-
-switch(game){
-case"neon-runner":initRunner();break;
-case"space-shooter":initShooter();break;
-case"ninja-jump":initNinja();break;
-case"road-racer":initRacer();break;
-case"brick-breaker":initBrick();break;
-case"flappy-challenge":initFlappy();break;
-case"2048":init2048();break;
-case"memory-cards":initMemory();break;
-case"zombie-survival":initZombie();break;
-default:initRunner();
-}
-}
-
-function loop(fn){
-function frame(t){
-if(!last)last=t;
-const dt=Math.min(32,t-last);
-last=t;
-if(!paused&&!over)fn(dt);
-drawCommon();
-animation=requestAnimationFrame(frame);
-}
-last=0;
-animation=requestAnimationFrame(frame);
-}
-
-function drawCommon(){
-ctx.save();
-ctx.globalAlpha=.04;
-ctx.strokeStyle="#fff";
-for(let x=0;x<canvas.width;x+=50){
-ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke();
-}
-for(let y=0;y<canvas.height;y+=50){
-ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(canvas.width,y);ctx.stroke();
-}
-ctx.restore();
-}
-
-function goHome(){
-location.href="index.html";
-}
-
-function keyAction(k){
-if(game==="neon-runner"||game==="ninja-jump"){
-if(k==="ArrowUp"||k===" "||k==="w")jump();
-}
-if(game==="road-racer"){
-if(k==="ArrowLeft"||k==="a")player.x-=45;
-if(k==="ArrowRight"||k==="d")player.x+=45;
-}
-if(game==="space-shooter"){
-if(k==="ArrowLeft"||k==="a")ship.x-=25;
-if(k==="ArrowRight"||k==="d")ship.x+=25;
-if(k===" "||k==="ArrowUp")shoot();
-}
-if(game==="flappy-challenge"){
-if(k===" "||k==="ArrowUp")flap();
-}
-if(game==="2048"){
-move2048(k);
-}
-}
-
-document.addEventListener("keydown",e=>{
-keyAction(e.key);
-});
-
-document.querySelectorAll(".pad button").forEach(b=>{
-b.addEventListener("pointerdown",e=>{
-e.preventDefault();
-keyAction(b.dataset.key);
-});
-});
-
-
-/* =====================================================
-   1 NEON RUNNER
-===================================================== */
-
-let runner={};
-
-function initRunner(){
-runner={x:120,y:410,w:38,h:38,vy:0,ground:410,obs:[],speed:5,t:0};
-loop(updateRunner);
-}
-
-function jump(){
-if((game==="neon-runner"||game==="ninja-jump")&&!over){
-if(runner.y>=runner.ground-1)runner.vy=-13;
-}
-}
-
-function updateRunner(dt){
-ctx.clearRect(0,0,900,520);
-
-runner.t+=dt;
-runner.vy+=.55;
-runner.y+=runner.vy;
-
-if(runner.y>runner.ground){
-runner.y=runner.ground;
-runner.vy=0;
-}
-
-if(Math.random()<.025){
-runner.obs.push({
-x:920,
-y:445,
-w:30+Math.random()*30,
-h:35+Math.random()*45
-});
-}
-
-runner.speed=5+level*.35;
-
-runner.obs.forEach(o=>o.x-=runner.speed);
-
-runner.obs=runner.obs.filter(o=>o.x>-100);
-
-runner.obs.forEach(o=>{
-if(hit(runner,o)){
-endGame("اصطدمت بعقبة");
-}
-if(o.x+o.w<runner.x&&!o.done){
-o.done=true;
-addScore(1);
-}
-});
-
-drawRunner();
-}
-
-function drawRunner(){
-ctx.fillStyle="#071020";
-ctx.fillRect(0,0,900,520);
-
-ctx.fillStyle="#101b31";
-ctx.fillRect(0,448,900,72);
-
-ctx.fillStyle="#00e5ff";
-ctx.fillRect(runner.x,runner.y,runner.w,runner.h);
-
-ctx.shadowBlur=20;
-ctx.shadowColor="#00e5ff";
-ctx.fillRect(runner.x,runner.y,runner.w,runner.h);
-ctx.shadowBlur=0;
-
-runner.obs.forEach(o=>{
-ctx.fillStyle="#ff315c";
-ctx.fillRect(o.x,o.y-o.h+38,o.w,o.h);
-});
-}
-
-
-/* =====================================================
-   2 SPACE SHOOTER
-===================================================== */
-
-let ship,bullets,enemies,shootCooldown;
-
-function initShooter(){
-ship={x:450,y:455,w:42,h:35};
-bullets=[];
-enemies=[];
-shootCooldown=0;
-loop(updateShooter);
-}
-
-function shoot(){
-if(game!=="space-shooter"||over)return;
-if(shootCooldown<=0){
-bullets.push({x:ship.x,y:ship.y-10,w:5,h:15});
-shootCooldown=12;
-}
-}
-
-function updateShooter(dt){
-ctx.clearRect(0,0,900,520);
-
-shootCooldown-=1;
-
-if(Math.random()<.025+level*.002){
-enemies.push({
-x:20+Math.random()*860,
-y:-40,
-w:32,h:32,
-speed:1.5+level*.25
-});
-}
-
-bullets.forEach(b=>b.y-=8);
-enemies.forEach(e=>e.y+=e.speed);
-
-for(const b of bullets){
-for(const e of enemies){
-if(!e.dead&&!b.dead&&hit(b,e)){
-b.dead=true;e.dead=true;addScore(1);
-}
-}
-}
-
-for(const e of enemies){
-if(e.y>520) e.dead=true;
-if(hit(ship,e))endGame("تم تدمير المركبة");
-}
-
-bullets=bullets.filter(b=>!b.dead&&b.y>-30);
-enemies=enemies.filter(e=>!e.dead);
-
-drawShooter();
-}
-
-function drawShooter(){
-ctx.fillStyle="#02030a";
-ctx.fillRect(0,0,900,520);
-
-for(let i=0;i<60;i++){
-ctx.fillStyle="rgba(255,255,255,.5)";
-ctx.fillRect((i*137)%900,(i*71)%500,2,2);
-}
-
-ctx.fillStyle="#00e5ff";
-ctx.beginPath();
-ctx.moveTo(ship.x,ship.y-25);
-ctx.lineTo(ship.x-23,ship.y+20);
-ctx.lineTo(ship.x,ship.y+10);
-ctx.lineTo(ship.x+23,ship.y+20);
-ctx.closePath();
-ctx.fill();
-
-ctx.fillStyle="#fff";
-bullets.forEach(b=>ctx.fillRect(b.x,b.y,b.w,b.h));
-
-enemies.forEach(e=>{
-ctx.fillStyle="#ff315c";
-ctx.beginPath();
-ctx.arc(e.x,e.y,e.w/2,0,Math.PI*2);
-ctx.fill();
-});
-}
-
-
-/* =====================================================
-   3 NINJA JUMP
-===================================================== */
-
-function initNinja(){
-runner={
-x:130,y:410,w:36,h:36,
-vy:0,ground:410,obs:[],
-speed:4,t:0
-};
-loop(updateNinja);
-}
-
-function updateNinja(dt){
-ctx.clearRect(0,0,900,520);
-
-runner.vy+=.55;
-runner.y+=runner.vy;
-
-if(runner.y>runner.ground){
-runner.y=runner.ground;
-runner.vy=0;
-}
-
-if(Math.random()<.02){
-runner.obs.push({
-x:920,
-y:430,
-w:35,h:35
-});
-}
-
-runner.obs.forEach(o=>o.x-=4+level*.3);
-
-runner.obs=runner.obs.filter(o=>o.x>-50);
-
-runner.obs.forEach(o=>{
-if(hit(runner,o))endGame("لم تتجاوز العقبة");
-if(o.x+o.w<runner.x&&!o.done){
-o.done=true;addScore(1);
-}
-});
-
-ctx.fillStyle="#100d18";
-ctx.fillRect(0,0,900,520);
-
-ctx.fillStyle="#171324";
-ctx.fillRect(0,448,900,72);
-
-ctx.fillStyle="#8b5cff";
-ctx.fillRect(runner.x,runner.y,runner.w,runner.h);
-
-runner.obs.forEach(o=>{
-ctx.fillStyle="#ff3b6b";
-ctx.fillRect(o.x,o.y,o.w,o.h);
-});
-}
-
-
-/* =====================================================
-   4 ROAD RACER
-===================================================== */
-
-let player,cars;
-
-function initRacer(){
-player={x:430,y:430,w:42,h:70};
-cars=[];
-loop(updateRacer);
-}
-
-function updateRacer(){
-ctx.clearRect(0,0,900,520);
-
-if(Math.random()<.025){
-cars.push({
-x:[270,430,590][Math.floor(Math.random()*3)],
-y:-100,w:42,h:70,speed:4+level*.3
-});
-}
-
-cars.forEach(c=>c.y+=c.speed);
-
-cars.forEach(c=>{
-if(hit(player,c))endGame("اصطدمت بسيارة");
-if(c.y>520&&!c.done){
-c.done=true;addScore(1);
-}
-});
-
-cars=cars.filter(c=>c.y<600);
-
-drawRoad();
-}
-
-function drawRoad(){
-ctx.fillStyle="#101217";
-ctx.fillRect(0,0,900,520);
-
-ctx.fillStyle="#252933";
-ctx.fillRect(220,0,460,520);
-
-ctx.strokeStyle="#fff";
-ctx.lineWidth=5;
-ctx.setLineDash([35,35]);
-ctx.lineDashOffset=performance.now()/15;
-ctx.beginPath();
-ctx.moveTo(370,0);ctx.lineTo(370,520);
-ctx.stroke();
-ctx.beginPath();
-ctx.moveTo(530,0);ctx.lineTo(530,520);
-ctx.stroke();
-ctx.setLineDash([]);
-
-ctx.fillStyle="#00e5ff";
-ctx.fillRect(player.x,player.y,player.w,player.h);
-
-cars.forEach(c=>{
-ctx.fillStyle="#ff315c";
-ctx.fillRect(c.x,c.y,c.w,c.h);
-});
-}
-
-
-/* =====================================================
-   5 BRICK BREAKER
-===================================================== */
-
-let paddle,ball,bricks;
-
-function initBrick(){
-paddle={x:400,y:475,w:110,h:15};
-ball={x:450,y:430,vx:4,vy:-4,r:8};
-bricks=[];
-
-for(let r=0;r<5;r++){
-for(let c=0;c<10;c++){
-bricks.push({
-x:85+c*74,
-y:55+r*28,
-w:62,h:20,
-alive:true
-});
-}
-}
-
-loop(updateBrick);
-}
-
-document.addEventListener("mousemove",e=>{
-if(game!=="brick-breaker")return;
-const rect=canvas.getBoundingClientRect();
-const scale=900/rect.width;
-paddle.x=(e.clientX-rect.left)*scale-paddle.w/2;
-});
-
-document.addEventListener("touchmove",e=>{
-if(game!=="brick-breaker")return;
-const t=e.touches[0];
-const rect=canvas.getBoundingClientRect();
-const scale=900/rect.width;
-paddle.x=(t.clientX-rect.left)*scale-paddle.w/2;
-},{passive:true});
-
-function updateBrick(){
-ctx.clearRect(0,0,900,520);
-
-ball.x+=ball.vx;
-ball.y+=ball.vy;
-
-if(ball.x<ball.r||ball.x>900-ball.r)ball.vx*=-1;
-if(ball.y<ball.r)ball.vy*=-1;
-
-if(ball.y+ball.r>=paddle.y&&
-ball.x>=paddle.x&&
-ball.x<=paddle.x+paddle.w){
-ball.vy=-Math.abs(ball.vy);
-}
-
-bricks.forEach(b=>{
-if(b.alive&&hit(ball,b)){
-b.alive=false;
-ball.vy*=-1;
-addScore(1);
-}
-});
-
-if(ball.y>520){
-endGame("سقطت الكرة");
-}
-
-if(bricks.every(b=>!b.alive)){
-addScore(20);
-endGame("أحسنت! حطمت جميع الطوب");
-}
-
-paddle.x=Math.max(0,Math.min(900-paddle.w,paddle.x));
-
-ctx.fillStyle="#050812";
-ctx.fillRect(0,0,900,520);
-
-bricks.forEach((b,i)=>{
-if(b.alive){
-ctx.fillStyle=`hsl(${i*7},80%,55%)`;
-ctx.fillRect(b.x,b.y,b.w,b.h);
-}
-});
-
-ctx.fillStyle="#00e5ff";
-ctx.fillRect(paddle.x,paddle.y,paddle.w,paddle.h);
-
-ctx.fillStyle="#fff";
-ctx.beginPath();
-ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);
-ctx.fill();
-}
-
-
-/* =====================================================
-   6 FLAPPY
-===================================================== */
-
-let bird,pipes;
-
-function initFlappy(){
-bird={x:180,y:250,vy:0,r:17};
-pipes=[];
-loop(updateFlappy);
-}
-
-function flap(){
-if(game==="flappy-challenge"&&!over){
-bird.vy=-7.5;
-}
-}
-
-function updateFlappy(){
-ctx.clearRect(0,0,900,520);
-
-bird.vy+=.35;
-bird.y+=bird.vy;
-
-if(Math.random()<.018){
-const gap=155;
-const top=70+Math.random()*220;
-pipes.push({
-x:920,
-top,
-bottom:top+gap,
-w:70,
-passed:false
-});
-}
-
-pipes.forEach(p=>p.x-=4+level*.2);
-
-pipes.forEach(p=>{
-if(
-bird.x+bird.r>p.x&&
-bird.x-bird.r<p.x+p.w&&
-(bird.y-bird.r<p.top||bird.y+bird.r>p.bottom)
-){
-endGame("اصطدمت بالأنبوب");
-}
-
-if(!p.passed&&p.x+p.w<bird.x){
-p.passed=true;
-addScore(1);
-}
-});
-
-pipes=pipes.filter(p=>p.x>-100);
-
-if(bird.y<0||bird.y>520){
-endGame("خرجت من المسار");
-}
-
-ctx.fillStyle="#07192b";
-ctx.fillRect(0,0,900,520);
-
-ctx.fillStyle="#00e5ff";
-ctx.beginPath();
-ctx.arc(bird.x,bird.y,bird.r,0,Math.PI*2);
-ctx.fill();
-
-pipes.forEach(p=>{
-ctx.fillStyle="#57e36d";
-ctx.fillRect(p.x,0,p.w,p.top);
-ctx.fillRect(p.x,p.bottom,p.w,520-p.bottom);
-});
-}
-
-
-/* =====================================================
-   7 2048
-===================================================== */
-
-let grid2048=[];
-
-function init2048(){
-grid2048=Array.from({length:4},()=>Array(4).fill(0));
-add2048();
-add2048();
-draw2048();
-}
-
-function add2048(){
-const empty=[];
-for(let r=0;r<4;r++)
-for(let c=0;c<4;c++)
-if(!grid2048[r][c])empty.push([r,c]);
-
-if(empty.length){
-const [r,c]=empty[Math.floor(Math.random()*empty.length)];
-grid2048[r][c]=Math.random()<.9?2:4;
-}
-}
-
-function move2048(k){
-if(game!=="2048"||over)return;
-
-let moved=false;
-
-function line(arr){
-let a=arr.filter(Boolean);
-for(let i=0;i<a.length-1;i++){
-if(a[i]===a[i+1]){
-a[i]*=2;
-addScore(Math.log2(a[i]));
-a[i+1]=0;
-}
-}
-a=a.filter(Boolean);
-while(a.length<4)a.push(0);
-return a;
-}
-
-if(k==="ArrowLeft"){
-for(let r=0;r<4;r++){
-let old=[...grid2048[r]];
-grid2048[r]=line(old);
-if(old.join()!=grid2048[r].join())moved=true;
-}
-}
-
-if(k==="ArrowRight"){
-for(let r=0;r<4;r++){
-let old=[...grid2048[r]].reverse();
-let n=line(old).reverse();
-if(old.reverse().join()!=n.join())moved=true;
-grid2048[r]=n;
-}
-}
-
-if(k==="ArrowUp"){
-for(let c=0;c<4;c++){
-let old=[];
-for(let r=0;r<4;r++)old.push(grid2048[r][c]);
-let n=line(old);
-for(let r=0;r<4;r++){
-if(grid2048[r][c]!==n[r])moved=true;
-grid2048[r][c]=n[r];
-}
-}
-}
-
-if(k==="ArrowDown"){
-for(let c=0;c<4;c++){
-let old=[];
-for(let r=3;r>=0;r--)old.push(grid2048[r][c]);
-let n=line(old).reverse();
-for(let r=0;r<4;r++){
-if(grid2048[r][c]!==n[r])moved=true;
-grid2048[r][c]=n[r];
-}
-}
-}
-
-if(moved)add2048();
-
-draw2048();
-
-if(grid2048.flat().includes(2048)){
-endGame("وصلت إلى 2048!");
-}
-}
-
-function draw2048(){
-ctx.fillStyle="#10131e";
-ctx.fillRect(0,0,900,520);
-
-const size=100;
-const gap=15;
-const startX=250;
-const startY=45;
-
-for(let r=0;r<4;r++){
-for(let c=0;c<4;c++){
-
-const x=startX+c*(size+gap);
-const y=startY+r*(size+gap);
-const n=grid2048[r][c];
-
-ctx.fillStyle=n?"#26344d":"#182033";
-ctx.fillRect(x,y,size,size);
-
-if(n){
-ctx.fillStyle="#fff";
-ctx.font="bold 30px Arial";
-ctx.textAlign="center";
-ctx.textBaseline="middle";
-ctx.fillText(n,x+size/2,y+size/2);
-}
-}
-}
-}
-
-
-/* =====================================================
-   8 MEMORY CARDS
-===================================================== */
-
-let cards=[],memoryFirst=null,memoryLock=false;
-
-function initMemory(){
-const symbols=["★","●","▲","◆","♥","☀","☂","♣"];
-cards=[...symbols,...symbols]
-.sort(()=>Math.random()-.5)
-.map((v,i)=>({v,i,open:false,matched:false}));
-
-drawMemory();
-}
-
-function drawMemory(){
-ctx.clearRect(0,0,900,520);
-
-const size=85,gap=15;
-const startX=180,startY=45;
-
-cards.forEach((card,i)=>{
-const r=Math.floor(i/4);
-const c=i%4;
-const x=startX+c*(size+gap);
-const y=startY+r*(size+gap);
-
-ctx.fillStyle=card.open||card.matched?"#17344a":"#242a3b";
-ctx.fillRect(x,y,size,size);
-
-if(card.open||card.matched){
-ctx.fillStyle="#00e5ff";
-ctx.font="bold 40px Arial";
-ctx.textAlign="center";
-ctx.textBaseline="middle";
-ctx.fillText(card.v,x+size/2,y+size/2);
-}
-
-card.x=x;card.y=y;
-});
-}
-
-canvas.addEventListener("click",e=>{
-if(game!=="memory-cards"||memoryLock||over)return;
-
-const rect=canvas.getBoundingClientRect();
-const sx=900/rect.width;
-const sy=520/rect.height;
-const x=(e.clientX-rect.left)*sx;
-const y=(e.clientY-rect.top)*sy;
-
-const card=cards.find(c=>
-x>=c.x&&x<=c.x+85&&
-y>=c.y&&y<=c.y+85
-);
-
-if(!card||card.open||card.matched)return;
-
-card.open=true;
-
-if(!memoryFirst){
-memoryFirst=card;
-drawMemory();
-return;
-}
-
-if(memoryFirst.v===card.v){
-card.matched=true;
-memoryFirst.matched=true;
-addScore(2);
-memoryFirst=null;
-
-if(cards.every(c=>c.matched)){
-endGame("وجدت جميع الأزواج");
-}
-
-}else{
-memoryLock=true;
-drawMemory();
-
-setTimeout(()=>{
-card.open=false;
-memoryFirst.open=false;
-memoryFirst=null;
-memoryLock=false;
-drawMemory();
-},650);
-}
-
-drawMemory();
-});
-
-
-/* =====================================================
-   9 ZOMBIE SURVIVAL
-===================================================== */
-
-let survivor,zombies,shots;
-
-function initZombie(){
-survivor={x:450,y:260,w:32,h:32};
-zombies=[];
-shots=[];
-loop(updateZombie);
-}
-
-function updateZombie(){
-ctx.clearRect(0,0,900,520);
-
-if(Math.random()<.025+level*.003){
-const side=Math.floor(Math.random()*4);
-let x,y;
-
-if(side===0){x=-30;y=Math.random()*520}
-if(side===1){x=930;y=Math.random()*520}
-if(side===2){x=Math.random()*900;y=-30}
-if(side===3){x=Math.random()*900;y=550}
-
-zombies.push({
-x,y,
-w:30,h:30,
-speed:1+level*.12
-});
-}
-
-zombies.forEach(z=>{
-const dx=survivor.x-z.x;
-const dy=survivor.y-z.y;
-const d=Math.hypot(dx,dy)||1;
-
-z.x+=dx/d*z.speed;
-z.y+=dy/d*z.speed;
-
-if(hit(survivor,z)){
-endGame("وصل إليك الزومبي");
-}
-});
-
-if(Math.random()<.06){
-const nearest=zombies[0];
-if(nearest){
-shots.push({
-x:survivor.x,
-y:survivor.y,
-tx:nearest.x,
-ty:nearest.y,
-life:30
-});
-}
-}
-
-shots.forEach(s=>{
-const dx=s.tx-s.x;
-const dy=s.ty-s.y;
-const d=Math.hypot(dx,dy)||1;
-
-s.x+=dx/d*12;
-s.y+=dy/d*12;
-s.life--;
-
-zombies.forEach(z=>{
-if(!z.dead&&Math.hypot(s.x-z.x,s.y-z.y)<22){
-z.dead=true;
-s.life=0;
-addScore(1);
-}
-});
-});
-
-zombies=zombies.filter(z=>!z.dead);
-shots=shots.filter(s=>s.life>0);
-
-ctx.fillStyle="#080b0d";
-ctx.fillRect(0,0,900,520);
-
-ctx.fillStyle="#00e5ff";
-ctx.fillRect(
-survivor.x-survivor.w/2,
-survivor.y-survivor.h/2,
-survivor.w,
-survivor.h
-);
-
-zombies.forEach(z=>{
-ctx.fillStyle="#65d66f";
-ctx.beginPath();
-ctx.arc(z.x,z.y,15,0,Math.PI*2);
-ctx.fill();
-});
-
-ctx.fillStyle="#fff";
-shots.forEach(s=>{
-ctx.beginPath();
-ctx.arc(s.x,s.y,4,0,Math.PI*2);
-ctx.fill();
-});
-}
-
-
-/* =====================================================
-   COLLISION
-===================================================== */
-
-function hit(a,b){
-
-if(a.r){
-return Math.hypot(
-a.x-(b.x+b.w/2),
-a.y-(b.y+b.h/2)
-)<a.r+Math.max(b.w,b.h)/2;
-}
-
-return(
-a.x < b.x+b.w &&
-a.x+a.w > b.x &&
-a.y < b.y+b.h &&
-a.y+a.h > b.y
-);
-}
-
-
-/* =====================================================
-   START
-===================================================== */
-
-restartGame();
+
+  /*
+  ==========================================
+  قصة: الهلال الصغير
+  ==========================================
+  */
+
+  const story = [
+
+    {
+      emoji: "🌙",
+
+      text:
+        "كان آدم يقف بجانب نافذة البيت وينظر إلى السماء. كان ينتظر شيئًا مهمًا جدًا... <strong>هلال رمضان.</strong>",
+
+      choices: []
+    },
+
+
+    {
+      emoji: "👦",
+
+      text:
+        "قال آدم لأمه: <strong>هل ظهر الهلال؟</strong><br><br>ابتسمت أمه وقالت: \"انظر جيدًا، ربما تراه قبل الجميع!\"",
+
+      choices: []
+    },
+
+
+    {
+      emoji: "🔭",
+
+      text:
+        "أخذ آدم منظاره الصغير وصعد إلى مكان مرتفع. نظر إلى السماء مرة... ثم مرة أخرى... وفجأة رأى شيئًا لامعًا.",
+
+      choices: []
+    },
+
+
+    {
+      emoji: "🌙✨",
+
+      text:
+        "<strong>لقد وجدته!</strong><br><br>كان الهلال الصغير يلمع في السماء. ركض آدم إلى أمه وهو يضحك من شدة الفرح.",
+
+      choices: [
+        {
+          text: "🎉 أخبر الجميع",
+          action: "celebrate"
+        },
+        {
+          text: "🤫 احتفظ بالسر",
+          action: "secret"
+        }
+      ]
+    },
+
+
+    {
+      emoji: "❤️",
+
+      text:
+        "أخبر آدم عائلته، ثم قال: <strong>\"أجمل شيء في رمضان أن نفرح معًا ونساعد بعضنا.\"</strong><br><br>ومنذ ذلك اليوم أصبح آدم ينتظر رمضان ليس فقط لرؤية الهلال، بل ليفعل الخير أيضًا.",
+
+      choices: []
+    }
+
+  ];
+
+
+  let currentPage = 0;
+
+
+  /*
+  ==========================================
+  عناصر الصفحة
+  ==========================================
+  */
+
+  const storyText =
+    document.getElementById("storyText");
+
+  const sceneEmoji =
+    document.getElementById("sceneEmoji");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const pageNumber =
+    document.getElementById("pageNumber");
+
+  const previousBtn =
+    document.getElementById("previousBtn");
+
+  const nextBtn =
+    document.getElementById("nextBtn");
+
+  const choices =
+    document.getElementById("choices");
+
+
+  /*
+  ==========================================
+  عرض الصفحة
+  ==========================================
+  */
+
+  function renderPage() {
+
+    const page =
+      story[currentPage];
+
+    storyText.innerHTML =
+      page.text;
+
+    sceneEmoji.textContent =
+      page.emoji;
+
+    pageNumber.textContent =
+      "الصفحة " +
+      (currentPage + 1) +
+      " من " +
+      story.length;
+
+
+    const percentage =
+      ((currentPage + 1) / story.length) * 100;
+
+    progressBar.style.width =
+      percentage + "%";
+
+
+    previousBtn.disabled =
+      currentPage === 0;
+
+
+    if (
+      currentPage === story.length - 1
+    ) {
+
+      nextBtn.textContent =
+        "↻ قراءة من البداية";
+
+    } else {
+
+      nextBtn.textContent =
+        "التالي →";
+
+    }
+
+
+    choices.innerHTML = "";
+
+
+    if (
+      page.choices &&
+      page.choices.length
+    ) {
+
+      page.choices.forEach(choice => {
+
+        const button =
+          document.createElement("button");
+
+        button.className =
+          "choice";
+
+        button.textContent =
+          choice.text;
+
+        button.onclick =
+          () => choose(choice.action);
+
+        choices.appendChild(button);
+
+      });
+
+    }
+
+  }
+
+
+  /*
+  ==========================================
+  التالي
+  ==========================================
+  */
+
+  function nextPage() {
+
+    if (
+      currentPage >= story.length - 1
+    ) {
+
+      currentPage = 0;
+
+    } else {
+
+      currentPage++;
+
+    }
+
+    renderPage();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /*
+  ==========================================
+  السابق
+  ==========================================
+  */
+
+  function previousPage() {
+
+    if (currentPage > 0) {
+
+      currentPage--;
+
+      renderPage();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+  }
+
+
+  /*
+  ==========================================
+  الاختيارات
+  ==========================================
+  */
+
+  function choose(action) {
+
+    if (action === "celebrate") {
+
+      alert(
+        "🎉 أحسنت!\nآدم شارك فرحته مع عائلته."
+      );
+
+    }
+
+
+    if (action === "secret") {
+
+      alert(
+        "😊 اختيار جميل، لكن مشاركة الفرح مع من نحب أجمل."
+      );
+
+    }
+
+  }
+
+
+  /*
+  ==========================================
+  العودة
+  ==========================================
+  */
+
+  function goHome() {
+
+    window.location.href =
+      "index.html";
+
+  }
+
+
+  /*
+  ==========================================
+  البداية
+  ==========================================
+  */
+
+  renderPage();
 
 </script>
 
