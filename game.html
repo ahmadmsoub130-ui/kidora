@@ -1,641 +1,1149 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070912">
+<title>ODDORA GAMES</title>
 
-  <title>ODDORA Arcade - لعبة</title>
-
-  <meta
-    name="description"
-    content="العب ألعاب ODDORA Arcade مباشرة من المتصفح."
-  >
-
-  <link rel="stylesheet" href="style.css">
-
-  <style>
-    .game-page {
-      min-height: calc(100vh - 160px);
-      padding: 50px 0 80px;
-    }
-
-    .game-page-header {
-      margin-bottom: 25px;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      text-decoration: none;
-      margin-bottom: 20px;
-    }
-
-    .back-link:hover {
-      color: var(--text);
-    }
-
-    .game-page-header h1 {
-      font-size: clamp(30px, 5vw, 52px);
-      margin: 0 0 10px;
-    }
-
-    .game-page-header p {
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.8;
-    }
-
-    .game-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .game-meta span {
-      padding: 8px 14px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      border-radius: 999px;
-      color: var(--muted);
-    }
-
-    .game-wrapper {
-      background: #050810;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,.35);
-    }
-
-    .game-toolbar {
-      min-height: 64px;
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      border-bottom: 1px solid var(--border);
-      background: #0b1120;
-    }
-
-    .game-toolbar-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-    }
-
-    .game-toolbar-title span:first-child {
-      font-size: 25px;
-    }
-
-    .game-toolbar-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    .game-tool-button {
-      border: 1px solid var(--border);
-      background: #101827;
-      color: var(--text);
-      padding: 9px 14px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .game-tool-button:hover {
-      background: #151f32;
-    }
-
-    .game-frame {
-      width: 100%;
-      height: min(78vh, 760px);
-      min-height: 550px;
-      border: 0;
-      display: block;
-      background: #000;
-    }
-
-    .game-info {
-      margin-top: 25px;
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 20px;
-    }
-
-    .info-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 25px;
-    }
-
-    .info-card h2 {
-      margin-top: 0;
-    }
-
-    .info-card p {
-      color: var(--muted);
-      line-height: 1.9;
-    }
-
-    .favorite-button {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #101827;
-      color: var(--text);
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 16px;
-    }
-
-    .favorite-button.active {
-      border-color: var(--primary);
-      background: rgba(124,92,255,.15);
-    }
-
-    @media (max-width: 800px) {
-      .game-page {
-        padding-top: 30px;
-      }
-
-      .game-toolbar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .game-toolbar-actions {
-        width: 100%;
-      }
-
-      .game-tool-button {
-        flex: 1;
-      }
-
-      .game-frame {
-        height: 78vh;
-        min-height: 500px;
-      }
-
-      .game-info {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:#060811;color:#fff}
+body{overflow-x:hidden;background:
+radial-gradient(circle at 20% 10%,rgba(0,220,255,.12),transparent 30%),
+radial-gradient(circle at 80% 80%,rgba(130,0,255,.12),transparent 35%),
+#060811}
+button{font:inherit}
+.top{
+position:sticky;top:0;z-index:20;
+display:flex;align-items:center;justify-content:space-between;
+padding:14px 18px;
+background:rgba(5,7,15,.88);
+backdrop-filter:blur(16px);
+border-bottom:1px solid rgba(255,255,255,.08)
+}
+.logo{font-size:24px;font-weight:900;letter-spacing:3px;color:#fff}
+.logo span{color:#00e5ff}
+.back{
+border:1px solid rgba(255,255,255,.15);
+background:rgba(255,255,255,.06);
+color:#fff;padding:9px 15px;border-radius:12px;
+cursor:pointer
+}
+.wrap{width:min(1100px,94%);margin:auto;padding:25px 0 50px}
+.head{text-align:center;margin-bottom:20px}
+.head h1{font-size:clamp(28px,6vw,54px);margin:10px 0}
+.head p{color:#9ca6bb;margin:0}
+.game-box{
+position:relative;width:100%;max-width:900px;margin:auto;
+background:rgba(12,16,29,.9);
+border:1px solid rgba(255,255,255,.1);
+border-radius:22px;padding:14px;
+box-shadow:0 25px 80px rgba(0,0,0,.45)
+}
+#game{
+display:block;width:100%;height:auto;
+background:#02040a;border-radius:15px;
+touch-action:none
+}
+.info{
+display:flex;justify-content:space-between;gap:10px;
+margin-top:12px;flex-wrap:wrap
+}
+.stat{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+padding:9px 14px;border-radius:12px;
+min-width:110px;text-align:center
+}
+.stat b{display:block;font-size:20px}
+.stat small{color:#8993a9}
+.controls{
+display:flex;justify-content:center;gap:10px;
+margin-top:15px;flex-wrap:wrap
+}
+.controls button,.action{
+border:0;border-radius:12px;
+padding:12px 20px;
+background:linear-gradient(135deg,#00b8ff,#6948ff);
+color:#fff;font-weight:800;cursor:pointer;
+box-shadow:0 8px 25px rgba(0,180,255,.18)
+}
+.pad{
+display:grid;
+grid-template-columns:60px 60px 60px;
+grid-template-rows:60px 60px 60px;
+justify-content:center;gap:6px;margin-top:15px
+}
+.pad button{
+border:1px solid rgba(255,255,255,.1);
+background:rgba(255,255,255,.07);
+color:#fff;border-radius:13px;font-size:22px;
+cursor:pointer
+}
+.pad .up{grid-column:2}
+.pad .left{grid-column:1;grid-row:2}
+.pad .down{grid-column:2;grid-row:2}
+.pad .right{grid-column:3;grid-row:2}
+.overlay{
+position:absolute;inset:14px;
+display:none;align-items:center;justify-content:center;
+background:rgba(2,4,10,.76);backdrop-filter:blur(6px);
+border-radius:15px;text-align:center;padding:20px
+}
+.overlay.show{display:flex}
+.overlay-box{
+background:#0d1220;border:1px solid rgba(255,255,255,.12);
+padding:25px;border-radius:20px;max-width:420px;width:90%
+}
+.overlay h2{margin-top:0}
+.hidden{display:none!important}
+.instructions{text-align:center;color:#8f99ae;margin-top:14px;line-height:1.7}
+@media(max-width:600px){
+.game-box{padding:8px;border-radius:16px}
+.overlay{inset:8px}
+.stat{flex:1;min-width:80px}
+}
+</style>
 </head>
 
 <body>
 
-<header class="site-header">
-  <div class="container header-inner">
-
-    <a href="index.html" class="logo">
-      ODDORA
-      <span>ARCADE</span>
-    </a>
-
-    <nav class="main-nav">
-      <a href="index.html#home">الرئيسية</a>
-      <a href="index.html#games">الألعاب</a>
-      <a href="index.html#categories">التصنيفات</a>
-      <a href="index.html#new">جديد</a>
-    </nav>
-
-    <div class="header-actions">
-      <a href="index.html" class="login-button">
-        العودة للألعاب
-      </a>
-    </div>
-
-  </div>
+<header class="top">
+<div class="logo">ODD<span>ORA</span></div>
+<button class="back" onclick="goHome()">← الرئيسية</button>
 </header>
 
-<main class="game-page">
+<main class="wrap">
 
-  <div class="container">
+<section class="head">
+<h1 id="gameTitle">ODDORA GAME</h1>
+<p id="gameDescription"></p>
+</section>
 
-    <div class="game-page-header">
+<section class="game-box">
 
-      <a href="index.html" class="back-link">
-        ← العودة إلى الألعاب
-      </a>
+<canvas id="game" width="900" height="520"></canvas>
 
-      <h1 id="gameTitle">
-        لعبة
-      </h1>
+<div class="overlay" id="overlay">
+<div class="overlay-box">
+<h2 id="overlayTitle">انتهت اللعبة</h2>
+<p id="overlayText"></p>
+<button class="action" onclick="restartGame()">إعادة اللعب</button>
+</div>
+</div>
 
-      <p id="gameDescription">
-        جاري تحميل اللعبة...
-      </p>
+<div class="info">
+<div class="stat">
+<b id="score">0</b>
+<small>النقاط</small>
+</div>
+<div class="stat">
+<b id="best">0</b>
+<small>أفضل نتيجة</small>
+</div>
+<div class="stat">
+<b id="level">1</b>
+<small>المستوى</small>
+</div>
+</div>
 
-      <div class="game-meta">
-        <span id="gameCategory">ألعاب</span>
-        <span>🎮 متصفح</span>
-        <span>📱 تعمل على الهاتف</span>
-      </div>
+<div class="controls">
+<button onclick="restartGame()">إعادة اللعب</button>
+<button onclick="pauseGame()">إيقاف / متابعة</button>
+</div>
 
-    </div>
+<div class="pad" id="pad">
+<button class="up" data-key="ArrowUp">▲</button>
+<button class="left" data-key="ArrowLeft">◀</button>
+<button class="down" data-key="ArrowDown">▼</button>
+<button class="right" data-key="ArrowRight">▶</button>
+</div>
 
+<p class="instructions" id="instructions">
+استخدم لوحة المفاتيح أو أزرار الهاتف للتحكم.
+</p>
 
-    <section class="game-wrapper">
-
-      <div class="game-toolbar">
-
-        <div class="game-toolbar-title">
-
-          <span id="gameIcon">
-            🎮
-          </span>
-
-          <span>
-            ODDORA Arcade
-          </span>
-
-        </div>
-
-        <div class="game-toolbar-actions">
-
-          <button
-            class="game-tool-button"
-            id="fullscreenButton"
-          >
-            ⛶ ملء الشاشة
-          </button>
-
-          <button
-            class="game-tool-button"
-            id="favoriteButton"
-          >
-            ☆ المفضلة
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <iframe
-        id="gameFrame"
-        class="game-frame"
-        title="ODDORA Game"
-        allow="fullscreen; autoplay"
-        loading="eager"
-      ></iframe>
-
-    </section>
-
-
-    <section class="game-info">
-
-      <div class="info-card">
-
-        <h2 id="infoTitle">
-          عن اللعبة
-        </h2>
-
-        <p id="infoDescription">
-          جاري تحميل معلومات اللعبة...
-        </p>
-
-      </div>
-
-
-      <div class="info-card">
-
-        <h2>
-          معلومات
-        </h2>
-
-        <p>
-          العب اللعبة مباشرة من المتصفح بدون تحميل.
-        </p>
-
-        <button
-          class="favorite-button"
-          id="favoriteButtonBottom"
-        >
-          ☆ إضافة إلى المفضلة
-        </button>
-
-      </div>
-
-    </section>
-
-  </div>
-
+</section>
 </main>
 
-
-<footer class="site-footer">
-
-  <div class="container footer-grid">
-
-    <div>
-      <a href="index.html" class="logo">
-        ODDORA
-        <span>ARCADE</span>
-      </a>
-
-      <p>
-        منصة عربية لألعاب المتصفح واللعب مباشرة.
-      </p>
-    </div>
-
-    <div>
-      <h3>المنصة</h3>
-      <a href="index.html#games">الألعاب</a>
-      <a href="index.html#categories">التصنيفات</a>
-      <a href="index.html#new">الألعاب الجديدة</a>
-    </div>
-
-    <div>
-      <h3>معلومات</h3>
-      <a href="privacy.html">الخصوصية</a>
-      <a href="terms.html">الشروط</a>
-      <a href="contact.html">تواصل معنا</a>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-
-    <div class="container">
-      © <span id="year"></span> ODDORA Arcade
-    </div>
-
-  </div>
-
-</footer>
-
-
-<script src="games.js"></script>
-
 <script>
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const params =
-    new URLSearchParams(window.location.search);
-
-  const id =
-    Number(params.get("id"));
-
-
-  const game =
-    GAMES.find(item => item.id === id);
-
-
-  const title =
-    document.getElementById("gameTitle");
-
-  const description =
-    document.getElementById("gameDescription");
-
-  const category =
-    document.getElementById("gameCategory");
-
-  const icon =
-    document.getElementById("gameIcon");
-
-  const infoTitle =
-    document.getElementById("infoTitle");
-
-  const infoDescription =
-    document.getElementById("infoDescription");
-
-  const frame =
-    document.getElementById("gameFrame");
-
-  const categoryNames = {
-
-    action: "أكشن",
-    racing: "سباقات",
-    puzzle: "ألغاز",
-    sports: "رياضة",
-    arcade: "أركيد",
-    strategy: "استراتيجية",
-    adventure: "مغامرات",
-    casual: "خفيفة"
-
-  };
-
-
-  /*
-    إذا كانت اللعبة غير موجودة
-  */
-
-  if (!game) {
-
-    title.textContent =
-      "اللعبة غير موجودة";
-
-    description.textContent =
-      "تعذر العثور على اللعبة المطلوبة.";
-
-    frame.style.display =
-      "none";
-
-    return;
-
-  }
-
-
-  /*
-    معلومات اللعبة
-  */
-
-  title.textContent =
-    game.titleAr || game.title;
-
-  description.textContent =
-    game.description || "";
-
-  infoTitle.textContent =
-    game.titleAr || game.title;
-
-  infoDescription.textContent =
-    game.description || "";
-
-  icon.textContent =
-    game.icon || "🎮";
-
-  category.textContent =
-    categoryNames[game.category] ||
-    "ألعاب";
-
-
-  /*
-    تحميل ملف اللعبة الحقيقي
-  */
-
-  if (game.file) {
-
-    frame.src =
-      game.file;
-
-  } else {
-
-    frame.src =
-      "games/snake/index.html";
-
-  }
-
-
-  /*
-    المفضلة
-  */
-
-  const favoriteKey =
-    "oddora_favorite_" + game.id;
-
-  const favoriteButton =
-    document.getElementById(
-      "favoriteButton"
-    );
-
-  const favoriteButtonBottom =
-    document.getElementById(
-      "favoriteButtonBottom"
-    );
-
-
-  function updateFavorite() {
-
-    const saved =
-      localStorage.getItem(
-        favoriteKey
-      ) === "true";
-
-
-    if (favoriteButton) {
-
-      favoriteButton.textContent =
-        saved
-          ? "★ في المفضلة"
-          : "☆ المفضلة";
-
-      favoriteButton.classList.toggle(
-        "active",
-        saved
-      );
-
-    }
-
-
-    if (favoriteButtonBottom) {
-
-      favoriteButtonBottom.textContent =
-        saved
-          ? "★ تمت الإضافة إلى المفضلة"
-          : "☆ إضافة إلى المفضلة";
-
-      favoriteButtonBottom.classList.toggle(
-        "active",
-        saved
-      );
-
-    }
-
-  }
-
-
-  function toggleFavorite() {
-
-    const current =
-      localStorage.getItem(
-        favoriteKey
-      ) === "true";
-
-
-    localStorage.setItem(
-      favoriteKey,
-      String(!current)
-    );
-
-
-    updateFavorite();
-
-  }
-
-
-  favoriteButton?.addEventListener(
-    "click",
-    toggleFavorite
-  );
-
-
-  favoriteButtonBottom?.addEventListener(
-    "click",
-    toggleFavorite
-  );
-
-
-  updateFavorite();
-
-
-  /*
-    ملء الشاشة
-  */
-
-  const fullscreenButton =
-    document.getElementById(
-      "fullscreenButton"
-    );
-
-
-  fullscreenButton?.addEventListener(
-    "click",
-    async () => {
-
-      try {
-
-        if (frame.requestFullscreen) {
-
-          await frame.requestFullscreen();
-
-        } else if (
-          frame.webkitRequestFullscreen
-        ) {
-
-          frame.webkitRequestFullscreen();
-
-        }
-
-      } catch (error) {
-
-        console.log(
-          "Fullscreen unavailable",
-          error
-        );
-
-      }
-
-    }
-  );
-
-
-  /*
-    السنة
-  */
-
-  const year =
-    document.getElementById("year");
-
-
-  if (year) {
-
-    year.textContent =
-      new Date().getFullYear();
-
-  }
-
+"use strict";
+
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+
+const titleEl=document.getElementById("gameTitle");
+const descEl=document.getElementById("gameDescription");
+const scoreEl=document.getElementById("score");
+const bestEl=document.getElementById("best");
+const levelEl=document.getElementById("level");
+const overlay=document.getElementById("overlay");
+const overlayTitle=document.getElementById("overlayTitle");
+const overlayText=document.getElementById("overlayText");
+
+const params=new URLSearchParams(location.search);
+const game=params.get("game")||"neon-runner";
+
+let score=0;
+let best=Number(localStorage.getItem("oddora_best_"+game)||0);
+let level=1;
+let paused=false;
+let over=false;
+let animation=0;
+let last=0;
+
+bestEl.textContent=best;
+
+const GAME_NAMES={
+"neon-runner":["Neon Runner","اركض وتجنب العقبات"],
+"space-shooter":["Space Shooter","دمر الأعداء وأنقذ مركبتك"],
+"ninja-jump":["Ninja Jump","اقفز وتجنب العقبات"],
+"road-racer":["Road Racer","قد السيارة وتجنب حركة المرور"],
+"brick-breaker":["Brick Breaker","حطم جميع الطوب"],
+"flappy-challenge":["Flappy Challenge","حلّق بين الأنابيب"],
+"2048":["2048","ادمج الأرقام ووصل إلى 2048"],
+"memory-cards":["Memory Cards","اعثر على الأزواج المتطابقة"],
+"zombie-survival":["Zombie Survival","اصمد أمام موجات الأعداء"]
+};
+
+if(GAME_NAMES[game]){
+titleEl.textContent=GAME_NAMES[game][0];
+descEl.textContent=GAME_NAMES[game][1];
+}
+
+function resizeCanvas(){
+const w=Math.min(900,canvas.parentElement.clientWidth-16);
+const ratio=520/900;
+canvas.style.height=(w*ratio)+"px";
+}
+window.addEventListener("resize",resizeCanvas);
+resizeCanvas();
+
+function resetUI(){
+score=0;level=1;paused=false;over=false;
+scoreEl.textContent=0;
+levelEl.textContent=1;
+overlay.classList.remove("show");
+}
+
+function addScore(n){
+score+=n;
+level=Math.max(1,Math.floor(score/10)+1);
+scoreEl.textContent=score;
+levelEl.textContent=level;
+
+if(score>best){
+best=score;
+bestEl.textContent=best;
+localStorage.setItem("oddora_best_"+game,best);
+}
+}
+
+function endGame(message="انتهت اللعبة"){
+over=true;
+overlayTitle.textContent="انتهت اللعبة";
+overlayText.textContent=message+" — نتيجتك: "+score;
+overlay.classList.add("show");
+}
+
+function pauseGame(){
+if(over)return;
+paused=!paused;
+}
+
+function restartGame(){
+cancelAnimationFrame(animation);
+resetUI();
+
+switch(game){
+case"neon-runner":initRunner();break;
+case"space-shooter":initShooter();break;
+case"ninja-jump":initNinja();break;
+case"road-racer":initRacer();break;
+case"brick-breaker":initBrick();break;
+case"flappy-challenge":initFlappy();break;
+case"2048":init2048();break;
+case"memory-cards":initMemory();break;
+case"zombie-survival":initZombie();break;
+default:initRunner();
+}
+}
+
+function loop(fn){
+function frame(t){
+if(!last)last=t;
+const dt=Math.min(32,t-last);
+last=t;
+if(!paused&&!over)fn(dt);
+drawCommon();
+animation=requestAnimationFrame(frame);
+}
+last=0;
+animation=requestAnimationFrame(frame);
+}
+
+function drawCommon(){
+ctx.save();
+ctx.globalAlpha=.04;
+ctx.strokeStyle="#fff";
+for(let x=0;x<canvas.width;x+=50){
+ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke();
+}
+for(let y=0;y<canvas.height;y+=50){
+ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(canvas.width,y);ctx.stroke();
+}
+ctx.restore();
+}
+
+function goHome(){
+location.href="index.html";
+}
+
+function keyAction(k){
+if(game==="neon-runner"||game==="ninja-jump"){
+if(k==="ArrowUp"||k===" "||k==="w")jump();
+}
+if(game==="road-racer"){
+if(k==="ArrowLeft"||k==="a")player.x-=45;
+if(k==="ArrowRight"||k==="d")player.x+=45;
+}
+if(game==="space-shooter"){
+if(k==="ArrowLeft"||k==="a")ship.x-=25;
+if(k==="ArrowRight"||k==="d")ship.x+=25;
+if(k===" "||k==="ArrowUp")shoot();
+}
+if(game==="flappy-challenge"){
+if(k===" "||k==="ArrowUp")flap();
+}
+if(game==="2048"){
+move2048(k);
+}
+}
+
+document.addEventListener("keydown",e=>{
+keyAction(e.key);
 });
+
+document.querySelectorAll(".pad button").forEach(b=>{
+b.addEventListener("pointerdown",e=>{
+e.preventDefault();
+keyAction(b.dataset.key);
+});
+});
+
+
+/* =====================================================
+   1 NEON RUNNER
+===================================================== */
+
+let runner={};
+
+function initRunner(){
+runner={x:120,y:410,w:38,h:38,vy:0,ground:410,obs:[],speed:5,t:0};
+loop(updateRunner);
+}
+
+function jump(){
+if((game==="neon-runner"||game==="ninja-jump")&&!over){
+if(runner.y>=runner.ground-1)runner.vy=-13;
+}
+}
+
+function updateRunner(dt){
+ctx.clearRect(0,0,900,520);
+
+runner.t+=dt;
+runner.vy+=.55;
+runner.y+=runner.vy;
+
+if(runner.y>runner.ground){
+runner.y=runner.ground;
+runner.vy=0;
+}
+
+if(Math.random()<.025){
+runner.obs.push({
+x:920,
+y:445,
+w:30+Math.random()*30,
+h:35+Math.random()*45
+});
+}
+
+runner.speed=5+level*.35;
+
+runner.obs.forEach(o=>o.x-=runner.speed);
+
+runner.obs=runner.obs.filter(o=>o.x>-100);
+
+runner.obs.forEach(o=>{
+if(hit(runner,o)){
+endGame("اصطدمت بعقبة");
+}
+if(o.x+o.w<runner.x&&!o.done){
+o.done=true;
+addScore(1);
+}
+});
+
+drawRunner();
+}
+
+function drawRunner(){
+ctx.fillStyle="#071020";
+ctx.fillRect(0,0,900,520);
+
+ctx.fillStyle="#101b31";
+ctx.fillRect(0,448,900,72);
+
+ctx.fillStyle="#00e5ff";
+ctx.fillRect(runner.x,runner.y,runner.w,runner.h);
+
+ctx.shadowBlur=20;
+ctx.shadowColor="#00e5ff";
+ctx.fillRect(runner.x,runner.y,runner.w,runner.h);
+ctx.shadowBlur=0;
+
+runner.obs.forEach(o=>{
+ctx.fillStyle="#ff315c";
+ctx.fillRect(o.x,o.y-o.h+38,o.w,o.h);
+});
+}
+
+
+/* =====================================================
+   2 SPACE SHOOTER
+===================================================== */
+
+let ship,bullets,enemies,shootCooldown;
+
+function initShooter(){
+ship={x:450,y:455,w:42,h:35};
+bullets=[];
+enemies=[];
+shootCooldown=0;
+loop(updateShooter);
+}
+
+function shoot(){
+if(game!=="space-shooter"||over)return;
+if(shootCooldown<=0){
+bullets.push({x:ship.x,y:ship.y-10,w:5,h:15});
+shootCooldown=12;
+}
+}
+
+function updateShooter(dt){
+ctx.clearRect(0,0,900,520);
+
+shootCooldown-=1;
+
+if(Math.random()<.025+level*.002){
+enemies.push({
+x:20+Math.random()*860,
+y:-40,
+w:32,h:32,
+speed:1.5+level*.25
+});
+}
+
+bullets.forEach(b=>b.y-=8);
+enemies.forEach(e=>e.y+=e.speed);
+
+for(const b of bullets){
+for(const e of enemies){
+if(!e.dead&&!b.dead&&hit(b,e)){
+b.dead=true;e.dead=true;addScore(1);
+}
+}
+}
+
+for(const e of enemies){
+if(e.y>520) e.dead=true;
+if(hit(ship,e))endGame("تم تدمير المركبة");
+}
+
+bullets=bullets.filter(b=>!b.dead&&b.y>-30);
+enemies=enemies.filter(e=>!e.dead);
+
+drawShooter();
+}
+
+function drawShooter(){
+ctx.fillStyle="#02030a";
+ctx.fillRect(0,0,900,520);
+
+for(let i=0;i<60;i++){
+ctx.fillStyle="rgba(255,255,255,.5)";
+ctx.fillRect((i*137)%900,(i*71)%500,2,2);
+}
+
+ctx.fillStyle="#00e5ff";
+ctx.beginPath();
+ctx.moveTo(ship.x,ship.y-25);
+ctx.lineTo(ship.x-23,ship.y+20);
+ctx.lineTo(ship.x,ship.y+10);
+ctx.lineTo(ship.x+23,ship.y+20);
+ctx.closePath();
+ctx.fill();
+
+ctx.fillStyle="#fff";
+bullets.forEach(b=>ctx.fillRect(b.x,b.y,b.w,b.h));
+
+enemies.forEach(e=>{
+ctx.fillStyle="#ff315c";
+ctx.beginPath();
+ctx.arc(e.x,e.y,e.w/2,0,Math.PI*2);
+ctx.fill();
+});
+}
+
+
+/* =====================================================
+   3 NINJA JUMP
+===================================================== */
+
+function initNinja(){
+runner={
+x:130,y:410,w:36,h:36,
+vy:0,ground:410,obs:[],
+speed:4,t:0
+};
+loop(updateNinja);
+}
+
+function updateNinja(dt){
+ctx.clearRect(0,0,900,520);
+
+runner.vy+=.55;
+runner.y+=runner.vy;
+
+if(runner.y>runner.ground){
+runner.y=runner.ground;
+runner.vy=0;
+}
+
+if(Math.random()<.02){
+runner.obs.push({
+x:920,
+y:430,
+w:35,h:35
+});
+}
+
+runner.obs.forEach(o=>o.x-=4+level*.3);
+
+runner.obs=runner.obs.filter(o=>o.x>-50);
+
+runner.obs.forEach(o=>{
+if(hit(runner,o))endGame("لم تتجاوز العقبة");
+if(o.x+o.w<runner.x&&!o.done){
+o.done=true;addScore(1);
+}
+});
+
+ctx.fillStyle="#100d18";
+ctx.fillRect(0,0,900,520);
+
+ctx.fillStyle="#171324";
+ctx.fillRect(0,448,900,72);
+
+ctx.fillStyle="#8b5cff";
+ctx.fillRect(runner.x,runner.y,runner.w,runner.h);
+
+runner.obs.forEach(o=>{
+ctx.fillStyle="#ff3b6b";
+ctx.fillRect(o.x,o.y,o.w,o.h);
+});
+}
+
+
+/* =====================================================
+   4 ROAD RACER
+===================================================== */
+
+let player,cars;
+
+function initRacer(){
+player={x:430,y:430,w:42,h:70};
+cars=[];
+loop(updateRacer);
+}
+
+function updateRacer(){
+ctx.clearRect(0,0,900,520);
+
+if(Math.random()<.025){
+cars.push({
+x:[270,430,590][Math.floor(Math.random()*3)],
+y:-100,w:42,h:70,speed:4+level*.3
+});
+}
+
+cars.forEach(c=>c.y+=c.speed);
+
+cars.forEach(c=>{
+if(hit(player,c))endGame("اصطدمت بسيارة");
+if(c.y>520&&!c.done){
+c.done=true;addScore(1);
+}
+});
+
+cars=cars.filter(c=>c.y<600);
+
+drawRoad();
+}
+
+function drawRoad(){
+ctx.fillStyle="#101217";
+ctx.fillRect(0,0,900,520);
+
+ctx.fillStyle="#252933";
+ctx.fillRect(220,0,460,520);
+
+ctx.strokeStyle="#fff";
+ctx.lineWidth=5;
+ctx.setLineDash([35,35]);
+ctx.lineDashOffset=performance.now()/15;
+ctx.beginPath();
+ctx.moveTo(370,0);ctx.lineTo(370,520);
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(530,0);ctx.lineTo(530,520);
+ctx.stroke();
+ctx.setLineDash([]);
+
+ctx.fillStyle="#00e5ff";
+ctx.fillRect(player.x,player.y,player.w,player.h);
+
+cars.forEach(c=>{
+ctx.fillStyle="#ff315c";
+ctx.fillRect(c.x,c.y,c.w,c.h);
+});
+}
+
+
+/* =====================================================
+   5 BRICK BREAKER
+===================================================== */
+
+let paddle,ball,bricks;
+
+function initBrick(){
+paddle={x:400,y:475,w:110,h:15};
+ball={x:450,y:430,vx:4,vy:-4,r:8};
+bricks=[];
+
+for(let r=0;r<5;r++){
+for(let c=0;c<10;c++){
+bricks.push({
+x:85+c*74,
+y:55+r*28,
+w:62,h:20,
+alive:true
+});
+}
+}
+
+loop(updateBrick);
+}
+
+document.addEventListener("mousemove",e=>{
+if(game!=="brick-breaker")return;
+const rect=canvas.getBoundingClientRect();
+const scale=900/rect.width;
+paddle.x=(e.clientX-rect.left)*scale-paddle.w/2;
+});
+
+document.addEventListener("touchmove",e=>{
+if(game!=="brick-breaker")return;
+const t=e.touches[0];
+const rect=canvas.getBoundingClientRect();
+const scale=900/rect.width;
+paddle.x=(t.clientX-rect.left)*scale-paddle.w/2;
+},{passive:true});
+
+function updateBrick(){
+ctx.clearRect(0,0,900,520);
+
+ball.x+=ball.vx;
+ball.y+=ball.vy;
+
+if(ball.x<ball.r||ball.x>900-ball.r)ball.vx*=-1;
+if(ball.y<ball.r)ball.vy*=-1;
+
+if(ball.y+ball.r>=paddle.y&&
+ball.x>=paddle.x&&
+ball.x<=paddle.x+paddle.w){
+ball.vy=-Math.abs(ball.vy);
+}
+
+bricks.forEach(b=>{
+if(b.alive&&hit(ball,b)){
+b.alive=false;
+ball.vy*=-1;
+addScore(1);
+}
+});
+
+if(ball.y>520){
+endGame("سقطت الكرة");
+}
+
+if(bricks.every(b=>!b.alive)){
+addScore(20);
+endGame("أحسنت! حطمت جميع الطوب");
+}
+
+paddle.x=Math.max(0,Math.min(900-paddle.w,paddle.x));
+
+ctx.fillStyle="#050812";
+ctx.fillRect(0,0,900,520);
+
+bricks.forEach((b,i)=>{
+if(b.alive){
+ctx.fillStyle=`hsl(${i*7},80%,55%)`;
+ctx.fillRect(b.x,b.y,b.w,b.h);
+}
+});
+
+ctx.fillStyle="#00e5ff";
+ctx.fillRect(paddle.x,paddle.y,paddle.w,paddle.h);
+
+ctx.fillStyle="#fff";
+ctx.beginPath();
+ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);
+ctx.fill();
+}
+
+
+/* =====================================================
+   6 FLAPPY
+===================================================== */
+
+let bird,pipes;
+
+function initFlappy(){
+bird={x:180,y:250,vy:0,r:17};
+pipes=[];
+loop(updateFlappy);
+}
+
+function flap(){
+if(game==="flappy-challenge"&&!over){
+bird.vy=-7.5;
+}
+}
+
+function updateFlappy(){
+ctx.clearRect(0,0,900,520);
+
+bird.vy+=.35;
+bird.y+=bird.vy;
+
+if(Math.random()<.018){
+const gap=155;
+const top=70+Math.random()*220;
+pipes.push({
+x:920,
+top,
+bottom:top+gap,
+w:70,
+passed:false
+});
+}
+
+pipes.forEach(p=>p.x-=4+level*.2);
+
+pipes.forEach(p=>{
+if(
+bird.x+bird.r>p.x&&
+bird.x-bird.r<p.x+p.w&&
+(bird.y-bird.r<p.top||bird.y+bird.r>p.bottom)
+){
+endGame("اصطدمت بالأنبوب");
+}
+
+if(!p.passed&&p.x+p.w<bird.x){
+p.passed=true;
+addScore(1);
+}
+});
+
+pipes=pipes.filter(p=>p.x>-100);
+
+if(bird.y<0||bird.y>520){
+endGame("خرجت من المسار");
+}
+
+ctx.fillStyle="#07192b";
+ctx.fillRect(0,0,900,520);
+
+ctx.fillStyle="#00e5ff";
+ctx.beginPath();
+ctx.arc(bird.x,bird.y,bird.r,0,Math.PI*2);
+ctx.fill();
+
+pipes.forEach(p=>{
+ctx.fillStyle="#57e36d";
+ctx.fillRect(p.x,0,p.w,p.top);
+ctx.fillRect(p.x,p.bottom,p.w,520-p.bottom);
+});
+}
+
+
+/* =====================================================
+   7 2048
+===================================================== */
+
+let grid2048=[];
+
+function init2048(){
+grid2048=Array.from({length:4},()=>Array(4).fill(0));
+add2048();
+add2048();
+draw2048();
+}
+
+function add2048(){
+const empty=[];
+for(let r=0;r<4;r++)
+for(let c=0;c<4;c++)
+if(!grid2048[r][c])empty.push([r,c]);
+
+if(empty.length){
+const [r,c]=empty[Math.floor(Math.random()*empty.length)];
+grid2048[r][c]=Math.random()<.9?2:4;
+}
+}
+
+function move2048(k){
+if(game!=="2048"||over)return;
+
+let moved=false;
+
+function line(arr){
+let a=arr.filter(Boolean);
+for(let i=0;i<a.length-1;i++){
+if(a[i]===a[i+1]){
+a[i]*=2;
+addScore(Math.log2(a[i]));
+a[i+1]=0;
+}
+}
+a=a.filter(Boolean);
+while(a.length<4)a.push(0);
+return a;
+}
+
+if(k==="ArrowLeft"){
+for(let r=0;r<4;r++){
+let old=[...grid2048[r]];
+grid2048[r]=line(old);
+if(old.join()!=grid2048[r].join())moved=true;
+}
+}
+
+if(k==="ArrowRight"){
+for(let r=0;r<4;r++){
+let old=[...grid2048[r]].reverse();
+let n=line(old).reverse();
+if(old.reverse().join()!=n.join())moved=true;
+grid2048[r]=n;
+}
+}
+
+if(k==="ArrowUp"){
+for(let c=0;c<4;c++){
+let old=[];
+for(let r=0;r<4;r++)old.push(grid2048[r][c]);
+let n=line(old);
+for(let r=0;r<4;r++){
+if(grid2048[r][c]!==n[r])moved=true;
+grid2048[r][c]=n[r];
+}
+}
+}
+
+if(k==="ArrowDown"){
+for(let c=0;c<4;c++){
+let old=[];
+for(let r=3;r>=0;r--)old.push(grid2048[r][c]);
+let n=line(old).reverse();
+for(let r=0;r<4;r++){
+if(grid2048[r][c]!==n[r])moved=true;
+grid2048[r][c]=n[r];
+}
+}
+}
+
+if(moved)add2048();
+
+draw2048();
+
+if(grid2048.flat().includes(2048)){
+endGame("وصلت إلى 2048!");
+}
+}
+
+function draw2048(){
+ctx.fillStyle="#10131e";
+ctx.fillRect(0,0,900,520);
+
+const size=100;
+const gap=15;
+const startX=250;
+const startY=45;
+
+for(let r=0;r<4;r++){
+for(let c=0;c<4;c++){
+
+const x=startX+c*(size+gap);
+const y=startY+r*(size+gap);
+const n=grid2048[r][c];
+
+ctx.fillStyle=n?"#26344d":"#182033";
+ctx.fillRect(x,y,size,size);
+
+if(n){
+ctx.fillStyle="#fff";
+ctx.font="bold 30px Arial";
+ctx.textAlign="center";
+ctx.textBaseline="middle";
+ctx.fillText(n,x+size/2,y+size/2);
+}
+}
+}
+}
+
+
+/* =====================================================
+   8 MEMORY CARDS
+===================================================== */
+
+let cards=[],memoryFirst=null,memoryLock=false;
+
+function initMemory(){
+const symbols=["★","●","▲","◆","♥","☀","☂","♣"];
+cards=[...symbols,...symbols]
+.sort(()=>Math.random()-.5)
+.map((v,i)=>({v,i,open:false,matched:false}));
+
+drawMemory();
+}
+
+function drawMemory(){
+ctx.clearRect(0,0,900,520);
+
+const size=85,gap=15;
+const startX=180,startY=45;
+
+cards.forEach((card,i)=>{
+const r=Math.floor(i/4);
+const c=i%4;
+const x=startX+c*(size+gap);
+const y=startY+r*(size+gap);
+
+ctx.fillStyle=card.open||card.matched?"#17344a":"#242a3b";
+ctx.fillRect(x,y,size,size);
+
+if(card.open||card.matched){
+ctx.fillStyle="#00e5ff";
+ctx.font="bold 40px Arial";
+ctx.textAlign="center";
+ctx.textBaseline="middle";
+ctx.fillText(card.v,x+size/2,y+size/2);
+}
+
+card.x=x;card.y=y;
+});
+}
+
+canvas.addEventListener("click",e=>{
+if(game!=="memory-cards"||memoryLock||over)return;
+
+const rect=canvas.getBoundingClientRect();
+const sx=900/rect.width;
+const sy=520/rect.height;
+const x=(e.clientX-rect.left)*sx;
+const y=(e.clientY-rect.top)*sy;
+
+const card=cards.find(c=>
+x>=c.x&&x<=c.x+85&&
+y>=c.y&&y<=c.y+85
+);
+
+if(!card||card.open||card.matched)return;
+
+card.open=true;
+
+if(!memoryFirst){
+memoryFirst=card;
+drawMemory();
+return;
+}
+
+if(memoryFirst.v===card.v){
+card.matched=true;
+memoryFirst.matched=true;
+addScore(2);
+memoryFirst=null;
+
+if(cards.every(c=>c.matched)){
+endGame("وجدت جميع الأزواج");
+}
+
+}else{
+memoryLock=true;
+drawMemory();
+
+setTimeout(()=>{
+card.open=false;
+memoryFirst.open=false;
+memoryFirst=null;
+memoryLock=false;
+drawMemory();
+},650);
+}
+
+drawMemory();
+});
+
+
+/* =====================================================
+   9 ZOMBIE SURVIVAL
+===================================================== */
+
+let survivor,zombies,shots;
+
+function initZombie(){
+survivor={x:450,y:260,w:32,h:32};
+zombies=[];
+shots=[];
+loop(updateZombie);
+}
+
+function updateZombie(){
+ctx.clearRect(0,0,900,520);
+
+if(Math.random()<.025+level*.003){
+const side=Math.floor(Math.random()*4);
+let x,y;
+
+if(side===0){x=-30;y=Math.random()*520}
+if(side===1){x=930;y=Math.random()*520}
+if(side===2){x=Math.random()*900;y=-30}
+if(side===3){x=Math.random()*900;y=550}
+
+zombies.push({
+x,y,
+w:30,h:30,
+speed:1+level*.12
+});
+}
+
+zombies.forEach(z=>{
+const dx=survivor.x-z.x;
+const dy=survivor.y-z.y;
+const d=Math.hypot(dx,dy)||1;
+
+z.x+=dx/d*z.speed;
+z.y+=dy/d*z.speed;
+
+if(hit(survivor,z)){
+endGame("وصل إليك الزومبي");
+}
+});
+
+if(Math.random()<.06){
+const nearest=zombies[0];
+if(nearest){
+shots.push({
+x:survivor.x,
+y:survivor.y,
+tx:nearest.x,
+ty:nearest.y,
+life:30
+});
+}
+}
+
+shots.forEach(s=>{
+const dx=s.tx-s.x;
+const dy=s.ty-s.y;
+const d=Math.hypot(dx,dy)||1;
+
+s.x+=dx/d*12;
+s.y+=dy/d*12;
+s.life--;
+
+zombies.forEach(z=>{
+if(!z.dead&&Math.hypot(s.x-z.x,s.y-z.y)<22){
+z.dead=true;
+s.life=0;
+addScore(1);
+}
+});
+});
+
+zombies=zombies.filter(z=>!z.dead);
+shots=shots.filter(s=>s.life>0);
+
+ctx.fillStyle="#080b0d";
+ctx.fillRect(0,0,900,520);
+
+ctx.fillStyle="#00e5ff";
+ctx.fillRect(
+survivor.x-survivor.w/2,
+survivor.y-survivor.h/2,
+survivor.w,
+survivor.h
+);
+
+zombies.forEach(z=>{
+ctx.fillStyle="#65d66f";
+ctx.beginPath();
+ctx.arc(z.x,z.y,15,0,Math.PI*2);
+ctx.fill();
+});
+
+ctx.fillStyle="#fff";
+shots.forEach(s=>{
+ctx.beginPath();
+ctx.arc(s.x,s.y,4,0,Math.PI*2);
+ctx.fill();
+});
+}
+
+
+/* =====================================================
+   COLLISION
+===================================================== */
+
+function hit(a,b){
+
+if(a.r){
+return Math.hypot(
+a.x-(b.x+b.w/2),
+a.y-(b.y+b.h/2)
+)<a.r+Math.max(b.w,b.h)/2;
+}
+
+return(
+a.x < b.x+b.w &&
+a.x+a.w > b.x &&
+a.y < b.y+b.h &&
+a.y+a.h > b.y
+);
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+restartGame();
 
 </script>
 
