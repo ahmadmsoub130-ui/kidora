@@ -1,72 +1,96 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
   <title>KIDORA - قراءة القصة</title>
+
+  <meta name="description"
+        content="اقرأ واستمع إلى قصص KIDORA للأطفال بالعربية والإنجليزية.">
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- ============================= -->
-  <!-- Header -->
-  <!-- ============================= -->
+<header class="site-header">
 
-  <header class="site-header">
+  <div class="container nav-wrap">
 
-    <div class="container header-inner">
+    <a href="index.html" class="logo">
+      KIDORA
+    </a>
 
-      <a href="index.html" class="logo">
-        <span class="logo-icon">📚</span>
-        <span>KIDORA</span>
-      </a>
+    <nav class="main-nav">
+      <a href="index.html#stories">القصص</a>
+      <a href="index.html#categories">التصنيفات</a>
+      <a href="index.html#ramadan">رمضان</a>
+      <a href="index.html#about">عن KIDORA</a>
+    </nav>
 
-      <div class="reader-header-actions">
+    <div class="nav-actions">
 
-        <button
-          id="languageToggle"
-          class="language-btn"
-          type="button"
-        >
-          English
-        </button>
+      <button id="languageToggle" type="button">
+        English
+      </button>
 
-        <a
-          href="index.html"
-          class="back-home"
-          data-ar="القصص"
-          data-en="Stories"
-        >
-          القصص
-        </a>
-
-      </div>
+      <button id="menuToggle" type="button">
+        ☰
+      </button>
 
     </div>
 
-  </header>
+  </div>
+
+  <div id="mobileMenu" class="mobile-menu">
+
+    <a href="index.html#stories">
+      القصص
+    </a>
+
+    <a href="index.html#categories">
+      التصنيفات
+    </a>
+
+    <a href="index.html#ramadan">
+      رمضان
+    </a>
+
+    <a href="index.html#about">
+      عن KIDORA
+    </a>
+
+  </div>
+
+</header>
 
 
-  <!-- ============================= -->
-  <!-- Reader -->
-  <!-- ============================= -->
+<main>
 
-  <main class="reader-page">
+<section class="story-reader">
 
-    <div class="container">
+  <div class="container">
 
-      <!-- Story information -->
+    <a href="index.html" class="back-button">
+      ← العودة إلى القصص
+    </a>
 
-      <section class="reader-intro">
 
-        <div
-          id="storyCategory"
-          class="reader-category"
-        >
-          📖
+    <div class="story-header">
+
+      <div id="storyIcon" class="story-big-icon">
+        📖
+      </div>
+
+      <div>
+
+        <div id="storyCategory"
+             class="story-category">
+          قصة
         </div>
 
         <h1 id="storyTitle">
@@ -74,860 +98,1079 @@
         </h1>
 
         <p id="storyDescription">
-          ...
+          قصة ممتعة للأطفال
         </p>
-
-      </section>
-
-
-      <!-- Progress -->
-
-      <section class="reader-progress">
-
-        <div class="progress-info">
-
-          <span id="pageCounter">
-            1 / 1
-          </span>
-
-          <span id="progressPercent">
-            0%
-          </span>
-
-        </div>
-
-        <div class="progress-bar">
-
-          <div
-            id="progressFill"
-            class="progress-fill"
-          ></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- Story -->
-
-      <section class="story-reader-card">
-
-        <div
-          id="storyScene"
-          class="story-scene"
-        >
-          🌙
-        </div>
-
-        <div
-          id="storyText"
-          class="story-text"
-        >
-          ...
-        </div>
-
-        <div class="reader-controls">
-
-          <button
-            id="previousButton"
-            class="reader-btn secondary"
-            type="button"
-          >
-            ← السابق
-          </button>
-
-          <button
-            id="favoriteButton"
-            class="favorite-btn"
-            type="button"
-          >
-            ♡
-          </button>
-
-          <button
-            id="nextButton"
-            class="reader-btn primary"
-            type="button"
-          >
-            التالي →
-          </button>
-
-        </div>
-
-      </section>
-
-
-      <!-- Font controls -->
-
-      <section class="reader-tools">
-
-        <span
-          class="tools-title"
-          data-ar="حجم النص"
-          data-en="Text size"
-        >
-          حجم النص
-        </span>
-
-        <button
-          id="fontSmall"
-          type="button"
-        >
-          A
-        </button>
-
-        <button
-          id="fontMedium"
-          type="button"
-          class="selected"
-        >
-          A+
-        </button>
-
-        <button
-          id="fontLarge"
-          type="button"
-        >
-          A++
-        </button>
-
-      </section>
-
-
-      <!-- Finish -->
-
-      <section
-        id="storyFinished"
-        class="story-finished"
-        style="display:none;"
-      >
-
-        <div class="finish-icon">
-          🎉
-        </div>
-
-        <h2
-          data-ar="أحسنت!"
-          data-en="Well done!"
-        >
-          أحسنت!
-        </h2>
-
-        <p
-          data-ar="لقد أكملت القصة."
-          data-en="You finished the story."
-        >
-          لقد أكملت القصة.
-        </p>
-
-        <button
-          id="nextStoryButton"
-          class="reader-btn primary"
-          type="button"
-        >
-          قصة أخرى
-        </button>
-
-      </section>
-
-    </div>
-
-  </main>
-
-
-  <!-- ============================= -->
-  <!-- Footer -->
-  <!-- ============================= -->
-
-  <footer class="site-footer">
-
-    <div class="container">
-
-      <div class="footer-logo">
-        📚 KIDORA
-      </div>
-
-      <p>
-        <span
-          data-ar="قصص جميلة للأطفال في كل وقت."
-          data-en="Beautiful stories for children."
-        >
-          قصص جميلة للأطفال في كل وقت.
-        </span>
-      </p>
-
-      <div class="footer-links">
-
-        <a
-          href="index.html"
-          data-ar="الرئيسية"
-          data-en="Home"
-        >
-          الرئيسية
-        </a>
-
-        <a
-          href="privacy.html"
-          data-ar="الخصوصية"
-          data-en="Privacy"
-        >
-          الخصوصية
-        </a>
-
-        <a
-          href="contact.html"
-          data-ar="تواصل معنا"
-          data-en="Contact"
-        >
-          تواصل معنا
-        </a>
 
       </div>
 
-      <p class="copyright">
-        © <span data-year></span> KIDORA
-      </p>
+    </div>
+
+
+    <div class="story-progress">
+
+      <div class="progress-info">
+
+        <span id="pageNumber">
+          1 / 1
+        </span>
+
+        <span id="progressPercent">
+          0%
+        </span>
+
+      </div>
+
+      <div class="progress-bar">
+
+        <div id="progressFill"
+             class="progress-fill">
+        </div>
+
+      </div>
 
     </div>
 
-  </footer>
+
+    <article class="story-page">
+
+      <div id="pageEmoji"
+           class="story-page-emoji">
+        📖
+      </div>
+
+      <p id="pageText"
+         class="story-page-text">
+        جارٍ تحميل القصة...
+      </p>
+
+    </article>
 
 
-  <!-- Story database -->
-  <script src="games.js"></script>
+    <!-- أدوات الصوت -->
 
-  <!-- Main application -->
-  <script src="app.js"></script>
+    <div class="audio-controls">
+
+      <button id="playButton"
+              type="button"
+              class="audio-button primary">
+        ▶️ استمع للقصة
+      </button>
+
+      <button id="stopButton"
+              type="button"
+              class="audio-button">
+        ⏹️ إيقاف
+      </button>
+
+    </div>
 
 
-  <!-- Reader system -->
-  <script>
+    <!-- أدوات القراءة -->
 
-    document.addEventListener("DOMContentLoaded", () => {
+    <div class="reader-controls">
 
-      // =====================================
-      // Get story
-      // =====================================
+      <button id="fontDecrease"
+              type="button">
+        A−
+      </button>
 
-      const params = new URLSearchParams(
-        window.location.search
+      <span>
+        حجم الخط
+      </span>
+
+      <button id="fontIncrease"
+              type="button">
+        A+
+      </button>
+
+      <button id="favoriteButton"
+              type="button">
+        ♡
+      </button>
+
+    </div>
+
+
+    <div class="story-navigation">
+
+      <button id="previousButton"
+              type="button"
+              class="nav-story-button">
+
+        ← السابق
+
+      </button>
+
+
+      <button id="nextButton"
+              type="button"
+              class="nav-story-button primary">
+
+        التالي →
+
+      </button>
+
+    </div>
+
+
+    <section id="finishSection"
+             class="finish-section"
+             style="display:none;">
+
+      <div class="finish-icon">
+        🎉
+      </div>
+
+      <h2 id="finishTitle">
+        أحسنت!
+      </h2>
+
+      <p id="finishText">
+        لقد أكملت القصة.
+      </p>
+
+      <button id="nextStoryButton"
+              type="button"
+              class="nav-story-button primary">
+
+        قصة أخرى →
+
+      </button>
+
+    </section>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+  <div class="container">
+
+    <div class="footer-logo">
+      KIDORA
+    </div>
+
+    <p>
+      © <span data-year></span> KIDORA
+    </p>
+
+    <div class="footer-links">
+
+      <a href="privacy.html">
+        الخصوصية
+      </a>
+
+      <a href="contact.html">
+        تواصل معنا
+      </a>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script src="games.js"></script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  /*
+   * ==============================
+   * إعدادات اللغة
+   * ==============================
+   */
+
+  let language =
+    localStorage.getItem("kidora_lang") || "ar";
+
+
+  /*
+   * ==============================
+   * اختيار القصة
+   * ==============================
+   */
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  let storyId =
+    params.get("story");
+
+
+  if (!storyId) {
+
+    storyId =
+      localStorage.getItem("kidora_last_story");
+
+  }
+
+
+  let story =
+    STORIES.find(function(item) {
+      return item.id === storyId;
+    });
+
+
+  if (!story) {
+    story = STORIES[0];
+  }
+
+
+  let currentPage = parseInt(
+    localStorage.getItem(
+      "kidora_page_" + story.id
+    ) || "0"
+  );
+
+
+  if (isNaN(currentPage)) {
+    currentPage = 0;
+  }
+
+
+  if (currentPage < 0) {
+    currentPage = 0;
+  }
+
+
+  if (currentPage >= story.pages.length) {
+    currentPage = story.pages.length - 1;
+  }
+
+
+  /*
+   * ==============================
+   * العناصر
+   * ==============================
+   */
+
+  const storyIcon =
+    document.getElementById("storyIcon");
+
+  const storyCategory =
+    document.getElementById("storyCategory");
+
+  const storyTitle =
+    document.getElementById("storyTitle");
+
+  const storyDescription =
+    document.getElementById("storyDescription");
+
+  const pageEmoji =
+    document.getElementById("pageEmoji");
+
+  const pageText =
+    document.getElementById("pageText");
+
+  const pageNumber =
+    document.getElementById("pageNumber");
+
+  const progressPercent =
+    document.getElementById("progressPercent");
+
+  const progressFill =
+    document.getElementById("progressFill");
+
+  const previousButton =
+    document.getElementById("previousButton");
+
+  const nextButton =
+    document.getElementById("nextButton");
+
+  const playButton =
+    document.getElementById("playButton");
+
+  const stopButton =
+    document.getElementById("stopButton");
+
+  const fontDecrease =
+    document.getElementById("fontDecrease");
+
+  const fontIncrease =
+    document.getElementById("fontIncrease");
+
+  const favoriteButton =
+    document.getElementById("favoriteButton");
+
+  const finishSection =
+    document.getElementById("finishSection");
+
+  const finishTitle =
+    document.getElementById("finishTitle");
+
+  const finishText =
+    document.getElementById("finishText");
+
+  const nextStoryButton =
+    document.getElementById("nextStoryButton");
+
+  const languageToggle =
+    document.getElementById("languageToggle");
+
+
+  /*
+   * ==============================
+   * التصنيفات
+   * ==============================
+   */
+
+  const categories = {
+
+    ar: {
+      ramadan: "رمضان",
+      bedtime: "قبل النوم",
+      animals: "الحيوانات",
+      adventures: "المغامرات",
+      world: "حول العالم",
+      learning: "التعلم"
+    },
+
+    en: {
+      ramadan: "Ramadan",
+      bedtime: "Bedtime",
+      animals: "Animals",
+      adventures: "Adventures",
+      world: "Around the World",
+      learning: "Learning"
+    }
+
+  };
+
+
+  /*
+   * ==============================
+   * تحديث اتجاه الموقع
+   * ==============================
+   */
+
+  function updateLanguageDirection() {
+
+    document.documentElement.lang =
+      language;
+
+    document.documentElement.dir =
+      language === "ar"
+        ? "rtl"
+        : "ltr";
+
+    if (languageToggle) {
+
+      languageToggle.textContent =
+        language === "ar"
+          ? "English"
+          : "العربية";
+
+    }
+
+  }
+
+
+  /*
+   * ==============================
+   * عرض القصة
+   * ==============================
+   */
+
+  function renderStory() {
+
+    updateLanguageDirection();
+
+
+    storyIcon.textContent =
+      story.icon || "📖";
+
+
+    storyCategory.textContent =
+      categories[language][story.cat] ||
+      story.cat;
+
+
+    storyTitle.textContent =
+      story.title[language];
+
+
+    storyDescription.textContent =
+      story.desc[language];
+
+
+    const page =
+      story.pages[currentPage];
+
+
+    pageEmoji.textContent =
+      page[0];
+
+
+    pageText.textContent =
+      page[language === "ar" ? 1 : 2];
+
+
+    pageNumber.textContent =
+      `${currentPage + 1} / ${story.pages.length}`;
+
+
+    const percent =
+      Math.round(
+        ((currentPage + 1) /
+        story.pages.length) * 100
       );
 
-      let storyId =
-        params.get("story");
 
-      if (!storyId) {
-        storyId =
-          localStorage.getItem("kidora_last_story");
-      }
-
-      if (!storyId) {
-        storyId = STORIES[0].id;
-      }
-
-      let story =
-        STORIES.find(item => item.id === storyId);
-
-      if (!story) {
-        story = STORIES[0];
-        storyId = story.id;
-      }
+    progressPercent.textContent =
+      percent + "%";
 
 
-      // =====================================
-      // Language
-      // =====================================
-
-      let language =
-        localStorage.getItem("kidora_lang") || "ar";
+    progressFill.style.width =
+      percent + "%";
 
 
-      // =====================================
-      // Current page
-      // =====================================
+    previousButton.disabled =
+      currentPage === 0;
 
-      let currentPage =
-        parseInt(
-          localStorage.getItem(
-            `kidora_page_${story.id}`
-          ) || "0"
-        );
+
+    if (currentPage === story.pages.length - 1) {
+
+      nextButton.textContent =
+        language === "ar"
+          ? "إنهاء القصة ✓"
+          : "Finish story ✓";
+
+    } else {
+
+      nextButton.textContent =
+        language === "ar"
+          ? "التالي →"
+          : "Next →";
+
+    }
+
+
+    localStorage.setItem(
+      "kidora_last_story",
+      story.id
+    );
+
+
+    localStorage.setItem(
+      "kidora_last_page",
+      currentPage
+    );
+
+
+    localStorage.setItem(
+      "kidora_page_" + story.id,
+      currentPage
+    );
+
+
+    updateFavoriteButton();
+
+    updateFinishSection();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /*
+   * ==============================
+   * الصوت
+   * ==============================
+   */
+
+  function stopVoice() {
+
+    if (
+      "speechSynthesis" in window
+    ) {
+
+      speechSynthesis.cancel();
+
+    }
+
+  }
+
+
+  function speakCurrentPage() {
+
+    if (
+      !("speechSynthesis" in window)
+    ) {
+
+      alert(
+        language === "ar"
+          ? "متصفحك لا يدعم القراءة الصوتية."
+          : "Your browser does not support speech."
+      );
+
+      return;
+
+    }
+
+
+    stopVoice();
+
+
+    const text =
+      story.pages[currentPage][
+        language === "ar" ? 1 : 2
+      ];
+
+
+    const speech =
+      new SpeechSynthesisUtterance(text);
+
+
+    speech.lang =
+      language === "ar"
+        ? "ar-SA"
+        : "en-US";
+
+
+    speech.rate = 0.9;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+
+    speech.onstart = function() {
+
+      playButton.textContent =
+        language === "ar"
+          ? "🔊 جارٍ القراءة..."
+          : "🔊 Reading...";
+
+    };
+
+
+    speech.onend = function() {
+
+      playButton.textContent =
+        language === "ar"
+          ? "▶️ استمع للقصة"
+          : "▶️ Listen";
+
+    };
+
+
+    speech.onerror = function() {
+
+      playButton.textContent =
+        language === "ar"
+          ? "▶️ استمع للقصة"
+          : "▶️ Listen";
+
+    };
+
+
+    speechSynthesis.speak(speech);
+
+  }
+
+
+  playButton.addEventListener(
+    "click",
+    speakCurrentPage
+  );
+
+
+  stopButton.addEventListener(
+    "click",
+    function() {
+
+      stopVoice();
+
+      playButton.textContent =
+        language === "ar"
+          ? "▶️ استمع للقصة"
+          : "▶️ Listen";
+
+    }
+  );
+
+
+  /*
+   * ==============================
+   * التالي
+   * ==============================
+   */
+
+  nextButton.addEventListener(
+    "click",
+    function() {
+
+      stopVoice();
+
 
       if (
-        isNaN(currentPage) ||
-        currentPage < 0 ||
-        currentPage >= story.pages.length
+        currentPage <
+        story.pages.length - 1
       ) {
-        currentPage = 0;
+
+        currentPage++;
+
+        renderStory();
+
+      } else {
+
+        localStorage.setItem(
+          "kidora_completed_" + story.id,
+          "true"
+        );
+
+        updateFinishSection();
+
       }
 
+    }
+  );
 
-      // =====================================
-      // Elements
-      // =====================================
 
-      const title =
-        document.getElementById("storyTitle");
+  /*
+   * ==============================
+   * السابق
+   * ==============================
+   */
 
-      const description =
-        document.getElementById("storyDescription");
+  previousButton.addEventListener(
+    "click",
+    function() {
 
-      const category =
-        document.getElementById("storyCategory");
+      stopVoice();
 
-      const scene =
-        document.getElementById("storyScene");
 
-      const text =
-        document.getElementById("storyText");
+      if (currentPage > 0) {
 
-      const previous =
-        document.getElementById("previousButton");
+        currentPage--;
 
-      const next =
-        document.getElementById("nextButton");
+        renderStory();
 
-      const pageCounter =
-        document.getElementById("pageCounter");
+      }
 
-      const progressPercent =
-        document.getElementById("progressPercent");
+    }
+  );
 
-      const progressFill =
-        document.getElementById("progressFill");
 
-      const favorite =
-        document.getElementById("favoriteButton");
+  /*
+   * ==============================
+   * قصة أخرى
+   * ==============================
+   */
 
-      const finished =
-        document.getElementById("storyFinished");
+  nextStoryButton.addEventListener(
+    "click",
+    function() {
+
+      stopVoice();
+
+
+      const currentIndex =
+        STORIES.findIndex(
+          function(item) {
+            return item.id === story.id;
+          }
+        );
+
+
+      let nextIndex =
+        currentIndex + 1;
+
+
+      if (
+        nextIndex >= STORIES.length
+      ) {
+
+        nextIndex = 0;
+
+      }
+
 
       const nextStory =
-        document.getElementById("nextStoryButton");
+        STORIES[nextIndex];
 
 
-      // =====================================
-      // Categories
-      // =====================================
-
-      const categories = {
-
-        ar: {
-          ramadan: "رمضان",
-          bedtime: "قبل النوم",
-          animals: "الحيوانات",
-          adventures: "مغامرات",
-          world: "حول العالم",
-          learning: "تعلم"
-        },
-
-        en: {
-          ramadan: "Ramadan",
-          bedtime: "Bedtime",
-          animals: "Animals",
-          adventures: "Adventures",
-          world: "Around the World",
-          learning: "Learning"
-        }
-
-      };
+      localStorage.setItem(
+        "kidora_last_story",
+        nextStory.id
+      );
 
 
-      // =====================================
-      // Update language
-      // =====================================
+      localStorage.setItem(
+        "kidora_last_page",
+        "0"
+      );
 
-      function updateLanguage() {
 
-        document.documentElement.lang =
-          language;
+      window.location.href =
+        "game.html?story=" +
+        encodeURIComponent(nextStory.id);
 
-        document.documentElement.dir =
-          language === "ar"
-            ? "rtl"
-            : "ltr";
+    }
+  );
 
-        title.textContent =
-          story.title[language];
 
-        description.textContent =
-          story.description[language];
+  /*
+   * ==============================
+   * المفضلة
+   * ==============================
+   */
 
-        category.textContent =
-          `${story.icon} ${
-            categories[language][story.cat]
-          }`;
+  function getFavorites() {
 
-        document
-          .querySelectorAll(
-            "[data-ar][data-en]"
-          )
-          .forEach(element => {
+    try {
 
-            element.textContent =
-              language === "ar"
-                ? element.dataset.ar
-                : element.dataset.en;
+      return JSON.parse(
+        localStorage.getItem(
+          "kidora_favorites"
+        ) || "[]"
+      );
 
-          });
+    } catch (error) {
 
-        const languageButton =
-          document.getElementById(
-            "languageToggle"
+      return [];
+
+    }
+
+  }
+
+
+  function updateFavoriteButton() {
+
+    const favorites =
+      getFavorites();
+
+
+    const isFavorite =
+      favorites.includes(story.id);
+
+
+    favoriteButton.textContent =
+      isFavorite ? "♥" : "♡";
+
+  }
+
+
+  favoriteButton.addEventListener(
+    "click",
+    function() {
+
+      let favorites =
+        getFavorites();
+
+
+      if (favorites.includes(story.id)) {
+
+        favorites =
+          favorites.filter(
+            function(id) {
+              return id !== story.id;
+            }
           );
 
-        if (languageButton) {
+      } else {
 
-          languageButton.textContent =
-            language === "ar"
-              ? "English"
-              : "العربية";
+        favorites.push(story.id);
 
-        }
-
-        updateReader();
       }
 
 
-      // =====================================
-      // Render page
-      // =====================================
-
-      function updateReader() {
-
-        const page =
-          story.pages[currentPage];
-
-        if (!page) return;
-
-        scene.textContent =
-          page[0];
-
-        text.textContent =
-          language === "ar"
-            ? page[1]
-            : page[2];
+      localStorage.setItem(
+        "kidora_favorites",
+        JSON.stringify(favorites)
+      );
 
 
-        // Page counter
+      updateFavoriteButton();
 
-        pageCounter.textContent =
-          `${currentPage + 1} / ${story.pages.length}`;
-
-
-        // Progress
-
-        const percent =
-          Math.round(
-            ((currentPage + 1) /
-              story.pages.length) * 100
-          );
-
-        progressPercent.textContent =
-          `${percent}%`;
-
-        progressFill.style.width =
-          `${percent}%`;
+    }
+  );
 
 
-        // Previous
+  /*
+   * ==============================
+   * حجم الخط
+   * ==============================
+   */
 
-        previous.disabled =
-          currentPage === 0;
+  let fontSize =
+    parseInt(
+      localStorage.getItem(
+        "kidora_font_size"
+      ) || "24"
+    );
 
 
-        // Next text
+  function updateFontSize() {
 
-        if (
-          currentPage ===
-          story.pages.length - 1
-        ) {
+    pageText.style.fontSize =
+      fontSize + "px";
 
-          next.textContent =
-            language === "ar"
-              ? "إنهاء القصة"
-              : "Finish Story";
+
+    localStorage.setItem(
+      "kidora_font_size",
+      fontSize
+    );
+
+  }
+
+
+  fontDecrease.addEventListener(
+    "click",
+    function() {
+
+      fontSize -= 2;
+
+      if (fontSize < 16) {
+        fontSize = 16;
+      }
+
+      updateFontSize();
+
+    }
+  );
+
+
+  fontIncrease.addEventListener(
+    "click",
+    function() {
+
+      fontSize += 2;
+
+      if (fontSize > 40) {
+        fontSize = 40;
+      }
+
+      updateFontSize();
+
+    }
+  );
+
+
+  /*
+   * ==============================
+   * إنهاء القصة
+   * ==============================
+   */
+
+  function updateFinishSection() {
+
+    const completed =
+      localStorage.getItem(
+        "kidora_completed_" + story.id
+      ) === "true";
+
+
+    const isLastPage =
+      currentPage ===
+      story.pages.length - 1;
+
+
+    if (completed || isLastPage) {
+
+      finishSection.style.display =
+        "block";
+
+
+      finishTitle.textContent =
+        language === "ar"
+          ? "🎉 أحسنت!"
+          : "🎉 Well done!";
+
+
+      finishText.textContent =
+        language === "ar"
+          ? "لقد وصلت إلى نهاية القصة."
+          : "You reached the end of the story.";
+
+
+    } else {
+
+      finishSection.style.display =
+        "none";
+
+    }
+
+  }
+
+
+  /*
+   * ==============================
+   * زر اللغة
+   * ==============================
+   */
+
+  languageToggle.addEventListener(
+    "click",
+    function() {
+
+      stopVoice();
+
+
+      language =
+        language === "ar"
+          ? "en"
+          : "ar";
+
+
+      localStorage.setItem(
+        "kidora_lang",
+        language
+      );
+
+
+      renderStory();
+
+    }
+  );
+
+
+  /*
+   * ==============================
+   * القائمة على الهاتف
+   * ==============================
+   */
+
+  const menuToggle =
+    document.getElementById(
+      "menuToggle"
+    );
+
+  const mobileMenu =
+    document.getElementById(
+      "mobileMenu"
+    );
+
+
+  if (
+    menuToggle &&
+    mobileMenu
+  ) {
+
+    menuToggle.addEventListener(
+      "click",
+      function() {
+
+        mobileMenu.classList.toggle(
+          "open"
+        );
+
+      }
+    );
+
+
+    mobileMenu
+      .querySelectorAll("a")
+      .forEach(function(link) {
+
+        link.addEventListener(
+          "click",
+          function() {
+
+            mobileMenu.classList.remove(
+              "open"
+            );
+
+          }
+        );
+
+      });
+
+  }
+
+
+  /*
+   * ==============================
+   * لوحة المفاتيح
+   * ==============================
+   */
+
+  document.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (event.key === "ArrowRight") {
+
+        if (language === "ar") {
+
+          nextButton.click();
 
         } else {
 
-          next.textContent =
-            language === "ar"
-              ? "التالي →"
-              : "Next →";
-
-        }
-
-
-        // Save progress
-
-        localStorage.setItem(
-          "kidora_last_story",
-          story.id
-        );
-
-        localStorage.setItem(
-          `kidora_page_${story.id}`,
-          currentPage
-        );
-
-        localStorage.setItem(
-          "kidora_last_page",
-          currentPage
-        );
-
-        updateFavorite();
-
-      }
-
-
-      // =====================================
-      // Next
-      // =====================================
-
-      next.addEventListener(
-        "click",
-        () => {
-
-          if (
-            currentPage <
-            story.pages.length - 1
-          ) {
-
-            currentPage++;
-
-            updateReader();
-
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth"
-            });
-
-          } else {
-
-            finished.style.display =
-              "block";
-
-            finished.scrollIntoView({
-              behavior: "smooth"
-            });
-
-            localStorage.setItem(
-              `kidora_completed_${story.id}`,
-              "true"
-            );
-
-          }
-
-        }
-      );
-
-
-      // =====================================
-      // Previous
-      // =====================================
-
-      previous.addEventListener(
-        "click",
-        () => {
-
-          if (currentPage > 0) {
-
-            currentPage--;
-
-            updateReader();
-
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth"
-            });
-
-          }
-
-        }
-      );
-
-
-      // =====================================
-      // Favorite
-      // =====================================
-
-      function getFavorites() {
-
-        try {
-
-          return JSON.parse(
-            localStorage.getItem(
-              "kidora_favorites"
-            ) || "[]"
-          );
-
-        } catch {
-
-          return [];
+          previousButton.click();
 
         }
 
       }
 
 
-      function updateFavorite() {
+      if (event.key === "ArrowLeft") {
 
-        const favorites =
-          getFavorites();
+        if (language === "ar") {
 
-        const isFavorite =
-          favorites.includes(story.id);
+          previousButton.click();
 
-        favorite.textContent =
-          isFavorite ? "♥" : "♡";
+        } else {
 
-        favorite.classList.toggle(
-          "active",
-          isFavorite
-        );
+          nextButton.click();
 
-        favorite.title =
-          language === "ar"
-            ? (
-              isFavorite
-                ? "إزالة من المفضلة"
-                : "إضافة للمفضلة"
-            )
-            : (
-              isFavorite
-                ? "Remove from favorites"
-                : "Add to favorites"
-            );
-      }
-
-
-      favorite.addEventListener(
-        "click",
-        () => {
-
-          let favorites =
-            getFavorites();
-
-          if (
-            favorites.includes(story.id)
-          ) {
-
-            favorites =
-              favorites.filter(
-                id => id !== story.id
-              );
-
-          } else {
-
-            favorites.push(story.id);
-
-          }
-
-          localStorage.setItem(
-            "kidora_favorites",
-            JSON.stringify(favorites)
-          );
-
-          updateFavorite();
-
-        }
-      );
-
-
-      // =====================================
-      // Font size
-      // =====================================
-
-      const small =
-        document.getElementById("fontSmall");
-
-      const medium =
-        document.getElementById("fontMedium");
-
-      const large =
-        document.getElementById("fontLarge");
-
-
-      function setFontSize(size) {
-
-        text.classList.remove(
-          "font-small",
-          "font-medium",
-          "font-large"
-        );
-
-        text.classList.add(
-          `font-${size}`
-        );
-
-        localStorage.setItem(
-          "kidora_font_size",
-          size
-        );
-
-        [small, medium, large]
-          .forEach(button => {
-            button.classList.remove(
-              "selected"
-            );
-          });
-
-        if (size === "small") {
-          small.classList.add("selected");
-        }
-
-        if (size === "medium") {
-          medium.classList.add("selected");
-        }
-
-        if (size === "large") {
-          large.classList.add("selected");
         }
 
       }
 
 
-      small.addEventListener(
-        "click",
-        () => setFontSize("small")
-      );
+      if (event.key === " ") {
 
-      medium.addEventListener(
-        "click",
-        () => setFontSize("medium")
-      );
+        event.preventDefault();
 
-      large.addEventListener(
-        "click",
-        () => setFontSize("large")
-      );
-
-
-      // =====================================
-      // Next story
-      // =====================================
-
-      nextStory.addEventListener(
-        "click",
-        () => {
-
-          const currentIndex =
-            STORIES.findIndex(
-              item => item.id === story.id
-            );
-
-          const nextIndex =
-            (currentIndex + 1) %
-            STORIES.length;
-
-          const newStory =
-            STORIES[nextIndex];
-
-          localStorage.setItem(
-            "kidora_last_story",
-            newStory.id
-          );
-
-          localStorage.setItem(
-            `kidora_page_${newStory.id}`,
-            "0"
-          );
-
-          window.location.href =
-            `game.html?story=${encodeURIComponent(
-              newStory.id
-            )}`;
-
-        }
-      );
-
-
-      // =====================================
-      // Language button
-      // =====================================
-
-      const languageToggle =
-        document.getElementById(
-          "languageToggle"
-        );
-
-      if (languageToggle) {
-
-        languageToggle.addEventListener(
-          "click",
-          () => {
-
-            language =
-              language === "ar"
-                ? "en"
-                : "ar";
-
-            localStorage.setItem(
-              "kidora_lang",
-              language
-            );
-
-            updateLanguage();
-
-          }
-        );
+        speakCurrentPage();
 
       }
 
-
-      // =====================================
-      // Keyboard navigation
-      // =====================================
-
-      document.addEventListener(
-        "keydown",
-        event => {
-
-          if (event.key === "ArrowRight") {
-
-            if (language === "ar") {
-              previous.click();
-            } else {
-              next.click();
-            }
-
-          }
-
-          if (event.key === "ArrowLeft") {
-
-            if (language === "ar") {
-              next.click();
-            } else {
-              previous.click();
-            }
-
-          }
-
-        }
-      );
+    }
+  );
 
 
-      // =====================================
-      // Initial font
-      // =====================================
+  /*
+   * ==============================
+   * السنة
+   * ==============================
+   */
 
-      const savedFont =
-        localStorage.getItem(
-          "kidora_font_size"
-        ) || "medium";
+  document
+    .querySelectorAll("[data-year]")
+    .forEach(function(element) {
 
-      setFontSize(savedFont);
-
-
-      // =====================================
-      // Start
-      // =====================================
-
-      updateLanguage();
+      element.textContent =
+        new Date().getFullYear();
 
     });
 
-  </script>
+
+  /*
+   * ==============================
+   * تشغيل الموقع
+   * ==============================
+   */
+
+  updateFontSize();
+
+  renderStory();
+
+});
+
+</script>
 
 </body>
 </html>
