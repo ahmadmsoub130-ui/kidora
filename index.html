@@ -1,480 +1,1344 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07090d">
+<title>THE VEIL — الحجاب</title>
 
-  <title>ODDORA Arcade | ألعاب المتصفح العربية</title>
+<style>
+:root{
+  --bg:#07090d;
+  --panel:#10141b;
+  --panel2:#151b24;
+  --text:#f2f4f7;
+  --muted:#929aa8;
+  --line:#27303d;
+  --accent:#8fa8ff;
+  --accent2:#647cff;
+  --danger:#b56b75;
+}
 
-  <meta
-    name="description"
-    content="ODDORA Arcade منصة عربية لاكتشاف ألعاب المتصفح المجانية."
-  >
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-  <meta name="theme-color" content="#070b14">
+html{
+  scroll-behavior:smooth;
+}
 
-  <link rel="stylesheet" href="style.css">
+body{
+  background:
+    radial-gradient(circle at 80% 10%,rgba(100,124,255,.10),transparent 30%),
+    radial-gradient(circle at 10% 80%,rgba(255,255,255,.04),transparent 25%),
+    var(--bg);
+  color:var(--text);
+  font-family:Arial,"Segoe UI",sans-serif;
+  min-height:100vh;
+}
+
+button{
+  font:inherit;
+}
+
+.app{
+  width:min(1100px,100%);
+  margin:auto;
+  padding:20px;
+}
+
+/* HEADER */
+
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:12px 0 25px;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:2px;
+}
+
+.logo span{
+  color:var(--accent);
+}
+
+.header-actions{
+  display:flex;
+  gap:8px;
+}
+
+.small-btn{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  color:var(--text);
+  padding:9px 13px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.small-btn:hover{
+  background:rgba(255,255,255,.07);
+}
+
+/* HERO */
+
+.hero{
+  min-height:430px;
+  border:1px solid var(--line);
+  border-radius:25px;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  background:
+    linear-gradient(to top,rgba(4,6,9,.98),rgba(4,6,9,.20)),
+    radial-gradient(circle at 70% 30%,#29344b 0,#111722 35%,#07090d 75%);
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(115deg,transparent 35%,rgba(255,255,255,.025) 36%,transparent 37%),
+    linear-gradient(65deg,transparent 55%,rgba(255,255,255,.018) 56%,transparent 57%);
+  opacity:.7;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  padding:35px;
+  max-width:700px;
+}
+
+.kicker{
+  color:var(--accent);
+  font-size:13px;
+  letter-spacing:3px;
+  margin-bottom:15px;
+  font-weight:bold;
+}
+
+h1{
+  font-size:clamp(42px,8vw,82px);
+  line-height:.95;
+  letter-spacing:-3px;
+  margin-bottom:18px;
+}
+
+.subtitle{
+  color:#c6ccd5;
+  line-height:1.8;
+  font-size:17px;
+  max-width:620px;
+}
+
+.actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:25px;
+}
+
+.primary{
+  border:0;
+  background:var(--accent);
+  color:#080a10;
+  padding:14px 22px;
+  border-radius:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.primary:hover{
+  background:#aabaff;
+}
+
+.secondary{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+  color:white;
+  padding:14px 22px;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+/* STORY */
+
+.story{
+  display:none;
+  margin-top:25px;
+}
+
+.story.active{
+  display:block;
+}
+
+.story-card{
+  background:linear-gradient(145deg,var(--panel),var(--panel2));
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:30px;
+}
+
+.chapter{
+  color:var(--accent);
+  font-size:13px;
+  letter-spacing:2px;
+  margin-bottom:15px;
+  font-weight:bold;
+}
+
+.story-title{
+  font-size:clamp(28px,6vw,45px);
+  margin-bottom:20px;
+}
+
+.story-text{
+  color:#d9dde4;
+  line-height:2;
+  font-size:18px;
+  white-space:pre-line;
+}
+
+.choices{
+  display:grid;
+  gap:12px;
+  margin-top:28px;
+}
+
+.choice{
+  width:100%;
+  text-align:start;
+  background:#0c1016;
+  border:1px solid var(--line);
+  color:#fff;
+  padding:17px;
+  border-radius:13px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.choice:hover{
+  border-color:var(--accent);
+  transform:translateY(-1px);
+  background:#111722;
+}
+
+.choice-number{
+  color:var(--accent);
+  font-weight:bold;
+  margin-left:8px;
+}
+
+/* INFO */
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:25px;
+}
+
+.info{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.025);
+  border-radius:16px;
+  padding:20px;
+}
+
+.info strong{
+  display:block;
+  margin-bottom:8px;
+}
+
+.info span{
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* FOOTER */
+
+footer{
+  padding:35px 0 20px;
+  color:var(--muted);
+  text-align:center;
+  font-size:13px;
+}
+
+/* MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  z-index:20;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-card{
+  width:min(500px,100%);
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:25px;
+}
+
+.modal-card h2{
+  margin-bottom:15px;
+}
+
+.modal-card p{
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.modal-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+  .app{
+    padding:12px;
+  }
+
+  header{
+    padding-bottom:15px;
+  }
+
+  .hero{
+    min-height:520px;
+    border-radius:19px;
+  }
+
+  .hero-content{
+    padding:24px;
+  }
+
+  h1{
+    letter-spacing:-2px;
+  }
+
+  .subtitle{
+    font-size:15px;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .story-card{
+    padding:22px;
+  }
+
+  .story-text{
+    font-size:16px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="site-header">
+<div class="app">
 
-    <div class="container header-inner">
+<header>
+  <div class="logo">THE <span>VEIL</span></div>
 
-      <a href="index.html" class="logo">
-        ODDORA
-        <span>ARCADE</span>
-      </a>
+  <div class="header-actions">
+    <button class="small-btn" id="languageBtn">English</button>
+    <button class="small-btn" id="resetBtn">Reset</button>
+  </div>
+</header>
 
-      <nav class="main-nav">
-        <a href="#home">الرئيسية</a>
-        <a href="#games">الألعاب</a>
-        <a href="#categories">التصنيفات</a>
-        <a href="#new">جديد</a>
-      </nav>
+<section class="hero">
 
-      <div class="header-actions">
+  <div class="hero-content">
 
-        <button
-          class="icon-button"
-          id="searchButton"
-          aria-label="بحث"
-        >
-          🔍
-        </button>
-
-        <button
-          class="login-button"
-          id="loginButton"
-        >
-          تسجيل الدخول
-        </button>
-
-      </div>
-
+    <div class="kicker" id="heroKicker">
+      INTERACTIVE MYSTERY
     </div>
 
-  </header>
-
-
-  <!-- HERO -->
-  <main>
-
-    <section class="hero" id="home">
-
-      <div class="container hero-content">
-
-        <div class="hero-text">
-
-          <div class="hero-badge">
-            🎮 منصة ألعاب المتصفح العربية
-          </div>
-
-          <h1>
-            اكتشف
-            <span>ألعابًا جديدة</span>
-            والعبها مباشرة
-          </h1>
-
-          <p>
-            آلاف الألعاب والتجارب الممتعة في مكان واحد.
-            بدون تحميل، وبدون تعقيد.
-          </p>
-
-          <div class="hero-buttons">
-
-            <a href="#games" class="primary-button">
-              ابدأ اللعب
-            </a>
-
-            <a href="#categories" class="secondary-button">
-              استكشف التصنيفات
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <div class="hero-visual">
-
-          <div class="hero-card hero-card-main">
-
-            <div class="hero-card-image">
-              🎮
-            </div>
-
-            <div class="hero-card-info">
-              <strong>ألعاب المتصفح</strong>
-              <span>العب الآن</span>
-            </div>
-
-          </div>
-
-          <div class="floating-card floating-one">
-            🏆 ألعاب رائجة
-          </div>
-
-          <div class="floating-card floating-two">
-            ⚡ ألعاب جديدة
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- SEARCH -->
-    <section class="search-section">
-
-      <div class="container">
-
-        <div class="search-box">
-
-          <span>🔍</span>
-
-          <input
-            type="search"
-            id="gameSearch"
-            placeholder="ابحث عن لعبة..."
-            autocomplete="off"
-          >
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CATEGORIES -->
-    <section class="section" id="categories">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <div>
-            <span class="section-label">
-              استكشف
-            </span>
-
-            <h2>
-              التصنيفات
-            </h2>
-          </div>
-
-        </div>
-
-
-        <div class="categories-grid">
-
-          <button class="category-card" data-category="action">
-            <span>⚔️</span>
-            <strong>أكشن</strong>
-            <small>ألعاب الحركة</small>
-          </button>
-
-          <button class="category-card" data-category="racing">
-            <span>🏎️</span>
-            <strong>سباقات</strong>
-            <small>سرعة ومنافسة</small>
-          </button>
-
-          <button class="category-card" data-category="puzzle">
-            <span>🧩</span>
-            <strong>ألغاز</strong>
-            <small>اختبر ذكاءك</small>
-          </button>
-
-          <button class="category-card" data-category="sports">
-            <span>⚽</span>
-            <strong>رياضة</strong>
-            <small>نافس واربح</small>
-          </button>
-
-          <button class="category-card" data-category="arcade">
-            <span>👾</span>
-            <strong>أركيد</strong>
-            <small>ألعاب كلاسيكية</small>
-          </button>
-
-          <button class="category-card" data-category="strategy">
-            <span>♟️</span>
-            <strong>استراتيجية</strong>
-            <small>خطط ونافس</small>
-          </button>
-
-          <button class="category-card" data-category="adventure">
-            <span>🗺️</span>
-            <strong>مغامرات</strong>
-            <small>اكتشف عوالم جديدة</small>
-          </button>
-
-          <button class="category-card" data-category="casual">
-            <span>🎯</span>
-            <strong>خفيفة</strong>
-            <small>العب بسرعة</small>
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- POPULAR GAMES -->
-    <section class="section games-section" id="games">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <div>
-
-            <span class="section-label">
-              الأكثر شعبية
-            </span>
-
-            <h2>
-              ألعاب رائجة
-            </h2>
-
-          </div>
-
-          <button
-            class="view-all"
-            id="showAllGames"
-          >
-            عرض الكل
-          </button>
-
-        </div>
-
-
-        <div
-          class="games-grid"
-          id="gamesGrid"
-        >
-
-          <!-- سيتم تحميل الألعاب هنا -->
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- NEW GAMES -->
-    <section class="section" id="new">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <div>
-
-            <span class="section-label">
-              وصلت حديثًا
-            </span>
-
-            <h2>
-              ألعاب جديدة
-            </h2>
-
-          </div>
-
-        </div>
-
-
-        <div
-          class="games-grid"
-          id="newGamesGrid"
-        >
-
-          <!-- سيتم تحميل الألعاب هنا -->
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CTA -->
-    <section class="cta-section">
-
-      <div class="container">
-
-        <div class="cta-box">
-
-          <div>
-
-            <span class="section-label">
-              ODDORA ARCADE
-            </span>
-
-            <h2>
-              عالم كامل من ألعاب المتصفح
-            </h2>
-
-            <p>
-              اكتشف ألعابًا جديدة كل يوم والعب مباشرة من المتصفح.
-            </p>
-
-          </div>
-
-          <a
-            href="#games"
-            class="primary-button"
-          >
-            اكتشف الألعاب
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-
-    <div class="container footer-grid">
-
-      <div>
-
-        <a href="index.html" class="logo">
-          ODDORA
-          <span>ARCADE</span>
-        </a>
-
-        <p>
-          منصة عربية لاكتشاف ألعاب المتصفح واللعب مباشرة.
-        </p>
-
-      </div>
-
-
-      <div>
-
-        <h3>
-          المنصة
-        </h3>
-
-        <a href="#games">
-          الألعاب
-        </a>
-
-        <a href="#categories">
-          التصنيفات
-        </a>
-
-        <a href="#new">
-          الألعاب الجديدة
-        </a>
-
-      </div>
-
-
-      <div>
-
-        <h3>
-          معلومات
-        </h3>
-
-        <a href="privacy.html">
-          الخصوصية
-        </a>
-
-        <a href="terms.html">
-          الشروط
-        </a>
-
-        <a href="contact.html">
-          تواصل معنا
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <div class="footer-bottom">
-
-      <div class="container">
-
-        © <span id="year"></span>
-        ODDORA Arcade
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- LOGIN MODAL -->
-  <div
-    class="modal"
-    id="loginModal"
-    aria-hidden="true"
-  >
-
-    <div class="modal-content">
-
-      <button
-        class="modal-close"
-        id="closeLogin"
-        aria-label="إغلاق"
-      >
-        ×
+    <h1 id="heroTitle">
+      الحجاب
+    </h1>
+
+    <p class="subtitle" id="heroText">
+      قصة غامضة تفاعلية. كل قرار تتخذه يغير الطريق الذي ستسلكه.
+      لا تثق بكل ما تراه.
+    </p>
+
+    <div class="actions">
+
+      <button class="primary" id="startBtn">
+        ابدأ القصة
       </button>
 
-      <h2>
-        تسجيل الدخول
-      </h2>
-
-      <p>
-        سجّل دخولك لحفظ ألعابك ومفضلاتك.
-      </p>
-
-      <input
-        type="email"
-        id="loginEmail"
-        placeholder="البريد الإلكتروني"
-      >
-
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="كلمة المرور"
-      >
-
-      <button class="primary-button full">
-        دخول
+      <button class="secondary" id="continueBtn">
+        متابعة
       </button>
-
-      <p class="modal-note">
-        نظام الحسابات سيتم ربطه بالمنصة لاحقًا.
-      </p>
 
     </div>
 
   </div>
 
+</section>
 
-  <script src="games.js"></script>
-  <script src="app.js"></script>
+<section class="story" id="story">
+
+  <div class="story-card">
+
+    <div class="chapter" id="chapter">
+      الفصل الأول
+    </div>
+
+    <h2 class="story-title" id="storyTitle">
+      البيت رقم 17
+    </h2>
+
+    <div class="story-text" id="storyText"></div>
+
+    <div class="choices" id="choices"></div>
+
+  </div>
+
+</section>
+
+<section class="info-grid">
+
+  <div class="info">
+    <strong id="info1Title">قصة تفاعلية</strong>
+    <span id="info1Text">اختياراتك تؤثر على الأحداث.</span>
+  </div>
+
+  <div class="info">
+    <strong id="info2Title">لغتان</strong>
+    <span id="info2Text">العربية والإنجليزية.</span>
+  </div>
+
+  <div class="info">
+    <strong id="info3Title">احفظ تقدمك</strong>
+    <span id="info3Text">يمكنك العودة لاحقًا من نفس الجهاز.</span>
+  </div>
+
+</section>
+
+<footer>
+  © 2026 THE VEIL — An ODDORA Original
+</footer>
+
+</div>
+
+<div class="modal" id="modal">
+
+  <div class="modal-card">
+
+    <h2 id="modalTitle">إعادة اللعبة؟</h2>
+
+    <p id="modalText">
+      سيتم حذف التقدم المحفوظ على هذا الجهاز.
+    </p>
+
+    <div class="modal-buttons">
+
+      <button class="primary" id="confirmReset">
+        نعم
+      </button>
+
+      <button class="secondary" id="cancelReset">
+        إلغاء
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const scenes = {
+
+start:{
+  titleAR:"البيت رقم 17",
+  titleEN:"House 17",
+
+  textAR:
+`الساعة 11:47 مساءً.
+
+المطر يضرب زجاج السيارة بينما يتوقف آدم أمام منزل قديم في نهاية شارع شبه خالٍ.
+
+ينظر إلى هاتفه.
+
+رسالة من رقم مجهول:
+
+"إذا كنت تقرأ هذه الرسالة، فأنت وصلت إلى المكان الصحيح."
+
+تظهر رسالة أخرى:
+
+"لا تثق بكل ما تراه."
+
+ثم رسالة ثالثة:
+
+"المفتاح تحت المصباح."
+
+يرفع آدم عينيه نحو المنزل.
+
+المصباح الموجود فوق الباب يومض بشكل غريب.`,
+
+  textEN:
+`11:47 PM.
+
+Rain hits the car window as Adam stops in front of an old house at the end of an almost empty street.
+
+He looks at his phone.
+
+A message from an unknown number:
+
+"If you're reading this, you've reached the right place."
+
+Another message appears:
+
+"Don't trust everything you see."
+
+Then a third:
+
+"The key is under the lamp."
+
+Adam looks toward the house.
+
+The lamp above the door flickers strangely.`,
+
+  choices:[
+    {
+      ar:"ينزل آدم من السيارة ويبحث عن المفتاح.",
+      en:"Adam gets out and searches for the key.",
+      next:"key"
+    },
+    {
+      ar:"يبقى داخل السيارة ويتصل بالرقم.",
+      en:"He stays in the car and calls the number.",
+      next:"call"
+    },
+    {
+      ar:"يقرر مغادرة المكان.",
+      en:"He decides to leave.",
+      next:"leave"
+    }
+  ]
+},
+
+key:{
+  titleAR:"المفتاح",
+  titleEN:"The Key",
+
+  textAR:
+`ينزل آدم.
+
+المطر يزداد.
+
+يقترب من المصباح، ثم يلاحظ شيئًا معدنيًا أسفله.
+
+إنه المفتاح.
+
+عندما يلمسه، يشعر ببرودة غير طبيعية.
+
+على المفتاح رقم صغير:
+
+17.`,
+
+  textEN:
+`Adam gets out.
+
+The rain becomes heavier.
+
+He approaches the lamp and notices something metallic underneath it.
+
+It is a key.
+
+When he touches it, an unnatural cold runs through his fingers.
+
+A small number is engraved on it:
+
+17.`,
+
+  choices:[
+    {
+      ar:"يفتح باب المنزل.",
+      en:"He unlocks the house.",
+      next:"inside"
+    },
+    {
+      ar:"يفحص المفتاح أكثر.",
+      en:"He examines the key.",
+      next:"examine"
+    }
+  ]
+},
+
+call:{
+  titleAR:"المكالمة",
+  titleEN:"The Call",
+
+  textAR:
+`يضغط آدم زر الاتصال.
+
+يرن الهاتف مرة واحدة.
+
+ثم يجيب صوت منخفض:
+
+"لماذا اتصلت؟"
+
+يتجمد آدم.
+
+"من أنت؟"
+
+يصمت الصوت لثانيتين.
+
+ثم يقول:
+
+"أنت تعرفني."
+
+تنقطع المكالمة.`,
+
+  textEN:
+`Adam presses call.
+
+The phone rings once.
+
+A low voice answers:
+
+"Why did you call?"
+
+Adam freezes.
+
+"Who are you?"
+
+Silence for two seconds.
+
+Then:
+
+"You know me."
+
+The call ends.`,
+
+  choices:[
+    {
+      ar:"يخرج من السيارة.",
+      en:"He gets out of the car.",
+      next:"key"
+    },
+    {
+      ar:"يتصل مرة أخرى.",
+      en:"He calls again.",
+      next:"callAgain"
+    }
+  ]
+},
+
+leave:{
+  titleAR:"الطريق",
+  titleEN:"The Road",
+
+  textAR:
+`يشغل آدم السيارة ويتحرك.
+
+بعد أقل من دقيقة، يلاحظ شيئًا غريبًا.
+
+نفس المصباح.
+
+نفس المنزل.
+
+رقم 17.
+
+لقد عاد إلى المكان نفسه.`,
+
+  textEN:
+`Adam starts the car and drives away.
+
+Less than a minute later, something feels wrong.
+
+The same lamp.
+
+The same house.
+
+Number 17.
+
+He has returned to the exact same place.`,
+
+  choices:[
+    {
+      ar:"يترجل من السيارة.",
+      en:"He gets out.",
+      next:"key"
+    }
+  ]
+},
+
+inside:{
+  titleAR:"داخل المنزل",
+  titleEN:"Inside",
+
+  textAR:
+`يفتح آدم الباب.
+
+صرير طويل.
+
+المنزل مظلم.
+
+يشغل المصباح اليدوي في هاتفه.
+
+في غرفة المعيشة توجد ثلاث صور قديمة على الحائط.
+
+تحت الصور كتابة صغيرة:
+
+"واحدة منهم ليست صورة."
+
+فجأة يسمع صوتًا من الطابق السفلي.`,
+
+  textEN:
+`Adam opens the door.
+
+A long creak.
+
+The house is dark.
+
+He turns on his phone flashlight.
+
+Three old photographs hang on the living room wall.
+
+Small writing beneath them says:
+
+"One of them is not a photograph."
+
+Suddenly, he hears a sound from downstairs.`,
+
+  choices:[
+    {
+      ar:"يفحص الصور.",
+      en:"He examines the photographs.",
+      next:"photos"
+    },
+    {
+      ar:"ينزل إلى القبو.",
+      en:"He goes downstairs.",
+      next:"basement"
+    },
+    {
+      ar:"يخرج من المنزل.",
+      en:"He leaves the house.",
+      next:"exit"
+    }
+  ]
+},
+
+examine:{
+  titleAR:"الرقم 17",
+  titleEN:"Number 17",
+
+  textAR:
+`يقلب آدم المفتاح.
+
+على الجهة الخلفية توجد عبارة محفورة:
+
+"لا تستخدمه على الباب."
+
+يرفع آدم رأسه نحو باب المنزل.
+
+العبارة لا تبدو منطقية.
+
+ثم يسمع صوت فتح قفل من الداخل.`,
+
+  textEN:
+`Adam turns the key over.
+
+An inscription is carved into the back:
+
+"Do not use it on the door."
+
+Adam looks at the house door.
+
+The message makes no sense.
+
+Then he hears a lock opening from inside.`,
+
+  choices:[
+    {
+      ar:"يدخل.",
+      en:"He enters.",
+      next:"inside"
+    }
+  ]
+},
+
+photos:{
+  titleAR:"الصور الثلاث",
+  titleEN:"The Three Photos",
+
+  textAR:
+`الصورة الأولى تظهر المنزل.
+
+الصورة الثانية تظهر شارعًا قديمًا.
+
+الصورة الثالثة تظهر آدم نفسه.
+
+لكن الصورة تبدو قديمة جدًا.
+
+آدم يتراجع خطوة.
+
+في أسفل الصورة تاريخ:
+
+2003.
+
+ثم يتحرك رأس الشخص الموجود في الصورة ببطء.`,
+
+  textEN:
+`The first photo shows the house.
+
+The second shows an old street.
+
+The third shows Adam himself.
+
+But the photograph looks very old.
+
+Adam steps back.
+
+At the bottom of the photo is a date:
+
+2003.
+
+Then the head of the person in the photograph slowly moves.`,
+
+  choices:[
+    {
+      ar:"يقترب من الصورة.",
+      en:"He moves closer.",
+      next:"photoClose"
+    },
+    {
+      ar:"يتراجع ويذهب إلى القبو.",
+      en:"He backs away and goes to the basement.",
+      next:"basement"
+    }
+  ]
+},
+
+basement:{
+  titleAR:"القبو",
+  titleEN:"The Basement",
+
+  textAR:
+`ينزل آدم الدرج ببطء.
+
+صوت قطرات الماء يتردد في المكان.
+
+في نهاية القبو باب حديدي.
+
+فوق الباب رمز غريب.
+
+قبل أن يلمسه آدم...
+
+يأتي صوت طفل من خلفه:
+
+"لا تنزل."
+
+ينطفئ المصباح.`,
+
+  textEN:
+`Adam slowly walks down the stairs.
+
+Water drips echo through the basement.
+
+At the end is an iron door.
+
+A strange symbol is carved above it.
+
+Before Adam can touch it...
+
+A child's voice comes from behind him:
+
+"Don't go down."
+
+The flashlight goes out.`,
+
+  choices:[
+    {
+      ar:"يفتح الباب.",
+      en:"He opens the door.",
+      next:"door"
+    },
+    {
+      ar:"يعود إلى الطابق العلوي.",
+      en:"He goes back upstairs.",
+      next:"inside"
+    }
+  ]
+},
+
+callAgain:{
+  titleAR:"المكالمة الثانية",
+  titleEN:"The Second Call",
+
+  textAR:
+`يتصل آدم مرة أخرى.
+
+هذه المرة لا يرن الهاتف.
+
+يظهر على الشاشة:
+
+"المتصل: آدم"
+
+ثم تصل رسالة:
+
+"أنا خلفك."
+
+لا يلتفت آدم.`,
+
+  textEN:
+`Adam calls again.
+
+This time, the phone doesn't ring.
+
+The screen shows:
+
+"Caller: Adam"
+
+Then a message arrives:
+
+"I'm behind you."
+
+Adam does not turn around.`,
+
+  choices:[
+    {
+      ar:"يلتفت.",
+      en:"He turns around.",
+      next:"turn"
+    },
+    {
+      ar:"ينزل من السيارة دون أن يلتفت.",
+      en:"He gets out without turning.",
+      next:"key"
+    }
+  ]
+},
+
+exit:{
+  titleAR:"الخروج",
+  titleEN:"Exit",
+
+  textAR:
+`يخرج آدم من المنزل.
+
+يغلق الباب خلفه.
+
+يصمت المطر.
+
+ينظر إلى هاتفه.
+
+رسالة جديدة:
+
+"كان عليك البقاء."
+
+ثم يسمع صوت الباب يفتح خلفه.`,
+
+  textEN:
+`Adam leaves the house.
+
+The door closes behind him.
+
+The rain stops.
+
+He looks at his phone.
+
+A new message appears:
+
+"You should have stayed."
+
+Then he hears the door open behind him.`,
+
+  choices:[
+    {
+      ar:"يعود إلى المنزل.",
+      en:"He returns to the house.",
+      next:"inside"
+    }
+  ]
+},
+
+photoClose:{
+  titleAR:"الصورة",
+  titleEN:"The Photograph",
+
+  textAR:
+`يقترب آدم.
+
+الصورة الآن مختلفة.
+
+الشخص الذي يشبهه أصبح أقرب إلى الكاميرا.
+
+وعلى ظهر الصورة تظهر جملة:
+
+"الفصل الأول بدأ قبل أن تصل."
+
+تظهر نقطة حمراء صغيرة على الخريطة في هاتفه.
+
+الموقع: القبو.`,
+
+  textEN:
+`Adam moves closer.
+
+The photograph has changed.
+
+The person who looks like him is now closer to the camera.
+
+On the back of the photograph, a sentence appears:
+
+"Chapter One began before you arrived."
+
+A small red dot appears on his phone map.
+
+Location: Basement.`,
+
+  choices:[
+    {
+      ar:"يتجه إلى القبو.",
+      en:"He heads to the basement.",
+      next:"basement"
+    }
+  ]
+},
+
+door:{
+  titleAR:"الباب",
+  titleEN:"The Door",
+
+  textAR:
+`يضع آدم يده على المقبض.
+
+قبل أن يفتحه، يسمع صوتًا خلف الباب:
+
+"آدم..."
+
+يتوقف.
+
+الصوت يعرف اسمه.
+
+ثم يقول:
+
+"أخيرًا عدت."
+
+الشاشة تصبح سوداء.
+
+يتوقف الفصل الأول هنا.`,
+
+  textEN:
+`Adam places his hand on the handle.
+
+Before opening it, he hears a voice behind the door:
+
+"Adam..."
+
+He freezes.
+
+The voice knows his name.
+
+Then it says:
+
+"You're finally back."
+
+The screen fades to black.
+
+Chapter One ends here.`,
+
+  choices:[
+    {
+      ar:"إعادة الفصل",
+      en:"Restart Chapter",
+      next:"start"
+    }
+  ]
+},
+
+turn:{
+  titleAR:"خلفك",
+  titleEN:"Behind You",
+
+  textAR:
+`يلتفت آدم.
+
+لا يوجد أحد.
+
+لكن شاشة هاتفه أصبحت سوداء.
+
+ثم تظهر عليها جملة واحدة:
+
+"الآن رأيتني."
+
+الفصل الأول مستمر...`,
+
+  textEN:
+`Adam turns around.
+
+Nobody is there.
+
+But his phone screen has gone black.
+
+Then one sentence appears:
+
+"Now you have seen me."
+
+Chapter One continues...`,
+
+  choices:[
+    {
+      ar:"متابعة.",
+      en:"Continue.",
+      next:"key"
+    }
+  ]
+}
+
+};
+
+let lang = localStorage.getItem("veilLang") || "ar";
+let current = localStorage.getItem("veilScene") || "start";
+
+const story = document.getElementById("story");
+const storyTitle = document.getElementById("storyTitle");
+const storyText = document.getElementById("storyText");
+const choices = document.getElementById("choices");
+const chapter = document.getElementById("chapter");
+
+const startBtn = document.getElementById("startBtn");
+const continueBtn = document.getElementById("continueBtn");
+const languageBtn = document.getElementById("languageBtn");
+const resetBtn = document.getElementById("resetBtn");
+
+const heroTitle = document.getElementById("heroTitle");
+const heroText = document.getElementById("heroText");
+const heroKicker = document.getElementById("heroKicker");
+
+const info1Title = document.getElementById("info1Title");
+const info1Text = document.getElementById("info1Text");
+const info2Title = document.getElementById("info2Title");
+const info2Text = document.getElementById("info2Text");
+const info3Title = document.getElementById("info3Title");
+const info3Text = document.getElementById("info3Text");
+
+const modal = document.getElementById("modal");
+const confirmReset = document.getElementById("confirmReset");
+const cancelReset = document.getElementById("cancelReset");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+
+function updateLanguage(){
+
+  const ar = lang === "ar";
+
+  document.documentElement.lang = ar ? "ar" : "en";
+  document.documentElement.dir = ar ? "rtl" : "ltr";
+
+  heroKicker.textContent =
+    ar ? "INTERACTIVE MYSTERY" : "INTERACTIVE MYSTERY";
+
+  heroTitle.textContent =
+    ar ? "الحجاب" : "THE VEIL";
+
+  heroText.textContent =
+    ar
+    ? "قصة غامضة تفاعلية. كل قرار تتخذه يغير الطريق الذي ستسلكه. لا تثق بكل ما تراه."
+    : "An interactive mystery story. Every decision changes the path you take. Don't trust everything you see.";
+
+  startBtn.textContent =
+    ar ? "ابدأ القصة" : "Start Story";
+
+  continueBtn.textContent =
+    ar ? "متابعة" : "Continue";
+
+  languageBtn.textContent =
+    ar ? "English" : "العربية";
+
+  resetBtn.textContent =
+    ar ? "إعادة" : "Reset";
+
+  info1Title.textContent =
+    ar ? "قصة تفاعلية" : "Interactive Story";
+
+  info1Text.textContent =
+    ar ? "اختياراتك تؤثر على الأحداث." : "Your choices affect the events.";
+
+  info2Title.textContent =
+    ar ? "لغتان" : "Two Languages";
+
+  info2Text.textContent =
+    ar ? "العربية والإنجليزية." : "Arabic and English.";
+
+  info3Title.textContent =
+    ar ? "احفظ تقدمك" : "Save Progress";
+
+  info3Text.textContent =
+    ar
+    ? "يمكنك العودة لاحقًا من نفس الجهاز."
+    : "Return later on the same device.";
+
+  modalTitle.textContent =
+    ar ? "إعادة اللعبة؟" : "Reset the game?";
+
+  modalText.textContent =
+    ar
+    ? "سيتم حذف التقدم المحفوظ على هذا الجهاز."
+    : "Saved progress on this device will be deleted.";
+
+  confirmReset.textContent =
+    ar ? "نعم" : "Yes";
+
+  cancelReset.textContent =
+    ar ? "إلغاء" : "Cancel";
+
+  renderScene(false);
+}
+
+function renderScene(showStory=true){
+
+  const scene = scenes[current];
+
+  if(!scene) return;
+
+  storyTitle.textContent =
+    lang === "ar" ? scene.titleAR : scene.titleEN;
+
+  storyText.textContent =
+    lang === "ar" ? scene.textAR : scene.textEN;
+
+  chapter.textContent =
+    lang === "ar" ? "الفصل الأول" : "CHAPTER ONE";
+
+  choices.innerHTML = "";
+
+  scene.choices.forEach((choice,index)=>{
+
+    const button = document.createElement("button");
+
+    button.className = "choice";
+
+    const number = document.createElement("span");
+    number.className = "choice-number";
+    number.textContent = `${index + 1}.`;
+
+    const text = document.createElement("span");
+    text.textContent =
+      lang === "ar" ? choice.ar : choice.en;
+
+    button.appendChild(number);
+    button.appendChild(text);
+
+    button.addEventListener("click",()=>{
+
+      current = choice.next;
+
+      localStorage.setItem("veilScene",current);
+
+      renderScene(true);
+
+    });
+
+    choices.appendChild(button);
+
+  });
+
+  if(showStory){
+
+    story.classList.add("active");
+
+    setTimeout(()=>{
+      story.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+    },50);
+
+  }
+}
+
+startBtn.addEventListener("click",()=>{
+
+  current = "start";
+
+  localStorage.setItem("veilScene",current);
+
+  renderScene(true);
+
+});
+
+continueBtn.addEventListener("click",()=>{
+
+  const saved =
+    localStorage.getItem("veilScene");
+
+  current = saved || "start";
+
+  renderScene(true);
+
+});
+
+languageBtn.addEventListener("click",()=>{
+
+  lang = lang === "ar" ? "en" : "ar";
+
+  localStorage.setItem("veilLang",lang);
+
+  updateLanguage();
+
+});
+
+resetBtn.addEventListener("click",()=>{
+
+  modal.classList.add("show");
+
+});
+
+cancelReset.addEventListener("click",()=>{
+
+  modal.classList.remove("show");
+
+});
+
+confirmReset.addEventListener("click",()=>{
+
+  localStorage.removeItem("veilScene");
+
+  current = "start";
+
+  modal.classList.remove("show");
+
+  story.classList.remove("active");
+
+});
+
+updateLanguage();
+
+</script>
 
 </body>
 </html>
