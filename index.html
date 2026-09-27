@@ -1,606 +1,227 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="KIDORA - قصص أطفال عربية وإنجليزية ممتعة قبل النوم، قصص رمضان، الحيوانات، المغامرات والتعلم."
-  >
-
-  <meta
-    name="keywords"
-    content="قصص أطفال, قصص قبل النوم, قصص رمضان, قصص عربية, kids stories, bedtime stories"
-  >
-
-  <meta
-    name="theme-color"
-    content="#7657e8"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>KIDORA - قصص أطفال ممتعة</title>
+  <meta name="description" content="KIDORA - قصص أطفال عربية وإنجليزية ممتعة قبل النوم، قصص رمضان، الحيوانات والمغامرات والتعلم.">
 
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
-
+  <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-  <!-- ======================================
-       HEADER
-       ====================================== -->
+<header class="site-header">
+  <div class="container nav-wrap">
 
-  <header class="site-header">
+    <a href="index.html" class="logo">
+      KIDORA
+    </a>
 
-    <div class="container header-inner">
+    <nav class="main-nav">
+      <a href="#stories">القصص</a>
+      <a href="#categories">التصنيفات</a>
+      <a href="#ramadan">رمضان</a>
+      <a href="#about">عن KIDORA</a>
+    </nav>
 
-      <a
-        href="index.html"
-        class="logo"
-        aria-label="KIDORA"
+    <div class="nav-actions">
+      <button id="languageToggle" type="button">English</button>
+      <button id="menuToggle" type="button">☰</button>
+    </div>
+
+  </div>
+
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="#stories">القصص</a>
+    <a href="#categories">التصنيفات</a>
+    <a href="#ramadan">رمضان</a>
+    <a href="#about">عن KIDORA</a>
+  </div>
+</header>
+
+
+<main>
+
+<section class="hero">
+  <div class="container hero-content">
+
+    <div class="hero-badge">
+      📚 قصص ممتعة للأطفال
+    </div>
+
+    <h1>
+      عالم KIDORA
+    </h1>
+
+    <p>
+      قصص قصيرة وممتعة للأطفال باللغة العربية والإنجليزية.
+      اختر قصة وابدأ المغامرة.
+    </p>
+
+    <div class="search-box">
+      <input
+        id="storySearch"
+        type="search"
+        placeholder="ابحث عن قصة..."
+        autocomplete="off"
       >
+    </div>
 
-        <span class="logo-icon">
-          📚
-        </span>
-
-        <span>
-          KIDORA
-        </span>
-
-      </a>
+  </div>
+</section>
 
 
-      <nav class="main-nav">
+<section id="categories" class="section">
+  <div class="container">
 
-        <a
-          href="#stories"
-          data-ar="القصص"
-          data-en="Stories"
-        >
-          القصص
-        </a>
+    <div class="section-heading">
+      <span>استكشف</span>
+      <h2>اختر نوع القصة</h2>
+    </div>
 
-        <a
-          href="#categories"
-          data-ar="التصنيفات"
-          data-en="Categories"
-        >
-          التصنيفات
-        </a>
+    <div class="categories">
 
-        <a
-          href="#ramadan"
-          data-ar="رمضان"
-          data-en="Ramadan"
-        >
-          رمضان
-        </a>
+      <button class="category-btn active" data-category="all">
+        📚 الكل
+      </button>
 
-        <a
-          href="#about"
-          data-ar="عن KIDORA"
-          data-en="About"
-        >
-          عن KIDORA
-        </a>
+      <button class="category-btn" data-category="ramadan">
+        🌙 رمضان
+      </button>
 
-      </nav>
+      <button class="category-btn" data-category="bedtime">
+        🌙 قبل النوم
+      </button>
+
+      <button class="category-btn" data-category="animals">
+        🐰 الحيوانات
+      </button>
+
+      <button class="category-btn" data-category="adventures">
+        🗺️ المغامرات
+      </button>
+
+      <button class="category-btn" data-category="world">
+        🌍 حول العالم
+      </button>
+
+      <button class="category-btn" data-category="learning">
+        🧠 التعلم
+      </button>
+
+    </div>
+
+  </div>
+</section>
 
 
-      <div class="header-actions">
+<section id="stories" class="section stories-section">
 
-        <button
-          id="languageToggle"
-          class="language-btn"
-          type="button"
-        >
-          English
-        </button>
+  <div class="container">
 
-        <button
-          id="menuToggle"
-          class="menu-toggle"
-          type="button"
-          aria-label="Menu"
-        >
-          ☰
-        </button>
+    <div class="section-heading">
+      <span>KIDORA</span>
+      <h2>قصصنا</h2>
+      <p>اختر قصة لتبدأ القراءة</p>
+    </div>
 
+    <div id="continueReading"></div>
+
+    <!-- هنا تظهر القصص -->
+    <div id="storiesGrid" class="stories-grid"></div>
+
+    <!-- رسالة تظهر إذا لم توجد نتائج -->
+    <div id="noStories" style="display:none;text-align:center;padding:40px;">
+      <h3>لم نجد قصة</h3>
+      <p>جرب البحث عن قصة أخرى.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="ramadan" class="ramadan-banner">
+
+  <div class="container">
+
+    <div class="ramadan-content">
+
+      <div class="ramadan-icon">
+        🌙
+      </div>
+
+      <div>
+        <h2>قصص رمضان</h2>
+        <p>
+          قصص جميلة تعلم الأطفال الخير والصدق والمساعدة والمحبة.
+        </p>
       </div>
 
     </div>
 
+  </div>
 
-    <div
-      id="mobileMenu"
-      class="mobile-menu"
-    >
+</section>
 
-      <a
-        href="#stories"
-        data-ar="القصص"
-        data-en="Stories"
-      >
-        القصص
-      </a>
 
-      <a
-        href="#categories"
-        data-ar="التصنيفات"
-        data-en="Categories"
-      >
-        التصنيفات
-      </a>
+<section id="about" class="section about-section">
 
-      <a
-        href="#ramadan"
-        data-ar="رمضان"
-        data-en="Ramadan"
-      >
-        رمضان
-      </a>
+  <div class="container">
 
-      <a
-        href="#about"
-        data-ar="عن KIDORA"
-        data-en="About"
-      >
-        عن KIDORA
-      </a>
-
+    <div class="section-heading">
+      <span>عن الموقع</span>
+      <h2>ما هو KIDORA؟</h2>
     </div>
 
-  </header>
+    <div class="about-box">
 
-
-  <!-- ======================================
-       HERO
-       ====================================== -->
-
-  <section class="hero">
-
-    <div class="container hero-content">
-
-      <div class="hero-badge">
-
-        📖
-
-        <span
-          data-ar="عالم من القصص للأطفال"
-          data-en="A world of stories for kids"
-        >
-          عالم من القصص للأطفال
-        </span>
-
-      </div>
-
-
-      <h1>
-
-        <span
-          data-ar="كل يوم قصة جديدة"
-          data-en="A New Story Every Day"
-        >
-          كل يوم قصة جديدة
-        </span>
-
-      </h1>
-
-
-      <p
-        data-ar="قصص قصيرة وممتعة تساعد الأطفال على الخيال والتعلم والاسترخاء قبل النوم."
-        data-en="Short and fun stories that help children imagine, learn, and relax before bedtime."
-      >
-        قصص قصيرة وممتعة تساعد الأطفال على الخيال والتعلم والاسترخاء قبل النوم.
+      <p>
+        KIDORA هو عالم قصص للأطفال.
+        يحتوي على قصص قصيرة وممتعة تساعد الأطفال على القراءة
+        والتخيل وتعلم القيم الجميلة.
       </p>
 
-
-      <div class="search-box">
-
-        <span class="search-icon">
-          🔍
-        </span>
-
-        <input
-          id="storySearch"
-          type="search"
-          placeholder="ابحث عن قصة..."
-          autocomplete="off"
-          aria-label="Search stories"
-        >
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ======================================
-       CATEGORIES
-       ====================================== -->
-
-  <section
-    id="categories"
-    class="section"
-  >
-
-    <div class="container">
-
-      <div class="section-header">
-
-        <h2
-          data-ar="اختر عالمك"
-          data-en="Choose Your World"
-        >
-          اختر عالمك
-        </h2>
-
-        <p
-          data-ar="اختر نوع القصة التي تريد قراءتها."
-          data-en="Choose the kind of story you want to read."
-        >
-          اختر نوع القصة التي تريد قراءتها.
-        </p>
-
-      </div>
-
-
-      <div class="categories">
-
-        <button
-          class="category-card active"
-          data-category="all"
-          type="button"
-        >
-
-          <div class="category-icon">
-            📚
-          </div>
-
-          <strong
-            data-ar="كل القصص"
-            data-en="All Stories"
-          >
-            كل القصص
-          </strong>
-
-        </button>
-
-
-        <button
-          class="category-card"
-          data-category="ramadan"
-          type="button"
-        >
-
-          <div class="category-icon">
-            🌙
-          </div>
-
-          <strong
-            data-ar="رمضان"
-            data-en="Ramadan"
-          >
-            رمضان
-          </strong>
-
-        </button>
-
-
-        <button
-          class="category-card"
-          data-category="bedtime"
-          type="button"
-        >
-
-          <div class="category-icon">
-            😴
-          </div>
-
-          <strong
-            data-ar="قبل النوم"
-            data-en="Bedtime"
-          >
-            قبل النوم
-          </strong>
-
-        </button>
-
-
-        <button
-          class="category-card"
-          data-category="animals"
-          type="button"
-        >
-
-          <div class="category-icon">
-            🐾
-          </div>
-
-          <strong
-            data-ar="الحيوانات"
-            data-en="Animals"
-          >
-            الحيوانات
-          </strong>
-
-        </button>
-
-
-        <button
-          class="category-card"
-          data-category="adventures"
-          type="button"
-        >
-
-          <div class="category-icon">
-            🗺️
-          </div>
-
-          <strong
-            data-ar="مغامرات"
-            data-en="Adventures"
-          >
-            مغامرات
-          </strong>
-
-        </button>
-
-
-        <button
-          class="category-card"
-          data-category="world"
-          type="button"
-        >
-
-          <div class="category-icon">
-            🌍
-          </div>
-
-          <strong
-            data-ar="حول العالم"
-            data-en="Around the World"
-          >
-            حول العالم
-          </strong>
-
-        </button>
-
-
-        <button
-          class="category-card"
-          data-category="learning"
-          type="button"
-        >
-
-          <div class="category-icon">
-            🧠
-          </div>
-
-          <strong
-            data-ar="تعلم"
-            data-en="Learning"
-          >
-            تعلم
-          </strong>
-
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ======================================
-       STORIES
-       ====================================== -->
-
-  <section
-    id="stories"
-    class="section"
-  >
-
-    <div class="container">
-
-      <div class="section-header">
-
-        <h2
-          data-ar="قصص KIDORA"
-          data-en="KIDORA Stories"
-        >
-          قصص KIDORA
-        </h2>
-
-        <p
-          data-ar="اختر قصة وابدأ المغامرة."
-          data-en="Choose a story and start the adventure."
-        >
-          اختر قصة وابدأ المغامرة.
-        </p>
-
-      </div>
-
-
-      <div
-        id="continueReading"
-        class="continue-reading"
-      >
-      </div>
-
-
-      <div
-        id="storiesGrid"
-        class="stories-grid"
-      >
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ======================================
-       RAMADAN
-       ====================================== -->
-
-  <section
-    id="ramadan"
-    class="section"
-  >
-
-    <div class="container">
-
-      <div class="ramadan-banner">
-
-        <div class="ramadan-content">
-
-          <h2
-            data-ar="🌙 حكايات رمضان"
-            data-en="🌙 Ramadan Stories"
-          >
-            🌙 حكايات رمضان
-          </h2>
-
-          <p
-            data-ar="قصص جميلة عن الرحمة والكرم والمساعدة والمحبة في شهر رمضان."
-            data-en="Beautiful stories about kindness, generosity, helping others, and love during Ramadan."
-          >
-            قصص جميلة عن الرحمة والكرم والمساعدة والمحبة في شهر رمضان.
-          </p>
-
-        </div>
-
-
-        <div class="ramadan-icon">
-          🏮
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ======================================
-       ABOUT
-       ====================================== -->
-
-  <section
-    id="about"
-    class="section about"
-  >
-
-    <div class="container">
-
-      <div class="about-content">
-
-        <div class="about-icon">
-          🧸
-        </div>
-
-
-        <h2
-          data-ar="مرحبًا بك في KIDORA"
-          data-en="Welcome to KIDORA"
-        >
-          مرحبًا بك في KIDORA
-        </h2>
-
-
-        <p
-          data-ar="KIDORA هو عالم قصص بسيط وممتع للأطفال. ستجد هنا قصصًا قصيرة عن الحيوانات والمغامرات ورمضان وقبل النوم والتعلم."
-          data-en="KIDORA is a simple and fun story world for children. Here you can find short stories about animals, adventures, Ramadan, bedtime, and learning."
-        >
-          KIDORA هو عالم قصص بسيط وممتع للأطفال. ستجد هنا قصصًا قصيرة عن الحيوانات والمغامرات ورمضان وقبل النوم والتعلم.
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ======================================
-       FOOTER
-       ====================================== -->
-
-  <footer class="site-footer">
-
-    <div class="container">
-
-      <div class="footer-logo">
-        📚 KIDORA
-      </div>
-
-
-      <p
-        data-ar="قصص جميلة للأطفال في كل وقت."
-        data-en="Beautiful stories for children."
-      >
-        قصص جميلة للأطفال في كل وقت.
-      </p>
-
-
-      <div class="footer-links">
-
-        <a
-          href="privacy.html"
-          data-ar="الخصوصية"
-          data-en="Privacy"
-        >
-          الخصوصية
-        </a>
-
-        <a
-          href="contact.html"
-          data-ar="تواصل معنا"
-          data-en="Contact"
-        >
-          تواصل معنا
-        </a>
-
-      </div>
-
-
-      <p class="copyright">
-
-        ©
-        <span data-year></span>
-        KIDORA
-
+      <p>
+        الموقع يدعم اللغة العربية والإنجليزية.
       </p>
 
     </div>
 
-  </footer>
+  </div>
+
+</section>
+
+</main>
 
 
-  <!-- ======================================
-       SCRIPTS
-       ====================================== -->
+<footer class="site-footer">
 
-  <script src="games.js"></script>
+  <div class="container">
 
-  <script src="app.js"></script>
+    <div class="footer-logo">
+      KIDORA
+    </div>
+
+    <p>
+      © <span data-year></span> KIDORA
+    </p>
+
+    <div class="footer-links">
+      <a href="privacy.html">الخصوصية</a>
+      <a href="contact.html">تواصل معنا</a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- مهم جداً: games.js قبل app.js -->
+<script src="games.js"></script>
+<script src="app.js"></script>
 
 </body>
-
 </html>
