@@ -1,1855 +1,1592 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#07090f">
-<title>THE VEIL | الحجاب — ODDORA</title>
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-:root{
-  --bg:#05070b;
-  --panel:#0c111a;
-  --panel2:#111927;
-  --text:#edf2f7;
-  --muted:#8f9aaa;
-  --line:#263244;
-  --accent:#7c5cff;
-  --accent2:#16d9c5;
-  --danger:#d94d68;
-}
-
-html{scroll-behavior:smooth}
-
-body{
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 20% 10%,rgba(124,92,255,.13),transparent 30%),
-    radial-gradient(circle at 80% 80%,rgba(22,217,197,.07),transparent 30%),
-    linear-gradient(135deg,#04060a,#090d14 55%,#05070b);
-  color:var(--text);
-  font-family:Arial,"Tahoma",sans-serif;
-  overflow-x:hidden;
-}
-
-button{
-  font:inherit;
-  cursor:pointer;
-}
-
-.app{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-
-header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  backdrop-filter:blur(18px);
-  background:rgba(5,7,11,.78);
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.nav{
-  width:min(1150px,94%);
-  margin:auto;
-  min-height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.logo-mark{
-  width:42px;
-  height:42px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,var(--accent),#291b75);
-  box-shadow:0 0 28px rgba(124,92,255,.25);
-  font-weight:900;
-}
-
-.logo-text{
-  font-size:18px;
-  font-weight:900;
-  letter-spacing:2px;
-}
-
-.logo-sub{
-  display:block;
-  color:var(--muted);
-  font-size:9px;
-  letter-spacing:2px;
-  margin-top:2px;
-}
-
-.nav-actions{
-  display:flex;
-  gap:8px;
-}
-
-.icon-btn{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.04);
-  color:white;
-  border-radius:11px;
-  min-width:43px;
-  height:43px;
-}
-
-.icon-btn:hover{
-  border-color:var(--accent);
-}
-
-main{
-  width:min(1150px,94%);
-  margin:0 auto;
-  flex:1;
-}
-
-.hero{
-  min-height:calc(100vh - 70px);
-  display:grid;
-  place-items:center;
-  position:relative;
-  padding:50px 0;
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:8% 10%;
-  background:
-    linear-gradient(rgba(5,7,11,.25),rgba(5,7,11,.85)),
-    radial-gradient(circle at 50% 30%,rgba(124,92,255,.18),transparent 35%);
-  pointer-events:none;
-}
-
-.hero-content{
-  position:relative;
-  max-width:850px;
-  text-align:center;
-}
-
-.badge{
-  display:inline-flex;
-  padding:8px 14px;
-  border:1px solid rgba(124,92,255,.35);
-  background:rgba(124,92,255,.08);
-  border-radius:999px;
-  color:#c9c0ff;
-  font-size:12px;
-  margin-bottom:20px;
-}
-
-h1{
-  font-size:clamp(48px,11vw,100px);
-  line-height:.9;
-  letter-spacing:7px;
-  font-weight:1000;
-  text-shadow:0 0 40px rgba(124,92,255,.18);
-}
-
-.hero-ar{
-  margin-top:18px;
-  font-size:clamp(25px,5vw,42px);
-  font-weight:800;
-}
-
-.hero-desc{
-  max-width:650px;
-  margin:22px auto;
-  color:#aab3c1;
-  line-height:1.9;
-  font-size:15px;
-}
-
-.buttons{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:12px;
-  margin-top:28px;
-}
-
-.btn{
-  border:0;
-  padding:14px 24px;
-  border-radius:13px;
-  color:white;
-  font-weight:800;
-  transition:.2s;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-}
-
-.primary{
-  background:linear-gradient(135deg,var(--accent),#4932c7);
-  box-shadow:0 10px 35px rgba(124,92,255,.22);
-}
-
-.secondary{
-  background:#121a27;
-  border:1px solid var(--line);
-}
-
-.danger{
-  background:#24101a;
-  border:1px solid #562335;
-  color:#ff9bad;
-}
-
-.game{
-  display:none;
-  padding:30px 0 60px;
-}
-
-.game.active{
-  display:block;
-}
-
-.top-info{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:15px;
-  flex-wrap:wrap;
-}
-
-.chapter-label{
-  color:#a99cff;
-  font-size:13px;
-  font-weight:800;
-}
-
-.progress-wrap{
-  flex:1;
-  max-width:400px;
-  height:6px;
-  background:#17202d;
-  border-radius:10px;
-  overflow:hidden;
-}
-
-.progress{
-  height:100%;
-  width:8.33%;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  transition:.4s;
-}
-
-.story-card{
-  position:relative;
-  min-height:650px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:25px;
-  background:
-    linear-gradient(180deg,rgba(8,11,17,.65),rgba(8,11,17,.98)),
-    radial-gradient(circle at 50% 15%,rgba(124,92,255,.16),transparent 35%);
-  box-shadow:0 25px 80px rgba(0,0,0,.35);
-}
-
-.scene{
-  min-height:650px;
-  padding:45px clamp(20px,6vw,70px);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.scene-number{
-  color:var(--accent2);
-  font-size:12px;
-  letter-spacing:2px;
-  margin-bottom:14px;
-}
-
-.scene h2{
-  font-size:clamp(28px,5vw,52px);
-  margin-bottom:18px;
-  line-height:1.1;
-}
-
-.scene p{
-  color:#b9c1cd;
-  font-size:16px;
-  line-height:2;
-  max-width:780px;
-  white-space:pre-line;
-}
-
-.story-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin:25px 0;
-}
-
-.meta{
-  padding:7px 11px;
-  border-radius:9px;
-  background:#101925;
-  border:1px solid #202d3f;
-  color:#9da9b9;
-  font-size:11px;
-}
-
-.choices{
-  display:grid;
-  gap:10px;
-  margin-top:25px;
-  max-width:800px;
-}
-
-.choice{
-  width:100%;
-  text-align:right;
-  background:rgba(255,255,255,.035);
-  color:#eef2f7;
-  border:1px solid #263244;
-  padding:16px 18px;
-  border-radius:13px;
-  transition:.2s;
-}
-
-.choice:hover{
-  border-color:var(--accent);
-  background:rgba(124,92,255,.08);
-  transform:translateX(-3px);
-}
-
-.ltr .choice{
-  text-align:left;
-}
-
-.inventory{
-  margin-top:30px;
-  padding:18px;
-  background:#090e16;
-  border:1px solid #1c2736;
-  border-radius:16px;
-}
-
-.inventory-title{
-  color:#8793a5;
-  font-size:12px;
-  margin-bottom:10px;
-}
-
-.items{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-
-.item{
-  padding:7px 10px;
-  border-radius:8px;
-  background:#121b28;
-  color:#c8d0db;
-  font-size:11px;
-}
-
-.clue{
-  margin-top:25px;
-  padding:17px;
-  border-right:3px solid var(--accent2);
-  background:rgba(22,217,197,.045);
-  color:#b7c9c9;
-  border-radius:10px;
-  line-height:1.8;
-}
-
-.ltr .clue{
-  border-right:0;
-  border-left:3px solid var(--accent2);
-}
-
-.ad-space{
-  margin:18px 0;
-  min-height:80px;
-  display:grid;
-  place-items:center;
-  border:1px dashed #253142;
-  border-radius:14px;
-  color:#536074;
-  font-size:11px;
-  background:rgba(255,255,255,.015);
-}
-
-.chapter-list{
-  margin-top:20px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-
-.chapter{
-  padding:14px;
-  border:1px solid #1d2939;
-  border-radius:12px;
-  background:#0b111a;
-  color:#69778b;
-  font-size:12px;
-}
-
-.chapter.unlocked{
-  color:#c8d0dc;
-  border-color:#303e54;
-}
-
-.chapter.current{
-  border-color:var(--accent);
-  color:white;
-  background:rgba(124,92,255,.08);
-}
-
-footer{
-  padding:30px 15px;
-  text-align:center;
-  color:#596679;
-  font-size:11px;
-  border-top:1px solid rgba(255,255,255,.05);
-}
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:none;
-  place-items:center;
-  padding:20px;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(8px);
-}
-
-.modal.show{
-  display:grid;
-}
-
-.modal-box{
-  width:min(450px,100%);
-  background:#0c121c;
-  border:1px solid #29364a;
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 30px 100px rgba(0,0,0,.55);
-}
-
-.modal-box h3{
-  margin-bottom:10px;
-}
-
-.modal-box p{
-  color:#8f9baa;
-  line-height:1.8;
-  margin-bottom:20px;
-}
-
-.modal-actions{
-  display:flex;
-  gap:10px;
-}
-
-.modal-actions button{
-  flex:1;
-}
-
-.hidden{
-  display:none!important;
-}
-
-@media(max-width:700px){
-  .nav{
-    min-height:62px;
-  }
-
-  .logo-text{
-    font-size:15px;
-  }
-
-  .hero{
-    min-height:calc(100vh - 62px);
-  }
-
-  h1{
-    letter-spacing:4px;
-  }
-
-  .story-card,
-  .scene{
-    min-height:620px;
-  }
-
-  .scene{
-    padding:32px 20px;
-  }
-
-  .chapter-list{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .progress-wrap{
-    order:3;
-    flex-basis:100%;
-    max-width:none;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6c5ce7">
+
+  <title>KIDORA | قصص أطفال ممتعة</title>
+
+  <meta
+    name="description"
+    content="KIDORA عالم قصص ممتعة للأطفال بالعربية والإنجليزية."
+  >
+
+  <style>
+    :root {
+      --purple: #7657e8;
+      --purple-dark: #5b42c7;
+      --yellow: #ffd95a;
+      --orange: #ff9f43;
+      --pink: #ff7eb6;
+      --blue: #63c7ff;
+      --green: #61d69b;
+
+      --cream: #fffaf0;
+      --white: #ffffff;
+      --text: #29304a;
+      --muted: #747b91;
+
+      --radius: 24px;
+      --shadow: 0 15px 40px rgba(67, 54, 120, .12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 10%, #fff0a8 0 7%, transparent 20%),
+        radial-gradient(circle at 90% 15%, #d9f4ff 0 8%, transparent 21%),
+        linear-gradient(180deg, #fffaf0 0%, #f8f5ff 100%);
+      color: var(--text);
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      line-height: 1.6;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 250, 240, .88);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(91, 66, 199, .08);
+    }
+
+    .header-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 25px;
+      font-weight: 1000;
+      color: var(--purple-dark);
+      letter-spacing: -1px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      background: var(--yellow);
+      border-radius: 15px;
+      font-size: 24px;
+      box-shadow: 0 7px 18px rgba(255, 217, 90, .3);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .nav a:hover {
+      color: var(--purple);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .language-btn,
+    .menu-btn {
+      border: 0;
+      background: var(--white);
+      color: var(--purple-dark);
+      border-radius: 13px;
+      padding: 9px 13px;
+      font-weight: 900;
+      box-shadow: 0 5px 18px rgba(67, 54, 120, .08);
+    }
+
+    .menu-btn {
+      display: none;
+      font-size: 20px;
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 55px 0 35px;
+    }
+
+    .hero-box {
+      min-height: 455px;
+      position: relative;
+      overflow: hidden;
+
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 35px;
+
+      padding: 45px;
+
+      border-radius: 35px;
+
+      background:
+        radial-gradient(circle at 90% 10%, rgba(255,255,255,.45), transparent 25%),
+        linear-gradient(135deg, #e8ddff, #dff5ff 52%, #fff3bf);
+
+      box-shadow: var(--shadow);
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: rgba(255,255,255,.72);
+      color: var(--purple-dark);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -3px;
+      color: #302b55;
+    }
+
+    .hero h1 span {
+      color: var(--purple);
+    }
+
+    .hero p {
+      max-width: 570px;
+      margin-top: 17px;
+      color: #626980;
+      font-size: 17px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      border: 0;
+      border-radius: 15px;
+      min-height: 50px;
+      padding: 0 22px;
+      font-weight: 950;
+    }
+
+    .primary-btn {
+      color: white;
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      box-shadow: 0 10px 25px rgba(108, 92, 231, .28);
+    }
+
+    .secondary-btn {
+      background: white;
+      color: var(--purple-dark);
+      box-shadow: 0 8px 20px rgba(67, 54, 120, .08);
+    }
+
+    .hero-art {
+      min-height: 340px;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .cloud {
+      position: absolute;
+      background: rgba(255,255,255,.7);
+      border-radius: 999px;
+      width: 130px;
+      height: 45px;
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .cloud::before {
+      width: 60px;
+      height: 60px;
+      left: 22px;
+      top: -25px;
+    }
+
+    .cloud::after {
+      width: 75px;
+      height: 75px;
+      right: 18px;
+      top: -35px;
+    }
+
+    .cloud-one {
+      top: 55px;
+      left: 15px;
+    }
+
+    .cloud-two {
+      bottom: 65px;
+      right: 10px;
+      transform: scale(.7);
+    }
+
+    .moon {
+      width: 175px;
+      height: 175px;
+      border-radius: 50%;
+      background: var(--yellow);
+      position: relative;
+      box-shadow: 0 20px 55px rgba(255, 191, 45, .3);
+    }
+
+    .moon::after {
+      content: "";
+      position: absolute;
+      width: 175px;
+      height: 175px;
+      background: #e8ddff;
+      border-radius: 50%;
+      left: 48px;
+      top: -20px;
+    }
+
+    .star {
+      position: absolute;
+      color: #fff;
+      font-size: 25px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .star-one {
+      top: 55px;
+      right: 70px;
+    }
+
+    .star-two {
+      bottom: 80px;
+      left: 70px;
+      animation-delay: 1s;
+    }
+
+    .book {
+      position: absolute;
+      bottom: 15px;
+      width: 180px;
+      height: 100px;
+      background: var(--purple);
+      border-radius: 12px 22px 22px 12px;
+      transform: rotate(-8deg);
+      box-shadow: 0 15px 35px rgba(91, 66, 199, .25);
+    }
+
+    .book::before {
+      content: "KIDORA";
+      position: absolute;
+      inset: 15px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 1000;
+      border: 2px solid rgba(255,255,255,.35);
+      border-radius: 8px;
+    }
+
+    @keyframes float {
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* SEARCH */
+
+    .search-wrap {
+      margin: 25px 0 5px;
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      border: 1px solid rgba(91, 66, 199, .08);
+      border-radius: 17px;
+      padding: 5px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .search span {
+      font-size: 20px;
+    }
+
+    .search input {
+      width: 100%;
+      height: 48px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+    }
+
+    /* SECTION */
+
+    .section {
+      padding: 55px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section-title small {
+      color: var(--purple);
+      font-weight: 1000;
+    }
+
+    .section-title h2 {
+      margin-top: 4px;
+      font-size: 32px;
+      color: #302b55;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    /* CATEGORIES */
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .category {
+      border: 0;
+      min-height: 130px;
+      padding: 15px 8px;
+      border-radius: 22px;
+      background: white;
+      box-shadow: var(--shadow);
+      color: var(--text);
+      transition: .2s ease;
+    }
+
+    .category:hover {
+      transform: translateY(-5px);
+    }
+
+    .category-icon {
+      font-size: 37px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .category strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .category small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* STORIES */
+
+    .stories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .story {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: .25s ease;
+    }
+
+    .story:hover {
+      transform: translateY(-5px);
+    }
+
+    .story-cover {
+      height: 190px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      font-size: 75px;
+    }
+
+    .cover-ramadan {
+      background: linear-gradient(135deg, #46368c, #8b70df);
+    }
+
+    .cover-sleep {
+      background: linear-gradient(135deg, #20335e, #6787c9);
+    }
+
+    .cover-animal {
+      background: linear-gradient(135deg, #a9e6bb, #68c5a0);
+    }
+
+    .cover-adventure {
+      background: linear-gradient(135deg, #ffc46b, #ff876d);
+    }
+
+    .cover-world {
+      background: linear-gradient(135deg, #73d4f4, #6986ed);
+    }
+
+    .cover-learn {
+      background: linear-gradient(135deg, #ffb4d5, #a57ff2);
+    }
+
+    .story-body {
+      padding: 17px;
+    }
+
+    .story-tag {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #f0edff;
+      color: var(--purple-dark);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .story h3 {
+      margin-top: 9px;
+      font-size: 18px;
+    }
+
+    .story p {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .story-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .story-time {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .read-btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 7px 12px;
+      background: var(--purple);
+      color: white;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    /* RAMADAN */
+
+    .ramadan {
+      background:
+        radial-gradient(circle at 85% 20%, rgba(255,217,90,.22), transparent 25%),
+        linear-gradient(135deg, #342567, #634ab8);
+      color: white;
+      border-radius: 32px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ramadan-content {
+      max-width: 620px;
+    }
+
+    .ramadan small {
+      color: #ffe783;
+      font-weight: 1000;
+    }
+
+    .ramadan h2 {
+      font-size: 35px;
+      margin: 5px 0;
+    }
+
+    .ramadan p {
+      color: #ddd7f4;
+      max-width: 560px;
+    }
+
+    .ramadan-btn {
+      margin-top: 20px;
+      border: 0;
+      background: var(--yellow);
+      color: #473a76;
+      padding: 12px 20px;
+      border-radius: 13px;
+      font-weight: 1000;
+    }
+
+    .ramadan-moon {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: var(--yellow);
+      left: 70px;
+      bottom: -35px;
+    }
+
+    .ramadan-moon::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: #483477;
+      border-radius: 50%;
+      left: 45px;
+      top: -20px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      margin-top: 35px;
+      background: #292348;
+      color: white;
+      padding: 45px 0 20px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 35px;
+    }
+
+    footer h3 {
+      margin-bottom: 8px;
+    }
+
+    footer p,
+    footer a {
+      color: #c4bfd9;
+      font-size: 13px;
+    }
+
+    footer a {
+      display: block;
+      margin: 5px 0;
+    }
+
+    .copyright {
+      margin-top: 35px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255,255,255,.1);
+      color: #9993b5;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 900px) {
+
+      .hero-box {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 35px 25px;
+      }
+
+      .hero p {
+        margin-inline: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-art {
+        min-height: 270px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .stories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      .nav {
+        display: none;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero {
+        padding-top: 25px;
+      }
+
+      .hero-box {
+        border-radius: 25px;
+        min-height: auto;
+      }
+
+      .hero h1 {
+        font-size: 43px;
+        letter-spacing: -2px;
+      }
+
+      .hero-art {
+        min-height: 220px;
+      }
+
+      .moon {
+        width: 125px;
+        height: 125px;
+      }
+
+      .moon::after {
+        width: 125px;
+        height: 125px;
+      }
+
+      .book {
+        width: 145px;
+        height: 80px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stories {
+        grid-template-columns: 1fr;
+      }
+
+      .ramadan {
+        padding: 28px 22px;
+      }
+
+      .ramadan h2 {
+        font-size: 28px;
+      }
+
+      .ramadan-moon {
+        display: none;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 420px) {
+
+      .logo {
+        font-size: 21px;
+      }
+
+      .logo-icon {
+        width: 37px;
+        height: 37px;
+      }
+
+      .language-btn {
+        padding: 8px 10px;
+      }
+
+      .hero h1 {
+        font-size: 37px;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="app">
+<header class="header">
+  <div class="container header-inner">
 
-<header>
-  <div class="nav">
-    <div class="logo">
-      <div class="logo-mark">O</div>
-      <div>
-        <div class="logo-text">ODDORA</div>
-        <span class="logo-sub">ORIGINAL STORIES</span>
-      </div>
+    <a href="index.html" class="logo">
+      <span class="logo-icon">📖</span>
+      KIDORA
+    </a>
+
+    <nav class="nav">
+      <a href="#stories">القصص</a>
+      <a href="#categories">التصنيفات</a>
+      <a href="#ramadan">رمضان</a>
+      <a href="#about">عن KIDORA</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="language-btn" id="languageBtn">
+        English
+      </button>
+
+      <button class="menu-btn" onclick="toggleMenu()">
+        ☰
+      </button>
     </div>
 
-    <div class="nav-actions">
-      <button class="icon-btn" id="langBtn" onclick="toggleLanguage()">EN</button>
-      <button class="icon-btn" onclick="openReset()">↻</button>
-    </div>
   </div>
 </header>
 
+
 <main>
 
-<section class="hero" id="home">
-  <div class="hero-content">
-    <div class="badge" id="heroBadge">ODDORA ORIGINAL • INTERACTIVE STORY</div>
+  <!-- HERO -->
 
-    <h1>THE VEIL</h1>
+  <section class="hero">
+    <div class="container">
 
-    <div class="hero-ar" id="heroTitle">الحِجَاب</div>
+      <div class="hero-box">
 
-    <p class="hero-desc" id="heroDesc">
-      قصة غموض تفاعلية تدور في مدينة قديمة يخفي سكانها سرًا لم يكن من المفترض أن تكتشفه.
-      كل قرار تتخذه يغير ما ستراه لاحقًا.
-    </p>
+        <div class="hero-text">
 
-    <div class="buttons">
-      <button class="btn primary" onclick="startGame()" id="startBtn">ابدأ القصة</button>
-      <button class="btn secondary" onclick="continueGame()" id="continueBtn">متابعة</button>
+          <span class="hero-label">
+            ✨ عالم القصص للأطفال
+          </span>
+
+          <h1>
+            كل يوم
+            <span>قصة جديدة</span>
+          </h1>
+
+          <p>
+            مرحبًا بك في KIDORA، عالم مليء بالقصص الممتعة
+            والمغامرات والشخصيات الجميلة التي يحبها الأطفال.
+          </p>
+
+          <div class="hero-buttons">
+
+            <button
+              class="primary-btn"
+              onclick="scrollToStories()"
+            >
+              📖 ابدأ القراءة
+            </button>
+
+            <button
+              class="secondary-btn"
+              onclick="scrollToCategories()"
+            >
+              🌈 اكتشف القصص
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="hero-art">
+
+          <div class="cloud cloud-one"></div>
+          <div class="cloud cloud-two"></div>
+
+          <div class="star star-one">⭐</div>
+          <div class="star star-two">✨</div>
+
+          <div class="moon"></div>
+
+          <div class="book"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- SEARCH -->
+
+  <section class="search-wrap">
+    <div class="container">
+
+      <div class="search">
+
+        <span>🔎</span>
+
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="ابحث عن قصة..."
+          oninput="searchStories()"
+        >
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CATEGORIES -->
+
+  <section class="section" id="categories">
+
+    <div class="container">
+
+      <div class="section-title">
+        <small>اختر ما تحب</small>
+        <h2>عالم KIDORA</h2>
+        <p>قصص مختلفة لكل وقت ومزاج</p>
+      </div>
+
+
+      <div class="categories">
+
+        <button
+          class="category"
+          onclick="filterStories('ramadan')"
+        >
+          <span class="category-icon">🌙</span>
+          <strong>قصص رمضان</strong>
+          <small>قصص وقيم جميلة</small>
+        </button>
+
+
+        <button
+          class="category"
+          onclick="filterStories('sleep')"
+        >
+          <span class="category-icon">🌙</span>
+          <strong>قبل النوم</strong>
+          <small>قصص هادئة</small>
+        </button>
+
+
+        <button
+          class="category"
+          onclick="filterStories('animals')"
+        >
+          <span class="category-icon">🦁</span>
+          <strong>الحيوانات</strong>
+          <small>أصدقاء الغابة</small>
+        </button>
+
+
+        <button
+          class="category"
+          onclick="filterStories('adventure')"
+        >
+          <span class="category-icon">🚀</span>
+          <strong>المغامرات</strong>
+          <small>رحلات مثيرة</small>
+        </button>
+
+
+        <button
+          class="category"
+          onclick="filterStories('world')"
+        >
+          <span class="category-icon">🌍</span>
+          <strong>حول العالم</strong>
+          <small>قصص من ثقافات مختلفة</small>
+        </button>
+
+
+        <button
+          class="category"
+          onclick="filterStories('learning')"
+        >
+          <span class="category-icon">🧠</span>
+          <strong>تعلم والعب</strong>
+          <small>قصص تعليمية</small>
+        </button>
+
+      </div>
+
     </div>
 
-    <div class="story-meta" style="justify-content:center;margin-top:25px">
-      <span class="meta" id="meta1">12 فصل</span>
-      <span class="meta" id="meta2">نهايات متعددة</span>
-      <span class="meta" id="meta3">حفظ تلقائي</span>
-      <span class="meta" id="meta4">عربي / English</span>
+  </section>
+
+
+  <!-- STORIES -->
+
+  <section class="section" id="stories">
+
+    <div class="container">
+
+      <div class="section-title">
+        <small>قصص مختارة</small>
+        <h2>ماذا سنقرأ اليوم؟</h2>
+        <p>اختر قصة واضغط "اقرأ القصة"</p>
+      </div>
+
+
+      <div class="stories" id="storiesGrid">
+
+
+        <article
+          class="story"
+          data-category="ramadan"
+          data-title="الهلال الصغير"
+        >
+
+          <div class="story-cover cover-ramadan">
+            🌙
+          </div>
+
+          <div class="story-body">
+
+            <span class="story-tag">
+              رمضان
+            </span>
+
+            <h3>
+              الهلال الصغير
+            </h3>
+
+            <p>
+              قصة لطيفة عن طفل ينتظر رؤية هلال رمضان
+              ويتعلم معنى الفرح ومساعدة الآخرين.
+            </p>
+
+            <div class="story-footer">
+
+              <span class="story-time">
+                ⏱ 5 دقائق
+              </span>
+
+              <button
+                class="read-btn"
+                onclick="openStory('الهلال الصغير')"
+              >
+                اقرأ القصة
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article
+          class="story"
+          data-category="sleep"
+          data-title="القمر الذي لم ينم"
+        >
+
+          <div class="story-cover cover-sleep">
+            🌜
+          </div>
+
+          <div class="story-body">
+
+            <span class="story-tag">
+              قبل النوم
+            </span>
+
+            <h3>
+              القمر الذي لم ينم
+            </h3>
+
+            <p>
+              ماذا يحدث عندما يشعر القمر بالتعب
+              لكنه لا يستطيع النوم؟
+            </p>
+
+            <div class="story-footer">
+
+              <span class="story-time">
+                ⏱ 4 دقائق
+              </span>
+
+              <button
+                class="read-btn"
+                onclick="openStory('القمر الذي لم ينم')"
+              >
+                اقرأ القصة
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article
+          class="story"
+          data-category="animals"
+          data-title="الأرنب والنجمة"
+        >
+
+          <div class="story-cover cover-animal">
+            🐰
+          </div>
+
+          <div class="story-body">
+
+            <span class="story-tag">
+              حيوانات
+            </span>
+
+            <h3>
+              الأرنب والنجمة
+            </h3>
+
+            <p>
+              أرنب صغير يرى نجمة تسقط في الغابة
+              ويقرر البحث عن صاحبها.
+            </p>
+
+            <div class="story-footer">
+
+              <span class="story-time">
+                ⏱ 5 دقائق
+              </span>
+
+              <button
+                class="read-btn"
+                onclick="openStory('الأرنب والنجمة')"
+              >
+                اقرأ القصة
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article
+          class="story"
+          data-category="adventure"
+          data-title="الباب الأزرق"
+        >
+
+          <div class="story-cover cover-adventure">
+            🚪
+          </div>
+
+          <div class="story-body">
+
+            <span class="story-tag">
+              مغامرات
+            </span>
+
+            <h3>
+              الباب الأزرق
+            </h3>
+
+            <p>
+              باب غامض يظهر في مكان لم يكن موجودًا فيه
+              بالأمس. أين سيقود الطفل؟
+            </p>
+
+            <div class="story-footer">
+
+              <span class="story-time">
+                ⏱ 7 دقائق
+              </span>
+
+              <button
+                class="read-btn"
+                onclick="openStory('الباب الأزرق')"
+              >
+                اقرأ القصة
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article
+          class="story"
+          data-category="world"
+          data-title="رسالة من بعيد"
+        >
+
+          <div class="story-cover cover-world">
+            🌍
+          </div>
+
+          <div class="story-body">
+
+            <span class="story-tag">
+              حول العالم
+            </span>
+
+            <h3>
+              رسالة من بعيد
+            </h3>
+
+            <p>
+              طفل يتلقى رسالة من صديق يعيش في بلد بعيد
+              ويتعلم أن الصداقة لا تعرف الحدود.
+            </p>
+
+            <div class="story-footer">
+
+              <span class="story-time">
+                ⏱ 6 دقائق
+              </span>
+
+              <button
+                class="read-btn"
+                onclick="openStory('رسالة من بعيد')"
+              >
+                اقرأ القصة
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article
+          class="story"
+          data-category="learning"
+          data-title="مدينة الألوان"
+        >
+
+          <div class="story-cover cover-learn">
+            🎨
+          </div>
+
+          <div class="story-body">
+
+            <span class="story-tag">
+              تعليم
+            </span>
+
+            <h3>
+              مدينة الألوان
+            </h3>
+
+            <p>
+              رحلة ممتعة يتعلم خلالها الطفل الألوان
+              بطريقة بسيطة ومسلية.
+            </p>
+
+            <div class="story-footer">
+
+              <span class="story-time">
+                ⏱ 5 دقائق
+              </span>
+
+              <button
+                class="read-btn"
+                onclick="openStory('مدينة الألوان')"
+              >
+                اقرأ القصة
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
     </div>
-  </div>
-</section>
 
-<section class="game" id="game">
+  </section>
 
-  <div class="top-info">
-    <div class="chapter-label" id="chapterLabel">الفصل 1 من 12</div>
-    <div class="progress-wrap">
-      <div class="progress" id="progress"></div>
+
+  <!-- RAMADAN -->
+
+  <section class="section" id="ramadan">
+
+    <div class="container">
+
+      <div class="ramadan">
+
+        <div class="ramadan-content">
+
+          <small>🌙 عالم رمضان</small>
+
+          <h2>
+            قصص جميلة لشهر جميل
+          </h2>
+
+          <p>
+            مجموعة قصص مناسبة للأطفال تساعدهم على فهم
+            معاني الرحمة والعطاء والتعاون والصدق بطريقة
+            بسيطة وممتعة.
+          </p>
+
+          <button
+            class="ramadan-btn"
+            onclick="filterStories('ramadan')"
+          >
+            اكتشف قصص رمضان
+          </button>
+
+        </div>
+
+        <div class="ramadan-moon"></div>
+
+      </div>
+
     </div>
-  </div>
 
-  <div class="story-card">
-    <div class="scene" id="scene"></div>
-  </div>
+  </section>
 
-  <div class="ad-space">
-    مساحة إعلانية — سيتم ربطها بإعلانات الموقع بعد إضافة شبكة الإعلانات
-  </div>
 
-  <div class="chapter-list" id="chapterList"></div>
+  <!-- ABOUT -->
 
-</section>
+  <section class="section" id="about">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <small>عن KIDORA</small>
+
+        <h2>
+          عالم صُمم ليحب الأطفال القراءة
+        </h2>
+
+        <p>
+          قصص قصيرة، كلمات بسيطة، وشخصيات تساعد الطفل
+          على الاستمتاع بالقصة وفهمها بسهولة.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
 
 </main>
 
+
 <footer>
-  © 2026 THE VEIL — An ODDORA Original
+
+  <div class="container">
+
+    <div class="footer-inner">
+
+      <div>
+        <h3>KIDORA 📖</h3>
+
+        <p>
+          عالم قصص ممتعة للأطفال باللغة العربية والإنجليزية.
+        </p>
+      </div>
+
+      <div>
+        <h3>استكشف</h3>
+
+        <a href="#stories">القصص</a>
+        <a href="#categories">التصنيفات</a>
+        <a href="#ramadan">رمضان</a>
+      </div>
+
+      <div>
+        <h3>اللغة</h3>
+
+        <a href="#" onclick="switchLanguage();return false;">
+          English
+        </a>
+
+        <a href="#">
+          العربية
+        </a>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 KIDORA — جميع الحقوق محفوظة
+    </div>
+
+  </div>
+
 </footer>
 
-</div>
-
-<div class="modal" id="resetModal">
-  <div class="modal-box">
-    <h3 id="resetTitle">إعادة البداية؟</h3>
-    <p id="resetText">
-      سيتم حذف تقدم القصة والأدلة والاختيارات المحفوظة على هذا الجهاز.
-    </p>
-
-    <div class="modal-actions">
-      <button class="btn danger" onclick="resetGame()" id="resetYes">حذف التقدم</button>
-      <button class="btn secondary" onclick="closeReset()" id="resetNo">إلغاء</button>
-    </div>
-  </div>
-</div>
 
 <script>
 
-const DATA = {
-
-ar:{
-
-heroBadge:"ODDORA ORIGINAL • قصة تفاعلية",
-heroTitle:"الحِجَاب",
-heroDesc:"قصة غموض تفاعلية تدور في مدينة قديمة يخفي سكانها سرًا لم يكن من المفترض أن تكتشفه. كل قرار تتخذه يغير ما ستراه لاحقًا.",
-start:"ابدأ القصة",
-continue:"متابعة",
-chapters:"12 فصل",
-endings:"نهايات متعددة",
-save:"حفظ تلقائي",
-language:"عربي / English",
-chapter:"الفصل",
-inventory:"الأدلة والأشياء",
-noItems:"لا توجد أدلة بعد",
-resetTitle:"إعادة البداية؟",
-resetText:"سيتم حذف تقدم القصة والأدلة والاختيارات المحفوظة على هذا الجهاز.",
-resetYes:"حذف التقدم",
-resetNo:"إلغاء",
-ad:"مساحة إعلانية — سيتم ربطها بإعلانات الموقع بعد إضافة شبكة الإعلانات",
-ending:"نهاية القصة",
-
-scenes:{
-
-s1:{
-chapter:1,
-title:"البيت رقم 17",
-text:"الساعة 11:47 ليلًا.\n\nوصل آدم إلى آخر شارع في الحي القديم. المطر خفيف، والمدينة تبدو وكأنها خالية تمامًا.\n\nأمام البيت رقم 17 توجد لمبة واحدة مضاءة. لا سيارات. لا أصوات. فقط صوت المطر.\n\nوصلت رسالة من رقم مجهول:\n\n«إذا كنت تقرأ هذه الرسالة، فأنت وصلت إلى المكان الصحيح.»\n\nثم رسالة ثانية:\n\n«لا تثق بكل ما تراه.»",
-choices:[
-["يقترب من البيت","s1a"],
-["يتصل بالرقم المجهول","s1b"],
-["يغادر المكان","s1c"]
-]
-},
-
-s1a:{
-chapter:1,
-title:"المفتاح تحت المصباح",
-text:"تحت المصباح القديم يجد آدم مفتاحًا معدنيًا صغيرًا.\n\nيمسكه للحظة… فيشعر ببرودة غير طبيعية.\n\nالباب الأمامي مقفل.\n\nالمفتاح يناسب القفل.",
-items:["المفتاح البارد"],
-choices:[
-["يفتح الباب","s2"],
-["يترك المفتاح ويغادر","s1c"]
-]
-},
-
-s1b:{
-chapter:1,
-title:"الرقم المجهول",
-text:"يتصل آدم.\n\nيرن الهاتف مرة… مرتين… ثم يسمع صوتًا منخفضًا.\n\n«لا تدخل من الباب الأمامي.»\n\nآدم: «من أنت؟»\n\nالصوت: «أنت تعرفني.»\n\nينقطع الاتصال.\n\nبعد ثوانٍ تصل رسالة:\n\n«المفتاح تحت المصباح.»",
-items:["رقم مجهول"],
-choices:[
-["يبحث عن المفتاح","s1a"],
-["يغادر","s1c"]
-]
-},
-
-s1c:{
-chapter:1,
-title:"العودة",
-text:"يقرر آدم العودة.\n\nيمشي عدة أمتار، ثم يسمع صوت باب يُغلق خلفه.\n\nيلتفت.\n\nالبيت رقم 17 أصبح بابه مفتوحًا.\n\nثم يصل إشعار جديد:\n\n«كنت أتمنى ألا تختار هذا الطريق.»",
-choices:[
-["العودة إلى البيت","s2"],
-["الاستمرار في المغادرة","s1end"]
-]
-},
-
-s1end:{
-chapter:1,
-title:"نهاية الطريق",
-text:"عاد آدم إلى منزله.\n\nفي صباح اليوم التالي اختفى البيت رقم 17 من الحي.\n\nلا أحد يتذكر أنه كان موجودًا.\n\nلكن صورة قديمة ظهرت على هاتف آدم…\n\nوفيها هو واقف أمام البيت.\n\nالنهاية البديلة للفصل الأول.",
-ending:true,
-choices:[
-["ابدأ من جديد","restart"]
-]
-},
-
-s2:{
-chapter:1,
-title:"داخل البيت",
-text:"الباب يفتح بصوت طويل.\n\nالداخل مظلم، لكن هناك ضوء خافت يأتي من غرفة في نهاية الممر.\n\nعلى الطاولة ثلاث صور قديمة.\n\nوبجانبها ورقة واحدة:\n\n«واحدة من هذه الصور ليست صورة.»",
-items:["ثلاث صور قديمة"],
-choices:[
-["يفحص الصور","s3"],
-["يدخل الغرفة المضيئة","s4"],
-["يفتح باب القبو","s5"]
-]
-},
-
-s3:{
-chapter:2,
-title:"الصورة القديمة",
-text:"الصورة الأولى لشارع قديم.\n\nالثانية لرجل يقف أمام البيت.\n\nالثالثة… لآدم.\n\nيتجمد في مكانه.\n\nالصورة مؤرخة في سنة 2003.\n\nآدم كان طفلًا وقتها.\n\nلكن الصورة تظهره بنفس عمره الحالي.",
-items:["صورة آدم","دليل: تاريخ 2003"],
-choices:[
-["يقلب الصورة","s6"],
-["يحاول تصويرها بهاتفه","s7"],
-["يترك الصور","s4"]
-]
-},
-
-s4:{
-chapter:2,
-title:"الغرفة المضيئة",
-text:"يدخل آدم الغرفة.\n\nمصباح قديم يومض باستمرار.\n\nعلى الجدار ساعة متوقفة عند 11:47.\n\nثم يسمع صوت خطوات فوقه.\n\nالبيت لا يحتوي على طابق علوي.",
-choices:[
-["يصعد إلى مصدر الصوت","s8"],
-["يعود للصور","s3"],
-["يخرج من البيت","s9"]
-]
-},
-
-s5:{
-chapter:2,
-title:"باب القبو",
-text:"الباب الحديدي لا يفتح.\n\nعندما يلمس آدم المقبض يسمع صوت طفل من خلف الباب:\n\n«لا تنزل.»\n\nيصمت لحظة.\n\nثم يقول الطفل:\n\n«ليس بعد.»",
-items:["باب القبو"],
-choices:[
-["يسأل الطفل من هو","s10"],
-["يبتعد عن الباب","s4"],
-["يحاول فتح الباب بالقوة","s11"]
-]
-},
-
-s6:{
-chapter:3,
-title:"الوجه خلف الصورة",
-text:"يقلب آدم الصورة.\n\nلا يوجد شيء في الخلف… في البداية.\n\nبعد ثوانٍ تظهر كتابة سوداء ببطء:\n\n«أنت لم تصل إلى هنا لأول مرة.»\n\nثم تتغير الصورة أمام عينيه.\n\nالرجل الموجود فيها يختفي.\n\nويظهر خلف آدم.",
-items:["الصورة المتغيرة"],
-choices:[
-["يلتفت فورًا","s12"],
-["لا يلتفت","s13"]
-]
-},
-
-s7:{
-chapter:3,
-title:"التسجيل",
-text:"يلتقط آدم صورة بهاتفه.\n\nعندما ينظر إليها، لا تظهر الصور الثلاث.\n\nتظهر غرفة مظلمة وشخص يقف في زاويتها.\n\nثم يبدأ هاتفه بتسجيل صوت من تلقاء نفسه:\n\n«آدم… لا تدعهم يعرفون أنك تتذكر.»",
-items:["تسجيل غامض"],
-choices:[
-["يحفظ التسجيل","s13"],
-["يحذفه","s12"]
-]
-},
-
-s8:{
-chapter:3,
-title:"الرجل بلا ظل",
-text:"يصل آدم إلى نهاية الممر.\n\nهناك رجل يقف وظهره إليه.\n\nالمصباح فوقه يعمل.\n\nلكن الرجل بلا ظل.\n\nيقول دون أن يلتفت:\n\n«كنت أعرف أنك ستأتي.»",
-choices:[
-["يسأله من يكون","s14"],
-["يهرب","s15"],
-["يقترب منه","s16"]
-]
-},
-
-s9:{
-chapter:3,
-title:"الشارع",
-text:"يخرج آدم إلى الشارع.\n\nالضباب أصبح أكثر كثافة.\n\nيمشي حتى يصل إلى نفس البيت.\n\nمهما حاول، يعود دائمًا إلى الرقم 17.\n\nهذه المرة يرى شخصًا يقف عند النافذة.",
-choices:[
-["يعود للبيت","s8"],
-["يدخل المنزل المقابل","s17"]
-]
-},
-
-s10:{
-chapter:4,
-title:"الطفل",
-text:"يسأل آدم:\n\n«من أنت؟»\n\nيرد الطفل:\n\n«أنا الشخص الذي حاول أن يحذرك آخر مرة.»\n\nآدم: «آخر مرة؟»\n\nصمت.\n\nثم يقول:\n\n«قبل أن تصبح مثله.»",
-choices:[
-["من تقصد؟","s18"],
-["يفتح الباب","s11"]
-]
-},
-
-s11:{
-chapter:4,
-title:"تحت الأرض",
-text:"ينفتح الباب فجأة.\n\nدرج حجري ينزل إلى الظلام.\n\nعلى الجدار رموز قديمة، وبينها رمز مطابق تمامًا للرمز الموجود في الصورة.\n\nفي الأسفل يوجد ممر طويل.\n\nومن نهايته يأتي صوت ماء.",
-items:["رمز الحجاب"],
-choices:[
-["ينزل","s19"],
-["يغلق الباب","s20"]
-]
-},
-
-s12:{
-chapter:4,
-title:"اختفاء الرجل",
-text:"يلتفت آدم.\n\nلا أحد.\n\nلكن على الأرض يوجد ظل رجل فقط.\n\nبدون جسد.\n\nالهاتف يهتز.\n\nرسالة واحدة:\n\n«لقد رآك.»",
-items:["ظل بلا صاحب"],
-choices:[
-["يتبع الظل","s21"],
-["يعود إلى الغرفة","s22"]
-]
-},
-
-s13:{
-chapter:4,
-title:"الذاكرة",
-text:"يبدأ آدم بتذكر شيء لم يحدث في حياته الحالية.\n\nكان هنا من قبل.\n\nكان طفلًا.\n\nوكان هناك شخص آخر معه.\n\nطفل يشبهه تمامًا.",
-items:["ذكرى مجهولة"],
-choices:[
-["يحاول تذكر اسم الطفل","s23"],
-["يرفض التفكير في الأمر","s22"]
-]
-},
-
-s14:{
-chapter:5,
-title:"الرجل",
-text:"الرجل يلتفت ببطء.\n\nوجهه طبيعي تمامًا.\n\nلكن عينيه لا تعكسان الضوء.\n\nيقول:\n\n«المدينة لم تنسَك يا آدم. أنت الذي نسيتها.»\n\nثم يضع مفتاحًا على الأرض.",
-items:["مفتاح أسود"],
-choices:[
-["يأخذ المفتاح","s24"],
-["يرفضه","s25"]
-]
-},
-
-s15:{
-chapter:5,
-title:"الهروب",
-text:"يركض آدم.\n\nالممر يطول.\n\nالباب الذي دخل منه أصبح بعيدًا جدًا.\n\nثم يسمع الرجل خلفه:\n\n«كلما هربت، تذكرت أكثر.»",
-choices:[
-["يتوقف","s14"],
-["يواصل الركض","s26"]
-]
-},
-
-s16:{
-chapter:5,
-title:"اللمسة",
-text:"يقترب آدم.\n\nالرجل يرفع يده.\n\nقبل أن يلمسه، تنطفئ الأنوار.\n\nتعود بعد ثانية واحدة.\n\nالرجل اختفى.\n\nلكن على يد آدم علامة سوداء صغيرة.",
-items:["علامة الحجاب"],
-choices:[
-["يفحص العلامة","s27"],
-["يتجاهلها","s24"]
-]
-},
-
-s17:{
-chapter:5,
-title:"المنزل المقابل",
-text:"يدخل آدم المنزل المقابل.\n\nالمكان فارغ، لكن هناك خريطة كبيرة للمدينة.\n\nثلاثة أماكن عليها دوائر:\n\nالبيت 17.\n\nالمقبرة القديمة.\n\nومبنى مهجور خارج المدينة.",
-items:["خريطة المدينة"],
-choices:[
-["يدرس الخريطة","s28"],
-["يأخذها معه","s29"]
-]
-},
-
-s18:{
-chapter:6,
-title:"الاسم الممنوع",
-text:"يقول الطفل:\n\n«لا تنطق اسمه.»\n\nآدم: «اسم من؟»\n\nالطفل يكتب حرفًا واحدًا على الأرض.\n\nA\n\nثم يمسحه بسرعة.\n\n«إنه ليس اسمًا… إنه باب.»",
-choices:[
-["يسأل عن الباب","s30"],
-["يسأل عن نفسه","s31"]
-]
-},
-
-s19:{
-chapter:6,
-title:"الممر السفلي",
-text:"ينزل آدم.\n\nالممر تحت البيت أقدم بكثير من المبنى نفسه.\n\nعلى الجدران صور لأشخاص من المدينة.\n\nبعضهم معروف.\n\nوبعضهم لا يزال يعيش في المدينة.",
-items:["صور السكان"],
-choices:[
-["يفحص إحدى الصور","s32"],
-["يتقدم","s33"]
-]
-},
-
-s20:{
-chapter:6,
-title:"إغلاق الباب",
-text:"يغلق آدم باب القبو.\n\nمن الجهة الأخرى يأتي طرق بطيء.\n\nطرقة.\n\nثم طرقتان.\n\nثم ثلاث.\n\nيتوقف.\n\nبعد لحظة يسمع طرقًا من خلفه.",
-choices:[
-["يلتفت","s34"],
-["يبقى ثابتًا","s35"]
-]
-},
-
-s21:{
-chapter:7,
-title:"الظل",
-text:"يتبع آدم الظل حتى يصل إلى غرفة صغيرة.\n\nالظل يتوقف أمام مرآة.\n\nلكن المرآة لا تعكس آدم.\n\nتعكس طفلًا يقف بجانبه.",
-choices:[
-["يتحدث مع الطفل","s36"],
-["يكسر المرآة","s37"]
-]
-},
-
-s22:{
-chapter:7,
-title:"الصمت",
-text:"يعود آدم إلى الغرفة.\n\nالصور اختفت.\n\nبقيت صورة واحدة فقط.\n\nصورة لمدينة كاملة تحت الأرض.",
-items:["صورة المدينة السفلى"],
-choices:[
-["يدقق في الصورة","s38"],
-["يحرق الصورة","s39"]
-]
-},
-
-s23:{
-chapter:7,
-title:"الاسم",
-text:"يحاول آدم التذكر.\n\nالاسم يعود إليه تدريجيًا:\n\n«سامي.»\n\nكان سامي معه في البيت.\n\nثم حدث شيء.\n\nشيء جعل آدم ينسى.",
-items:["اسم سامي"],
-choices:[
-["يتذكر ما حدث","s40"],
-["يتوقف عن التذكر","s41"]
-]
-},
-
-s24:{
-chapter:8,
-title:"المفتاح الأسود",
-text:"المفتاح الأسود يفتح بابًا لم يكن موجودًا قبل لحظات.\n\nخلفه ممر مضاء بضوء أزرق خافت.\n\nتظهر على الجدار عبارة:\n\n«الجانب الآخر ليس مكانًا.»",
-choices:[
-["يدخل","s42"],
-["يغلق الباب","s43"]
-]
-},
-
-s25:{
-chapter:8,
-title:"الرفض",
-text:"يرفض آدم المفتاح.\n\nالرجل يبتسم.\n\n«إذًا ستجد الباب بالطريقة الصعبة.»\n\nيختفي.\n\nبعد لحظات يسمع آدم صوت المدينة كلها… كأنها تتحدث في وقت واحد.",
-choices:[
-["يتبع الصوت","s44"],
-["يعود للبيت","s45"]
-]
-},
-
-s26:{
-chapter:8,
-title:"الممر الطويل",
-text:"يصل آدم أخيرًا إلى باب الخروج.\n\nيفتحه.\n\nلكن بدل الشارع يرى نفس البيت من الخارج.\n\nكأنه عالق داخل حلقة.",
-choices:[
-["يدخل البيت مرة أخرى","s42"],
-["يكسر الحلقة","s46"]
-]
-},
-
-s27:{
-chapter:9,
-title:"العلامة",
-text:"العلامة على يد آدم تتحرك ببطء.\n\nتتحول إلى نفس الرمز الموجود على جدران القبو.\n\nتظهر كلمة واحدة:\n\n«تذكّر.»",
-choices:[
-["يحاول تذكر الماضي","s40"],
-["يرفض العلامة","s47"]
-]
-},
-
-s28:{
-chapter:9,
-title:"الخريطة",
-text:"يكتشف آدم أن الدوائر الثلاث تشكل مثلثًا.\n\nفي مركزه يوجد مكان غير موجود على أي خريطة حديثة.\n\nاسم المكان:\n\n«العتبة.»",
-items:["موقع العتبة"],
-choices:[
-["يبحث عن العتبة","s48"],
-["يتجاهلها","s49"]
-]
-},
-
-s29:{
-chapter:9,
-title:"الطريق",
-text:"يأخذ آدم الخريطة.\n\nعندما يفتحها خارج المنزل، تتغير الطرق عليها.\n\nتظهر طريق جديدة تقوده مباشرة إلى المقبرة القديمة.",
-choices:[
-["يتبع الطريق","s50"],
-["يمزق الخريطة","s51"]
-]
-},
-
-s30:{
-chapter:10,
-title:"الباب",
-text:"يقول الطفل:\n\n«الباب هو أنت.»\n\nآدم لا يفهم.\n\nثم تظهر أمامه صور متتابعة:\n\nالبيت.\n\nالطفل.\n\nالرجل.\n\nوآدم في عمر مختلف.",
-choices:[
-["يشاهد كل الصور","s52"],
-["يغلق عينيه","s53"]
-]
-},
-
-s31:{
-chapter:10,
-title:"آدم",
-text:"الطفل يجيب:\n\n«أنت لم تكن الضحية.»\n\nصمت طويل.\n\n«كنت المفتاح.»",
-choices:[
-["يسأل ماذا فتح","s52"],
-["يرفض التصديق","s53"]
-]
-},
-
-s32:{
-chapter:10,
-title:"الصورة",
-text:"يفحص آدم صورة أحد سكان المدينة.\n\nخلفها تاريخ 2003.\n\nثم يرى صورة ثانية لنفس الشخص.\n\nلكن عمره لم يتغير.",
-choices:[
-["يبحث عن صور أخرى","s54"],
-["يترك المكان","s55"]
-]
-},
-
-s33:{
-chapter:10,
-title:"المدينة السفلى",
-text:"يصل آدم إلى قاعة ضخمة تحت الأرض.\n\nفي وسطها باب أسود بلا مقبض.\n\nوفوق الباب نفس الرمز.\n\nتظهر على الأرض كتابة:\n\n«اختر من سيعود.»",
-choices:[
-["أختار سامي","s56"],
-["أختار نفسي","s57"],
-["لا أختار أحدًا","s58"]
-]
-},
-
-s34:{
-chapter:11,
-title:"الطرقة",
-text:"يلتفت آدم.\n\nلا أحد.\n\nلكن الباب الذي أغلقه أصبح مفتوحًا.\n\nومن داخله يرى نفسه واقفًا في الظلام.",
-choices:[
-["يدخل","s59"],
-["يبتعد","s60"]
-]
-},
-
-s35:{
-chapter:11,
-title:"الصوت",
-text:"يبقى آدم ثابتًا.\n\nالصوت خلفه يقول:\n\n«هذه المرة لن تهرب.»\n\nثم يسمع صوت سامي لأول مرة.",
-choices:[
-["ينادي سامي","s61"],
-["لا يجيب","s60"]
-]
-},
-
-s36:{
-chapter:11,
-title:"سامي",
-text:"الطفل في المرآة يقول:\n\n«كنت أنتظر أن تتذكر.»\n\nآدم: «ماذا حدث لك؟»\n\nسامي: «أنت اخترت أن تنساني.»",
-choices:[
-["يسأل لماذا","s62"],
-["يطلب منه الخروج","s63"]
-]
-},
-
-s37:{
-chapter:11,
-title:"المرآة",
-text:"يكسر آدم المرآة.\n\nلكن كل قطعة تعكس نسخة مختلفة منه.\n\nإحداها تبتسم.\n\nإحداها تبكي.\n\nإحداها تقول:\n\n«لا تفتح الباب.»",
-choices:[
-["يصدق التحذير","s64"],
-["يفتح الباب","s65"]
-]
-},
-
-s38:{
-chapter:11,
-title:"الصورة الأخيرة",
-text:"في الصورة يرى آدم البيت من الأعلى.\n\nالمدينة حوله مظلمة.\n\nوفوق البيت دائرة ضخمة تشبه الحجاب.\n\nيكتشف أن الدائرة ليست فوق البيت.\n\nإنها تحيط بالمدينة كلها.",
-choices:[
-["يبحث عن مركز الدائرة","s48"],
-["يحرق الصورة","s39"]
-]
-},
-
-s39:{
-chapter:12,
-title:"النار",
-text:"يحرق آدم الصورة.\n\nللحظة يظن أن كل شيء انتهى.\n\nثم يرى الدخان يتجمع في شكل رجل.\n\nالرجل يقول:\n\n«أخيرًا اخترت.»",
-choices:[
-["يواجهه","s66"],
-["يهرب","s67"]
-]
-},
-
-s40:{
-chapter:12,
-title:"الذاكرة الكاملة",
-text:"تعود الذكرى.\n\nكان آدم وسامي طفلين.\n\nوجدوا بابًا تحت البيت.\n\nآدم فتحه.\n\nوسامي دخل أولًا.\n\nلكن الباب لم يعد كما كان.\n\nمنذ ذلك اليوم اختفى سامي من ذاكرة الجميع… إلا آدم.",
-choices:[
-["يفتح الباب الأخير","s68"],
-["يغلق الباب للأبد","s69"]
-]
-},
-
-s41:{
-chapter:12,
-title:"النسيان",
-text:"يرفض آدم استعادة ذاكرته.\n\nتبدأ المدينة بالعودة إلى طبيعتها.\n\nلكن شيئًا واحدًا لم يتغير.\n\nالبيت رقم 17 ما زال موجودًا.",
-choices:[
-["يدخل البيت مرة أخرى","s68"],
-["يترك المدينة","s70"]
-]
-},
-
-s42:{
-chapter:12,
-title:"الجانب الآخر",
-text:"يعبر آدم الباب.\n\nلا يوجد ظلام.\n\nولا يوجد ضوء.\n\nفقط مدينة تشبه مدينته تمامًا… لكن كل شخص فيها يملك وجه آدم.",
-choices:[
-["يتقدم","s71"],
-["يعود","s69"]
-]
-},
-
-s43:{
-chapter:12,
-title:"الباب المغلق",
-text:"يغلق آدم الباب.\n\nالصوت خلفه يختفي.\n\nلأول مرة منذ بداية الليلة، يعود صوت المطر الطبيعي.\n\nلكنه يجد المفتاح الأسود في جيبه.",
-choices:[
-["يرمي المفتاح","s69"],
-["يحتفظ به","s71"]
-]
-},
-
-s44:{
-chapter:12,
-title:"أصوات المدينة",
-text:"يسمع آدم آلاف الأصوات.\n\nكلها تقول اسمه.\n\nثم صوت واحد فقط يقول:\n\n«سامي.»",
-choices:[
-["يتبع الصوت","s68"],
-["يتجاهله","s70"]
-]
-},
-
-s45:{
-chapter:12,
-title:"البيت",
-text:"يعود آدم إلى البيت رقم 17.\n\nالباب مفتوح.\n\nفي الداخل يقف سامي، بنفس عمره الآن.\n\nيقول:\n\n«تأخرت كثيرًا.»",
-choices:[
-["يعانقه","s72"],
-["يسأله من هو","s73"]
-]
-},
-
-s46:{
-chapter:12,
-title:"كسر الحلقة",
-text:"يكتشف آدم أن الحلقة تعتمد على خوفه.\n\nيتوقف عن الهرب.\n\nالبيت يبدأ بالانهيار حوله.\n\nلكن أمامه باب واحد فقط.",
-choices:[
-["يفتح الباب","s71"],
-["يبقى مكانه","s69"]
-]
-},
-
-s47:{
-chapter:12,
-title:"رفض العلامة",
-text:"يحاول آدم إزالة العلامة.\n\nتختفي.\n\nلكن معها تختفي إحدى ذكرياته.\n\nلا يعرف أي ذكرى فقد.",
-choices:[
-["يستمر","s70"],
-["يعود للبيت","s73"]
-]
-},
-
-s48:{
-chapter:12,
-title:"العتبة",
-text:"يصل آدم إلى المكان الموجود في مركز الخريطة.\n\nهناك باب حجري قائم وحده.\n\nلا جدران حوله.\n\nيقول صوت سامي:\n\n«إذا فتحته، لن تستطيع اختيار من يعود.»",
-choices:[
-["يفتح الباب","s71"],
-["يتركه مغلقًا","s69"]
-]
-},
-
-s49:{
-chapter:12,
-title:"القرار",
-text:"يتجاهل آدم العتبة.\n\nتمر الساعات.\n\nتشرق الشمس.\n\nلأول مرة يبدو كل شيء طبيعيًا.\n\nلكن هاتفه يعرض صورة جديدة.\n\nآدم واقف أمام البيت… وخلفه سامي.",
-choices:[
-["يبحث عن سامي","s72"],
-["يمسح الصورة","s70"]
-]
-},
-
-s50:{
-chapter:12,
-title:"المقبرة",
-text:"يصل آدم إلى المقبرة القديمة.\n\nيجد قبرًا باسم سامي.\n\nالتاريخ: 2003.\n\nلكن القبر جديد تمامًا.",
-choices:[
-["يفتح القبر","s74"],
-["يتركه","s69"]
-]
-},
-
-s51:{
-chapter:12,
-title:"تمزيق الخريطة",
-text:"يمزق آدم الخريطة.\n\nكل قطعة تتحول إلى ورقة تحمل اسمًا.\n\nآخر اسم هو اسمه.",
-choices:[
-["يجمع القطع","s71"],
-["يحرقها","s70"]
-]
-},
-
-s52:{
-chapter:12,
-title:"الحقيقة",
-text:"يفهم آدم أخيرًا.\n\nالبيت لم يكن يطارده.\n\nكان يحاول تذكيره.\n\nسامي لم يكن شبحًا.\n\nكان الشخص الذي بقي خلف الحجاب عندما أغلق آدم الباب.",
-choices:[
-["أعيد سامي","s72"],
-["أغلق الحجاب","s69"]
-]
-},
-
-s53:{
-chapter:12,
-title:"الإنكار",
-text:"يرفض آدم الحقيقة.\n\nكل شيء يختفي.\n\nثم يستيقظ في منزله.\n\nالساعة 11:47 ليلًا.\n\nوعلى هاتفه رسالة:\n\n«لن تستطيع نسياننا مرتين.»",
-choices:[
-["يذهب إلى البيت 17","s68"],
-["يبقى في منزله","s70"]
-]
-},
-
-s54:{
-chapter:12,
-title:"الصور",
-text:"كل الصور تشير إلى نفس اليوم.\n\n22 أبريل 2003.\n\nوفي آخر صورة يظهر آدم وسامي أمام الباب.",
-choices:[
-["يدخل الباب","s68"],
-["يمزق الصور","s69"]
-]
-},
-
-s55:{
-chapter:12,
-title:"الخروج",
-text:"يخرج آدم من المكان.\n\nلكن قبل أن يغادر يرى على الجدار رسالة:\n\n«يمكنك المغادرة، لكن لا يمكنك ترك الباب.»",
-choices:[
-["يعود","s68"],
-["يغادر نهائيًا","s70"]
-]
-},
-
-s56:{
-chapter:12,
-title:"اختيار سامي",
-text:"يختار آدم سامي.\n\nالباب الأسود ينفتح.\n\nيخرج سامي من الظلام.\n\nلكن آدم يشعر أن شيئًا ما ينتقل إلى داخله.",
-choices:[
-["يقبل الثمن","endGood"],
-["يرفض الثمن","endOpen"]
-]
-},
-
-s57:{
-chapter:12,
-title:"اختيار آدم",
-text:"يختار آدم نفسه.\n\nالباب يغلق خلفه.\n\nالمدينة تعود لطبيعتها.\n\nلكن سامي يبقى في الجانب الآخر.",
-choices:[
-["النهاية","endDark"]
-]
-},
-
-s58:{
-chapter:12,
-title:"لا أحد",
-text:"يرفض آدم الاختيار.\n\nيبدأ الباب بالانهيار.\n\nالمدينة السفلى تتشقق.\n\nثم يسمع صوت سامي:\n\n«هذه أول مرة تختار الجميع.»",
-choices:[
-["النهاية","endFree"]
-]
-},
-
-s59:{
-chapter:12,
-title:"نسخة آدم",
-text:"يدخل آدم.\n\nنسخته الأخرى تقف أمامه.\n\nتقول:\n\n«أنا أنت الذي بقي هنا.»",
-choices:[
-["يسأله لماذا","endOpen"],
-["يواجهه","endDark"]
-]
-},
-
-s60:{
-chapter:12,
-title:"الهروب الأخير",
-text:"يبتعد آدم.\n\nتتوقف الأصوات.\n\nيصل إلى الشارع.\n\nالشمس تشرق.\n\nلكن ظله أصبح يتحرك وحده.",
-choices:[
-["النهاية","endOpen"]
-]
-},
-
-s61:{
-chapter:12,
-title:"سامي",
-text:"ينادي آدم اسم سامي.\n\nيرد الصوت من كل مكان:\n\n«أنا هنا.»\n\nثم تظهر يد صغيرة من الظلام.",
-choices:[
-["يمسك اليد","endGood"],
-["يتراجع","endOpen"]
-]
-},
-
-s62:{
-chapter:12,
-title:"لماذا؟",
-text:"يقول سامي:\n\n«لأنك كنت خائفًا. وأنا اخترت أن أبقى بدلًا منك.»\n\nيصمت آدم.",
-choices:[
-["يعيده معه","endGood"],
-["يتركه","endDark"]
-]
-},
-
-s63:{
-chapter:12,
-title:"الخروج",
-text:"يمد آدم يده.\n\nسامي لا يتحرك.\n\n«إذا خرجت أنا، سيحتاج شخص آخر أن يبقى.»",
-choices:[
-["يبقى آدم","endFree"],
-["يخرج وحده","endDark"]
-]
-},
-
-s64:{
-chapter:12,
-title:"التحذير",
-text:"يصدق آدم التحذير.\n\nيترك الباب مغلقًا.\n\nالمدينة تستعيد صوتها.\n\nولا يعود البيت رقم 17 موجودًا.",
-choices:[
-["النهاية","endFree"]
-]
-},
-
-s65:{
-chapter:12,
-title:"فتح الباب",
-text:"يفتح آدم الباب.\n\nخلفه لا يوجد شيء.\n\nثم يظهر سامي.\n\n«كنت أعرف أنك ستفتحه.»",
-choices:[
-["النهاية","endOpen"]
-]
-},
-
-s66:{
-chapter:12,
-title:"المواجهة",
-text:"يواجه آدم الرجل.\n\nالرجل يقول:\n\n«أنا لست من يقرر النهاية. أنت من يفعل.»",
-choices:[
-["يختار سامي","endGood"],
-["يختار نفسه","endDark"]
-]
-},
-
-s67:{
-chapter:12,
-title:"الهروب",
-text:"يهرب آدم.\n\nخلفه يغلق البيت أبوابه.\n\nعندما يصل إلى الطريق الرئيسي، لا يجد المدينة.\n\nفقط صحراء واسعة.",
-choices:[
-["النهاية","endOpen"]
-]
-},
-
-s68:{
-chapter:12,
-title:"الباب الأخير",
-text:"يقف آدم أمام الباب.\n\nيدرك أن كل ما حدث بدأ من هنا.\n\nعلى الباب خياران:\n\n«افتح»\n\n«تذكر»",
-choices:[
-["افتح","endGood"],
-["تذكر","endFree"]
-]
-},
-
-s69:{
-chapter:12,
-title:"إغلاق الحجاب",
-text:"يغلق آدم الباب.\n\nالصوت الأخير لسامي يصل إليه:\n\n«هذه المرة… لن أنساك.»\n\nتختفي العلامة.\n\nوتشرق الشمس.",
-choices:[
-["النهاية","endFree"]
-]
-},
-
-s70:{
-chapter:12,
-title:"الحياة الطبيعية",
-text:"يترك آدم كل شيء خلفه.\n\nبعد أشهر، تبدأ حياته بالعودة إلى طبيعتها.\n\nلكن كل عام، في نفس اليوم، تصله رسالة من رقم مجهول:\n\n«هل تذكر؟»",
-choices:[
-["النهاية","endOpen"]
-]
-},
-
-s71:{
-chapter:12,
-title:"ما خلف الحجاب",
-text:"يعبر آدم.\n\nيرى المدينة الحقيقية خلف الحجاب.\n\nكل شخص فقده المكان موجود هناك.\n\nومن بينهم سامي.\n\nلكن الباب بدأ يغلق.",
-choices:[
-["ينقذ سامي","endGood"],
-["ينقذ المدينة","endFree"]
-]
-},
-
-s72:{
-chapter:12,
-title:"عودة سامي",
-text:"يمد آدم يده.\n\nسامي يعود إلى العالم الحقيقي.\n\nالبيت رقم 17 يختفي.\n\nلكن في آخر لقطة، تظهر نافذة مضاءة في مكان بعيد.",
-choices:[
-["النهاية","endGood"]
-]
-},
-
-s73:{
-chapter:12,
-title:"من أنت؟",
-text:"سامي يبتسم.\n\n«أنا الشخص الذي كنت تبحث عنه.»\n\nلكن آدم يعرف أن هناك شيئًا آخر لم يخبره به.",
-choices:[
-["يصدقه","endOpen"],
-["لا يصدقه","endDark"]
-]
-},
-
-s74:{
-chapter:12,
-title:"القبر",
-text:"يفتح آدم القبر.\n\nلا يوجد جسد.\n\nفقط صورة قديمة.\n\nالصورة لآدم وهو يقف أمام البيت.\n\nوفي الخلف سامي.\n\nوالتاريخ ليس 2003.\n\nإنه تاريخ اليوم.",
-choices:[
-["النهاية","endOpen"]
-]
-},
-
-endGood:{
-chapter:12,
-title:"النهاية — خلف الحجاب",
-text:"نجح آدم في الوصول إلى الحقيقة وإنقاذ سامي.\n\nلكن الحجاب لم يختفِ تمامًا.\n\nفي آخر مشهد، يقف آدم وسامي أمام المدينة القديمة.\n\nيقول سامي:\n\n«هذه كانت البوابة الأولى فقط.»\n\nتنتهي القصة.\n\nTHE VEIL — SEASON 1",
-ending:true,
-choices:[
-["ابدأ من جديد","restart"]
-]
-},
-
-endDark:{
-chapter:12,
-title:"النهاية — الثمن",
-text:"اختار آدم نفسه.\n\nأغلقت البوابة، لكن سامي بقي خلفها.\n\nمنذ ذلك اليوم لم يعد آدم يسمع الأصوات.\n\nلكنه كل ليلة عند 11:47 يرى شخصًا يقف أمام نافذته.\n\nظل بلا صاحب.",
-ending:true,
-choices:[
-["ابدأ من جديد","restart"]
-]
-},
-
-endFree:{
-chapter:12,
-title:"النهاية — التحرر",
-text:"رفض آدم أن يدفع شخصًا آخر الثمن.\n\nأغلق الحجاب من الداخل.\n\nاختفى البيت رقم 17.\n\nواختفت المدينة السفلى.\n\nلأول مرة منذ سنوات، أصبحت المدينة هادئة.\n\nلكن على الأرض بقي مفتاح أسود واحد.",
-ending:true,
-choices:[
-["ابدأ من جديد","restart"]
-]
-},
-
-endOpen:{
-chapter:12,
-title:"النهاية — الباب المفتوح",
-text:"ظن آدم أن القصة انتهت.\n\nلكن الباب لم يُغلق.\n\nبعد أسبوع، ظهر البيت رقم 17 في مدينة أخرى.\n\nوفي داخله صورة جديدة.\n\nصورة لشخص لم يعرفه آدم من قبل.\n\nTHE VEIL WILL RETURN.",
-ending:true,
-choices:[
-["ابدأ من جديد","restart"]
-]
-}
-
-}
-
-},
-
-en:{
-
-heroBadge:"ODDORA ORIGINAL • INTERACTIVE STORY",
-heroTitle:"THE VEIL",
-heroDesc:"An interactive mystery set in an old city hiding a secret that was never meant to be discovered. Every choice changes what you see next.",
-start:"START STORY",
-continue:"CONTINUE",
-chapters:"12 CHAPTERS",
-endings:"MULTIPLE ENDINGS",
-save:"AUTO SAVE",
-language:"عربي / English",
-chapter:"CHAPTER",
-inventory:"CLUES & ITEMS",
-noItems:"No clues yet",
-resetTitle:"Restart?",
-resetText:"This will delete your saved story progress, clues and choices on this device.",
-resetYes:"DELETE PROGRESS",
-resetNo:"CANCEL",
-ad:"AD SPACE — CONNECT YOUR AD NETWORK HERE",
-ending:"STORY END",
-
-scenes:{}
-
-}
-
-};
-
-const ENGLISH={
-
-s1:["House Number 17","11:47 PM.\n\nAdam arrives at the end of the old neighborhood. Light rain falls and the city feels completely empty.\n\nA single lamp is lit above House 17.\n\nA message arrives:\n\n“If you are reading this, you reached the right place.”\n\nThen another:\n\n“Do not trust everything you see.”"],
-s1a:["The Key Under the Lamp","Under the old lamp Adam finds a small metal key.\n\nIt is unnaturally cold.\n\nThe front door is locked.\n\nThe key fits."],
-s1b:["The Unknown Number","Adam calls.\n\nAfter two rings, a quiet voice answers:\n\n“Do not enter through the front door.”\n\n“Who are you?”\n\n“You know me.”\n\nThe call ends.\n\nA message arrives:\n\n“The key is under the lamp.”"],
-s1c:["Return","Adam decides to leave.\n\nAfter a few steps, he hears a door close behind him.\n\nHe turns.\n\nHouse 17 is now open.\n\nA new message appears:\n\n“I hoped you would not choose this path.”"],
-s1end:["The End of the Road","Adam returns home.\n\nThe next morning House 17 has disappeared.\n\nNo one remembers it ever existed.\n\nBut an old photo appears on Adam's phone.\n\nHe is standing in front of House 17."],
-
-s2:["Inside the House","The door opens with a long creak.\n\nThe inside is dark, but a faint light comes from a room at the end of the hall.\n\nThree old photographs sit on a table.\n\nBeside them is a note:\n\n“One of these photographs is not a photograph.”"],
-s3:["The Old Photograph","The first photo shows an old street.\n\nThe second shows a man standing in front of the house.\n\nThe third… shows Adam.\n\nHe freezes.\n\nThe photograph is dated 2003.\n\nAdam was a child then.\n\nBut the photo shows him at his current age."],
-s4:["The Lit Room","Adam enters the room.\n\nAn old lamp flickers.\n\nA clock on the wall is stopped at 11:47.\n\nThen he hears footsteps above him.\n\nThere is no upper floor."],
-s5:["The Basement Door","The iron door will not open.\n\nWhen Adam touches the handle, a child's voice comes from behind it:\n\n“Don't go down.”\n\nSilence.\n\nThen:\n\n“Not yet.”"],
-s6:["The Face Behind the Photo","Adam turns the photograph over.\n\nAt first there is nothing.\n\nThen black writing slowly appears:\n\n“You have not arrived here for the first time.”\n\nThe man in the photograph disappears.\n\nHe is suddenly standing behind Adam."],
-s7:["The Recording","Adam takes a photo.\n\nThe three photographs disappear from the screen.\n\nInstead, he sees a dark room and a person standing in the corner.\n\nHis phone starts recording by itself:\n\n“Adam… don't let them know you remember.”"],
-s8:["The Man Without a Shadow","A man stands at the end of the hall with his back turned.\n\nThe light above him is on.\n\nBut he has no shadow.\n\nWithout turning, he says:\n\n“I knew you would come.”"],
-s9:["The Street","Adam leaves the house.\n\nThe fog is thicker now.\n\nHe walks until he reaches House 17 again.\n\nNo matter which direction he takes, he returns to it.\n\nSomeone stands at the window."],
-s10:["The Child","Adam asks who he is.\n\nThe child answers:\n\n“I am the one who tried to warn you last time.”\n\n“Last time?”\n\nSilence.\n\n“Before you became like him.”"],
-s11:["Below the Ground","The door suddenly opens.\n\nStone stairs descend into darkness.\n\nAncient symbols cover the walls.\n\nOne symbol matches the photograph.\n\nA long corridor stretches below."],
-s12:["The Vanishing Man","Adam turns.\n\nNobody is there.\n\nOnly a man's shadow remains on the floor.\n\nHis phone vibrates.\n\nOne message:\n\n“He saw you.”"],
-s13:["The Memory","Adam remembers something that never happened in his current life.\n\nHe has been here before.\n\nHe was a child.\n\nAnd another child was with him.\n\nA child who looked exactly like him."],
-s14:["The Man","The man turns slowly.\n\nHis face looks normal.\n\nBut his eyes do not reflect the light.\n\n“The city did not forget you, Adam. You forgot it.”\n\nHe places a key on the floor."],
-s15:["Escape","Adam runs.\n\nThe corridor gets longer.\n\nThe door he entered through is impossibly far away.\n\nThe man speaks behind him:\n\n“Every time you run, you remember more.”"],
-s16:["The Touch","Adam approaches.\n\nThe man raises his hand.\n\nBefore touching him, the lights go out.\n\nWhen they return, the man is gone.\n\nA small black mark is on Adam's hand."],
-s17:["The House Across","Adam enters the house across the street.\n\nIt is empty, but a large city map hangs on the wall.\n\nThree places are circled:\n\nHouse 17.\n\nThe old cemetery.\n\nAn abandoned building outside the city."],
-s18:["The Forbidden Name","The child says:\n\n“Do not say his name.”\n\n“Whose name?”\n\nThe child writes one letter on the floor.\n\nA.\n\nThen quickly erases it.\n\n“It is not a name… it is a door.”"],
-s19:["The Lower Corridor","Adam descends.\n\nThe corridor is much older than the house above it.\n\nPhotographs of people from the city cover the walls.\n\nSome are still alive."],
-s20:["Closing the Door","Adam closes the basement door.\n\nThree slow knocks come from the other side.\n\nThen he hears knocking behind him."],
-s21:["The Shadow","Adam follows the shadow into a small room.\n\nThe shadow stops in front of a mirror.\n\nThe mirror does not reflect Adam.\n\nIt reflects a child standing beside him."],
-s22:["Silence","Adam returns to the room.\n\nThe photographs are gone.\n\nOnly one remains.\n\nIt shows an entire city underground."],
-s23:["The Name","Adam tries to remember.\n\nThe name returns slowly:\n\n“Sami.”\n\nSami was with him in the house.\n\nThen something happened.\n\nSomething that made Adam forget."],
-s24:["The Black Key","The black key opens a door that was not there before.\n\nBeyond it is a corridor lit by a faint blue light.\n\nA message is written on the wall:\n\n“The other side is not a place.”"],
-s25:["Refusal","Adam refuses the key.\n\nThe man smiles.\n\n“Then you will find the door the hard way.”\n\nHe disappears.\n\nThen the entire city seems to speak at once."],
-s26:["The Long Corridor","Adam reaches an exit.\n\nHe opens it.\n\nInstead of the street, he sees the outside of House 17.\n\nHe is trapped in a loop."],
-s27:["The Mark","The mark on Adam's hand moves.\n\nIt becomes the same symbol from the basement.\n\nOne word appears:\n\n“Remember.”"],
-s28:["The Map","The three circles form a triangle.\n\nAt its center is a place missing from every modern map.\n\nIts name:\n\n“The Threshold.”"],
-s29:["The Road","Adam takes the map.\n\nOutside, the roads change on it.\n\nA new path leads directly to the old cemetery."],
-s30:["The Door","The child says:\n\n“The door is you.”\n\nAdam does not understand.\n\nImages appear:\n\nThe house.\n\nThe child.\n\nThe man.\n\nAdam at another age."],
-s31:["Adam","The child answers:\n\n“You were not the victim.”\n\nSilence.\n\n“You were the key.”"],
-s32:["The Photograph","Adam examines a photograph.\n\nOn the back is the date 2003.\n\nThen he sees another photo of the same person.\n\nTheir age has not changed."],
-s33:["The Underground City","Adam reaches a huge chamber underground.\n\nA black door stands in the center with no handle.\n\nAbove it is the same symbol.\n\nWords on the floor:\n\n“Choose who returns.”"],
-s34:["The Knock","Adam turns.\n\nNobody.\n\nThe door he closed is open.\n\nInside he sees himself standing in darkness."],
-s35:["The Voice","Adam remains still.\n\nA voice behind him says:\n\n“This time you will not run.”\n\nThen he hears Sami."],
-s36:["Sami","The child in the mirror says:\n\n“I was waiting for you to remember.”\n\n“What happened to you?”\n\n“You chose to forget me.”"],
-s37:["The Mirror","Adam breaks the mirror.\n\nEvery piece reflects a different version of him.\n\nOne smiles.\n\nOne cries.\n\nOne says:\n\n“Do not open the door.”"],
-s38:["The Final Image","The photograph shows House 17 from above.\n\nThe city is dark.\n\nA huge circle surrounds the city."],
-s39:["Fire","Adam burns the photograph.\n\nFor a moment he thinks it is over.\n\nThen the smoke forms a man.\n\n“Finally, you chose.”"],
-s40:["The Full Memory","Adam remembers.\n\nHe and Sami were children.\n\nThey found a door beneath the house.\n\nAdam opened it.\n\nSami entered first.\n\nThe door changed.\n\nFrom that day, everyone forgot Sami… except Adam."],
-s41:["Forgetting","Adam refuses to recover his memory.\n\nThe city returns to normal.\n\nBut House 17 still exists."],
-s42:["The Other Side","Adam crosses the door.\n\nThere is no darkness and no light.\n\nOnly a city identical to his own.\n\nEvery person has Adam's face."],
-s43:["The Closed Door","Adam closes the door.\n\nThe voice disappears.\n\nRain sounds normal again.\n\nBut the black key is in his pocket."],
-s44:["The City's Voices","Thousands of voices say Adam's name.\n\nThen one voice says:\n\n“Sami.”"],
-s45:["The House","Adam returns to House 17.\n\nSami stands inside, the same age as Adam.\n\n“You took long enough.”"],
-s46:["Breaking the Loop","Adam realizes the loop depends on his fear.\n\nHe stops running.\n\nThe house begins to collapse.\n\nOnly one door remains."],
-s47:["Rejecting the Mark","Adam removes the mark.\n\nIt disappears.\n\nBut one of his memories disappears with it."],
-s48:["The Threshold","Adam reaches the place at the center of the map.\n\nA stone doorway stands alone.\n\nSami's voice says:\n\n“If you open it, you cannot choose who returns.”"],
-s49:["The Decision","Adam ignores the Threshold.\n\nMorning comes.\n\nEverything looks normal.\n\nBut a new photo appears on his phone.\n\nAdam stands in front of House 17, with Sami behind him."],
-s50:["The Cemetery","Adam reaches the old cemetery.\n\nHe finds a grave named Sami.\n\nDate: 2003.\n\nBut the grave looks brand new."],
-s51:["Tearing the Map","Adam tears the map.\n\nEach piece becomes a paper with a name.\n\nThe last name is his."],
-s52:["The Truth","Adam finally understands.\n\nThe house was not hunting him.\n\nIt was trying to make him remember.\n\nSami was not a ghost.\n\nHe was the person who stayed behind when Adam closed the Veil."],
-s53:["Denial","Adam rejects the truth.\n\nEverything disappears.\n\nHe wakes at home.\n\n11:47 PM.\n\nA message waits:\n\n“You cannot forget us twice.”"],
-s54:["The Photos","Every photo points to the same day.\n\nApril 22, 2003.\n\nThe final image shows Adam and Sami before the door."],
-s55:["Leaving","Adam leaves.\n\nOn the wall is a message:\n\n“You can leave, but you cannot leave the door.”"],
-s56:["Choosing Sami","Adam chooses Sami.\n\nThe black door opens.\n\nSami emerges.\n\nBut Adam feels something move into him."],
-s57:["Choosing Adam","Adam chooses himself.\n\nThe door closes.\n\nThe city returns to normal.\n\nSami remains on the other side."],
-s58:["Choosing Nobody","Adam refuses to choose.\n\nThe door begins collapsing.\n\nThe underground city cracks apart.\n\nSami says:\n\n“This is the first time you chose everyone.”"],
-s59:["Adam's Double","Adam enters.\n\nAnother version of himself stands there.\n\n“I am the you who stayed here.”"],
-s60:["The Final Escape","Adam leaves.\n\nThe voices stop.\n\nSunrise arrives.\n\nBut his shadow moves by itself."],
-s61:["Sami","Adam calls Sami's name.\n\nThe answer comes from everywhere:\n\n“I am here.”\n\nA small hand appears from the darkness."],
-s62:["Why?","Sami says:\n\n“You were afraid. I chose to stay instead of you.”"],
-s63:["The Exit","Adam reaches out.\n\nSami does not move.\n\n“If I leave, someone else must stay.”"],
-s64:["The Warning","Adam believes the warning.\n\nHe leaves the door closed.\n\nThe city becomes normal again.\n\nHouse 17 disappears."],
-s65:["Opening the Door","Adam opens the door.\n\nThere is nothing behind it.\n\nThen Sami appears.\n\n“I knew you would open it.”"],
-s66:["The Confrontation","Adam faces the man.\n\n“I do not decide the ending. You do.”"],
-s67:["Running","Adam runs.\n\nThe house closes behind him.\n\nWhen he reaches the main road, the city is gone.\n\nOnly desert remains."],
-s68:["The Final Door","Adam stands before the door.\n\nEverything began here.\n\nTwo choices remain:\n\n“Open”\n\n“Remember”"],
-s69:["Closing the Veil","Adam closes the door.\n\nSami's final voice reaches him:\n\n“This time… I will not forget you.”\n\nThe mark disappears.\n\nSunrise comes."],
-s70:["Normal Life","Adam leaves everything behind.\n\nMonths later life becomes normal.\n\nBut every year, on the same day, a message arrives:\n\n“Do you remember?”"],
-s71:["Beyond the Veil","Adam crosses.\n\nHe sees the true city behind the Veil.\n\nEveryone lost there is present.\n\nIncluding Sami.\n\nBut the door is closing."],
-s72:["Sami Returns","Adam reaches out.\n\nSami returns to the real world.\n\nHouse 17 disappears.\n\nIn the final shot, a distant window is lit."],
-s73:["Who Are You?","Sami smiles.\n\n“I am the person you were looking for.”\n\nBut Adam knows there is something else he has not told him."],
-s74:["The Grave","Adam opens the grave.\n\nThere is no body.\n\nOnly an old photograph.\n\nAdam stands before House 17.\n\nSami is behind him.\n\nThe date is not 2003.\n\nIt is today."],
-
-endGood:["ENDING — BEYOND THE VEIL","Adam reached the truth and saved Sami.\n\nBut the Veil did not disappear completely.\n\nSami says:\n\n“That was only the first gate.”\n\nTHE VEIL — SEASON 1"],
-endDark:["ENDING — THE PRICE","Adam chose himself.\n\nThe gate closed, but Sami remained behind it.\n\nEvery night at 11:47, Adam sees a figure outside his window.\n\nA shadow without a body."],
-endFree:["ENDING — FREEDOM","Adam refused to sacrifice another person.\n\nHe closed the Veil from the inside.\n\nHouse 17 disappeared.\n\nOnly one black key remained."],
-endOpen:["ENDING — THE OPEN DOOR","Adam thought the story was over.\n\nBut the door remained open.\n\nA week later, House 17 appeared in another city.\n\nInside was a new photograph.\n\nTHE VEIL WILL RETURN."]
-};
-
-Object.keys(ENGLISH).forEach(k=>{
-  if(DATA.en.scenes[k]){
-    DATA.en.scenes[k].title=ENGLISH[k][0];
-    DATA.en.scenes[k].text=ENGLISH[k][1];
-  }
-});
-
-let lang=localStorage.getItem("veil_lang")||"ar";
-let state=JSON.parse(localStorage.getItem("veil_state")||"null")||{
-  scene:"s1",
-  chapter:1,
-  items:[]
-};
-
-function save(){
-  localStorage.setItem("veil_state",JSON.stringify(state));
-  localStorage.setItem("veil_lang",lang);
-}
-
-function currentData(){
-  return DATA[lang];
-}
-
-function sceneData(id){
-  return currentData().scenes[id];
-}
-
-function startGame(){
-  state={
-    scene:"s1",
-    chapter:1,
-    items:[]
-  };
-  save();
-  showGame();
-  render();
-}
-
-function continueGame(){
-  showGame();
-  render();
-}
-
-function showGame(){
-  document.getElementById("home").style.display="none";
-  document.getElementById("game").classList.add("active");
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function addItems(scene){
-  if(!scene.items)return;
-
-  scene.items.forEach(item=>{
-    if(!state.items.includes(item)){
-      state.items.push(item);
+  /* =========================
+     MOBILE MENU
+  ========================= */
+
+  function toggleMenu() {
+
+    const nav = document.querySelector(".nav");
+
+    if (nav.style.display === "flex") {
+      nav.style.display = "";
+    } else {
+      nav.style.display = "flex";
+      nav.style.position = "absolute";
+      nav.style.top = "74px";
+      nav.style.right = "4%";
+      nav.style.left = "4%";
+      nav.style.padding = "18px";
+      nav.style.background = "white";
+      nav.style.borderRadius = "18px";
+      nav.style.flexDirection = "column";
+      nav.style.boxShadow = "0 15px 40px rgba(0,0,0,.12)";
     }
-  });
-}
-
-function choose(next){
-
-  if(next==="restart"){
-    startGame();
-    return;
   }
 
-  if(next==="endGood"||next==="endDark"||next==="endFree"||next==="endOpen"){
-    state.scene=next;
-    state.chapter=12;
-    save();
-    render();
-    return;
+
+  /* =========================
+     SCROLL
+  ========================= */
+
+  function scrollToStories() {
+    document
+      .getElementById("stories")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
   }
 
-  const target=sceneData(next);
 
-  if(!target)return;
-
-  state.scene=next;
-
-  if(target.chapter>state.chapter){
-    state.chapter=target.chapter;
+  function scrollToCategories() {
+    document
+      .getElementById("categories")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
   }
 
-  addItems(target);
-  save();
-  render();
-}
 
-function render(){
+  /* =========================
+     SEARCH
+  ========================= */
 
-  const scene=sceneData(state.scene);
+  function searchStories() {
 
-  if(!scene)return;
+    const input =
+      document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
 
-  addItems(scene);
-  save();
+    const stories =
+      document.querySelectorAll(".story");
 
-  document.documentElement.lang=lang;
-  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+    stories.forEach(story => {
 
-  const d=currentData();
+      const title =
+        story
+          .dataset
+          .title
+          .toLowerCase();
 
-  document.getElementById("chapterLabel").textContent=
-    `${d.chapter} ${scene.chapter} ${lang==="ar"?"من":"OF"} 12`;
+      const text =
+        story
+          .innerText
+          .toLowerCase();
 
-  document.getElementById("progress").style.width=
-    `${Math.max(8.33,scene.chapter/12*100)}%`;
+      if (
+        !input ||
+        title.includes(input) ||
+        text.includes(input)
+      ) {
 
-  const sceneEl=document.getElementById("scene");
+        story.style.display = "";
 
-  let html=`
-    <div class="scene-number">
-      ${d.chapter} ${scene.chapter}
-    </div>
+      } else {
 
-    <h2>${escapeHtml(scene.title)}</h2>
+        story.style.display = "none";
 
-    <p>${escapeHtml(scene.text)}</p>
-  `;
+      }
 
-  if(scene.items && scene.items.length){
-    html+=`
-      <div class="clue">
-        ${scene.items.map(x=>"✓ "+escapeHtml(x)).join("<br>")}
-      </div>
-    `;
+    });
+
   }
 
-  if(state.items.length){
-    html+=`
-      <div class="inventory">
-        <div class="inventory-title">${d.inventory}</div>
-        <div class="items">
-          ${state.items.map(x=>`<span class="item">${escapeHtml(x)}</span>`).join("")}
-        </div>
-      </div>
-    `;
+
+  /* =========================
+     FILTER
+  ========================= */
+
+  function filterStories(category) {
+
+    const stories =
+      document.querySelectorAll(".story");
+
+    stories.forEach(story => {
+
+      if (
+        story.dataset.category === category
+      ) {
+
+        story.style.display = "";
+
+      } else {
+
+        story.style.display = "none";
+
+      }
+
+    });
+
+    document
+      .getElementById("stories")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
   }
 
-  if(scene.ending){
-    html+=`
-      <div class="choices">
-        <button class="choice" onclick="choose('restart')">
-          ↻ ${d.start}
-        </button>
-      </div>
-    `;
-  }else{
-    html+=`
-      <div class="choices">
-        ${scene.choices.map(c=>`
-          <button class="choice" onclick="choose('${c[1]}')">
-            ${escapeHtml(c[0])}
-          </button>
-        `).join("")}
-      </div>
-    `;
+
+  /* =========================
+     STORY
+  ========================= */
+
+  function openStory(title) {
+
+    /*
+      مؤقتًا نعرض رسالة واضحة.
+      في الخطوة التالية سنربط كل قصة
+      بصفحة القراءة داخل نفس موقع KIDORA.
+    */
+
+    alert(
+      "📖 " +
+      title +
+      "\n\nالقصة ستفتح داخل KIDORA."
+    );
+
   }
 
-  sceneEl.innerHTML=html;
 
-  updateHomeTexts();
-  renderChapters();
-}
+  /* =========================
+     LANGUAGE
+  ========================= */
 
-function renderChapters(){
+  function switchLanguage() {
 
-  const list=document.getElementById("chapterList");
+    const current =
+      document.documentElement.lang;
 
-  let html="";
+    if (current === "ar") {
 
-  for(let i=1;i<=12;i++){
+      localStorage.setItem(
+        "kidora_language",
+        "en"
+      );
 
-    let cls="chapter";
+      alert(
+        "English version will be activated in the next step."
+      );
 
-    if(i<=state.chapter) cls+=" unlocked";
-    if(i===state.chapter) cls+=" current";
+    } else {
 
-    html+=`
-      <div class="${cls}">
-        ${lang==="ar"?"الفصل":"CHAPTER"} ${i}
-        ${i<state.chapter?" ✓":i===state.chapter?" •":""}
-      </div>
-    `;
+      localStorage.setItem(
+        "kidora_language",
+        "ar"
+      );
+
+      alert(
+        "سيتم تفعيل النسخة العربية."
+      );
+
+    }
+
   }
 
-  list.innerHTML=html;
-}
 
-function updateHomeTexts(){
-
-  const d=currentData();
-
-  document.getElementById("heroBadge").textContent=d.heroBadge;
-  document.getElementById("heroTitle").textContent=d.heroTitle;
-  document.getElementById("heroDesc").textContent=d.heroDesc;
-  document.getElementById("startBtn").textContent=d.start;
-  document.getElementById("continueBtn").textContent=d.continue;
-
-  document.getElementById("meta1").textContent=d.chapters;
-  document.getElementById("meta2").textContent=d.endings;
-  document.getElementById("meta3").textContent=d.save;
-  document.getElementById("meta4").textContent=d.language;
-
-  document.getElementById("resetTitle").textContent=d.resetTitle;
-  document.getElementById("resetText").textContent=d.resetText;
-  document.getElementById("resetYes").textContent=d.resetYes;
-  document.getElementById("resetNo").textContent=d.resetNo;
-
-  document.querySelector(".ad-space").textContent=d.ad;
-
-  document.getElementById("langBtn").textContent=
-    lang==="ar"?"EN":"عربي";
-}
-
-function toggleLanguage(){
-
-  lang=lang==="ar"?"en":"ar";
-
-  save();
-
-  updateHomeTexts();
-
-  if(document.getElementById("game").classList.contains("active")){
-    render();
-  }
-}
-
-function openReset(){
-  document.getElementById("resetModal").classList.add("show");
-}
-
-function closeReset(){
-  document.getElementById("resetModal").classList.remove("show");
-}
-
-function resetGame(){
-
-  localStorage.removeItem("veil_state");
-
-  state={
-    scene:"s1",
-    chapter:1,
-    items:[]
-  };
-
-  closeReset();
-
-  startGame();
-}
-
-function escapeHtml(text){
-
-  return String(text)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-updateHomeTexts();
+  document
+    .getElementById("languageBtn")
+    .addEventListener(
+      "click",
+      switchLanguage
+    );
 
 </script>
 
