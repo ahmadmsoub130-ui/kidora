@@ -1,171 +1,99 @@
-// ========================================
-// KIDORA - Main App
-// ========================================
+document.addEventListener("DOMContentLoaded", function () {
 
-document.addEventListener("DOMContentLoaded", () => {
+  const storiesGrid = document.getElementById("storiesGrid");
+  const searchInput = document.getElementById("storySearch");
+  const languageButton = document.getElementById("languageToggle");
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const categoryButtons = document.querySelectorAll("[data-category]");
+  const yearElements = document.querySelectorAll("[data-year]");
 
-  const savedLanguage = localStorage.getItem("kidora_lang") || "ar";
-  let currentLanguage = savedLanguage;
+  let language = localStorage.getItem("kidora_lang") || "ar";
+  let currentCategory = "all";
+  let searchText = "";
 
-  // ----------------------------------------
-  // Language
-  // ----------------------------------------
+  function escapeHTML(text) {
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
 
-  function setLanguage(lang) {
-    currentLanguage = lang;
-    localStorage.setItem("kidora_lang", lang);
-
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-
-    document.querySelectorAll("[data-ar][data-en]").forEach(element => {
-      element.textContent =
-        lang === "ar"
-          ? element.getAttribute("data-ar")
-          : element.getAttribute("data-en");
-    });
-
-    const languageButton = document.getElementById("languageToggle");
+  function updateLanguage() {
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
 
     if (languageButton) {
-      languageButton.textContent =
-        lang === "ar" ? "English" : "العربية";
+      languageButton.textContent = language === "ar" ? "English" : "العربية";
+    }
+
+    if (searchInput) {
+      searchInput.placeholder =
+        language === "ar"
+          ? "ابحث عن قصة..."
+          : "Search for a story...";
     }
 
     renderStories();
-    updateSearchPlaceholder();
   }
-
-  function updateSearchPlaceholder() {
-    const searchInput = document.getElementById("storySearch");
-
-    if (!searchInput) return;
-
-    searchInput.placeholder =
-      currentLanguage === "ar"
-        ? "ابحث عن قصة..."
-        : "Search for a story...";
-  }
-
-  const languageToggle = document.getElementById("languageToggle");
-
-  if (languageToggle) {
-    languageToggle.addEventListener("click", () => {
-      setLanguage(currentLanguage === "ar" ? "en" : "ar");
-    });
-  }
-
-  // ----------------------------------------
-  // Story elements
-  // ----------------------------------------
-
-  const storiesContainer = document.getElementById("storiesGrid");
-  const searchInput = document.getElementById("storySearch");
-
-  let activeCategory = "all";
-
-  // ----------------------------------------
-  // Category names
-  // ----------------------------------------
-
-  const categoryNames = {
-    ar: {
-      all: "كل القصص",
-      ramadan: "رمضان",
-      bedtime: "قبل النوم",
-      animals: "الحيوانات",
-      adventures: "مغامرات",
-      world: "حول العالم",
-      learning: "تعلم"
-    },
-
-    en: {
-      all: "All Stories",
-      ramadan: "Ramadan",
-      bedtime: "Bedtime",
-      animals: "Animals",
-      adventures: "Adventures",
-      world: "Around the World",
-      learning: "Learning"
-    }
-  };
-
-  // ----------------------------------------
-  // Category icons
-  // ----------------------------------------
-
-  const categoryIcons = {
-    all: "📚",
-    ramadan: "🌙",
-    bedtime: "😴",
-    animals: "🐾",
-    adventures: "🗺️",
-    world: "🌍",
-    learning: "🧠"
-  };
-
-  // ----------------------------------------
-  // Get category name
-  // ----------------------------------------
-
-  function getCategoryName(category) {
-    return categoryNames[currentLanguage][category] ||
-           categoryNames[currentLanguage].all;
-  }
-
-  // ----------------------------------------
-  // Render story cards
-  // ----------------------------------------
 
   function renderStories() {
 
-    if (!storiesContainer || typeof STORIES === "undefined") {
+    if (!storiesGrid) return;
+
+    if (!Array.isArray(STORIES) || STORIES.length === 0) {
+      storiesGrid.innerHTML = `
+        <div style="text-align:center;padding:40px;">
+          <h3>لا توجد قصص</h3>
+          <p>لم يتم تحميل ملف القصص.</p>
+        </div>
+      `;
       return;
     }
 
-    const searchValue = searchInput
-      ? searchInput.value.trim().toLowerCase()
-      : "";
+    const filteredStories = STORIES.filter(function (story) {
 
-    let filteredStories = STORIES.filter(story => {
-
-      const matchesCategory =
-        activeCategory === "all" ||
-        story.cat === activeCategory;
+      const categoryMatch =
+        currentCategory === "all" ||
+        story.cat === currentCategory;
 
       const title =
-        story.title[currentLanguage].toLowerCase();
+        story.title?.[language] ||
+        story.title?.ar ||
+        "";
 
       const description =
-        story.description[currentLanguage].toLowerCase();
+        story.desc?.[language] ||
+        story.desc?.ar ||
+        "";
 
-      const matchesSearch =
-        !searchValue ||
-        title.includes(searchValue) ||
-        description.includes(searchValue);
+      const searchMatch =
+        !searchText ||
+        title.toLowerCase().includes(searchText.toLowerCase()) ||
+        description.toLowerCase().includes(searchText.toLowerCase());
 
-      return matchesCategory && matchesSearch;
+      return categoryMatch && searchMatch;
     });
 
     if (filteredStories.length === 0) {
 
-      storiesContainer.innerHTML = `
-        <div class="empty-stories">
-          <div class="empty-icon">🔎</div>
-
+      storiesGrid.innerHTML = `
+        <div style="
+          grid-column:1/-1;
+          text-align:center;
+          padding:50px 20px;
+        ">
+          <div style="font-size:50px;">📚</div>
           <h3>
-            ${
-              currentLanguage === "ar"
-                ? "لم نجد قصة بهذا الاسم"
-                : "No story found"
-            }
+            ${language === "ar" ? "لم نجد هذه القصة" : "No stories found"}
           </h3>
-
           <p>
             ${
-              currentLanguage === "ar"
-                ? "جرّب البحث بكلمة أخرى."
-                : "Try searching with another word."
+              language === "ar"
+                ? "جرب البحث عن قصة أخرى."
+                : "Try another search."
             }
           </p>
         </div>
@@ -174,284 +102,138 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    storiesContainer.innerHTML = filteredStories
-      .map(createStoryCard)
-      .join("");
+    storiesGrid.innerHTML = filteredStories.map(function (story) {
 
-    attachStoryButtons();
-  }
+      const title =
+        story.title?.[language] ||
+        story.title?.ar ||
+        "Story";
 
-  // ----------------------------------------
-  // Create story card
-  // ----------------------------------------
+      const description =
+        story.desc?.[language] ||
+        story.desc?.ar ||
+        "";
 
-  function createStoryCard(story) {
+      return `
+        <article class="story-card">
 
-    const title = story.title[currentLanguage];
-    const description = story.description[currentLanguage];
-
-    const readText =
-      currentLanguage === "ar"
-        ? "اقرأ القصة"
-        : "Read Story";
-
-    const minuteText =
-      currentLanguage === "ar"
-        ? `${story.time} دقائق`
-        : `${story.time} min`;
-
-    return `
-      <article
-        class="story-card"
-        data-story-id="${story.id}"
-      >
-
-        <div class="story-icon">
-          ${story.icon}
-        </div>
-
-        <div class="story-card-content">
-
-          <div class="story-category">
-            ${categoryIcons[story.cat] || "📖"}
-            ${getCategoryName(story.cat)}
+          <div class="story-card-icon">
+            ${escapeHTML(story.icon || "📖")}
           </div>
 
-          <h3>
-            ${escapeHTML(title)}
-          </h3>
+          <div class="story-card-content">
 
-          <p>
-            ${escapeHTML(description)}
-          </p>
+            <div class="story-category">
+              ${escapeHTML(story.cat)}
+            </div>
 
-          <div class="story-card-bottom">
+            <h3>
+              ${escapeHTML(title)}
+            </h3>
 
-            <span class="story-time">
-              ⏱️ ${minuteText}
-            </span>
+            <p>
+              ${escapeHTML(description)}
+            </p>
 
-            <button
-              class="read-story-btn"
-              data-story="${story.id}"
-              type="button"
-            >
-              ${readText}
-            </button>
+            <div class="story-card-bottom">
+
+              <span>
+                ⏱️ ${escapeHTML(story.time || "3 min")}
+              </span>
+
+              <a
+                href="game.html?story=${encodeURIComponent(story.id)}"
+                class="read-story"
+                data-story="${escapeHTML(story.id)}"
+              >
+                ${language === "ar" ? "اقرأ القصة →" : "Read story →"}
+              </a>
+
+            </div>
 
           </div>
 
-        </div>
+        </article>
+      `;
 
-      </article>
-    `;
-  }
+    }).join("");
 
-  // ----------------------------------------
-  // Open story
-  // ----------------------------------------
+    document.querySelectorAll("[data-story]").forEach(function (link) {
 
-  function attachStoryButtons() {
+      link.addEventListener("click", function () {
 
-    document.querySelectorAll("[data-story]").forEach(button => {
+        const storyId = this.getAttribute("data-story");
 
-      button.addEventListener("click", () => {
+        localStorage.setItem("kidora_last_story", storyId);
+        localStorage.setItem("kidora_last_page", "0");
 
-        const storyId = button.getAttribute("data-story");
-
-        if (!storyId) return;
-
-        localStorage.setItem(
-          "kidora_last_story",
-          storyId
-        );
-
-        localStorage.setItem(
-          "kidora_last_page",
-          "0"
-        );
-
-        window.location.href =
-          `game.html?story=${encodeURIComponent(storyId)}`;
       });
 
     });
   }
-
-  // ----------------------------------------
-  // Search
-  // ----------------------------------------
 
   if (searchInput) {
 
-    searchInput.addEventListener("input", () => {
+    searchInput.addEventListener("input", function () {
+      searchText = this.value.trim();
       renderStories();
     });
 
   }
 
-  // ----------------------------------------
-  // Category buttons
-  // ----------------------------------------
+  categoryButtons.forEach(function (button) {
 
-  document.querySelectorAll("[data-category]").forEach(button => {
+    button.addEventListener("click", function () {
 
-    button.addEventListener("click", () => {
+      currentCategory =
+        this.getAttribute("data-category") || "all";
 
-      activeCategory =
-        button.getAttribute("data-category") || "all";
-
-      document.querySelectorAll("[data-category]").forEach(item => {
+      categoryButtons.forEach(function (item) {
         item.classList.remove("active");
       });
 
-      button.classList.add("active");
+      this.classList.add("active");
 
       renderStories();
 
-      const storiesSection =
-        document.getElementById("stories");
-
-      if (storiesSection) {
-        storiesSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
     });
 
   });
 
-  // ----------------------------------------
-  // Mobile menu
-  // ----------------------------------------
+  if (languageButton) {
 
-  const menuButton =
-    document.getElementById("menuToggle");
+    languageButton.addEventListener("click", function () {
 
-  const mobileMenu =
-    document.getElementById("mobileMenu");
+      language = language === "ar" ? "en" : "ar";
 
-  if (menuButton && mobileMenu) {
+      localStorage.setItem("kidora_lang", language);
 
-    menuButton.addEventListener("click", () => {
-
-      mobileMenu.classList.toggle("open");
+      updateLanguage();
 
     });
 
-    mobileMenu
-      .querySelectorAll("a")
-      .forEach(link => {
-
-        link.addEventListener("click", () => {
-          mobileMenu.classList.remove("open");
-        });
-
-      });
   }
 
-  // ----------------------------------------
-  // Continue reading
-  // ----------------------------------------
+  if (menuToggle && mobileMenu) {
 
-  function setupContinueReading() {
+    menuToggle.addEventListener("click", function () {
+      mobileMenu.classList.toggle("open");
+    });
 
-    const lastStory =
-      localStorage.getItem("kidora_last_story");
+    mobileMenu.querySelectorAll("a").forEach(function (link) {
 
-    const continueBox =
-      document.getElementById("continueReading");
-
-    if (!lastStory || !continueBox) return;
-
-    const story =
-      STORIES.find(item => item.id === lastStory);
-
-    if (!story) return;
-
-    const title =
-      story.title[currentLanguage];
-
-    const text =
-      currentLanguage === "ar"
-        ? "تابع قصتك"
-        : "Continue reading";
-
-    continueBox.innerHTML = `
-      <div class="continue-icon">
-        ${story.icon}
-      </div>
-
-      <div class="continue-info">
-
-        <small>
-          ${text}
-        </small>
-
-        <strong>
-          ${escapeHTML(title)}
-        </strong>
-
-      </div>
-
-      <button
-        type="button"
-        id="continueStoryButton"
-      >
-        ${
-          currentLanguage === "ar"
-            ? "متابعة"
-            : "Continue"
-        }
-      </button>
-    `;
-
-    continueBox.style.display = "flex";
-
-    const continueButton =
-      document.getElementById("continueStoryButton");
-
-    if (continueButton) {
-
-      continueButton.addEventListener("click", () => {
-
-        window.location.href =
-          `game.html?story=${encodeURIComponent(lastStory)}`;
-
+      link.addEventListener("click", function () {
+        mobileMenu.classList.remove("open");
       });
 
-    }
+    });
+
   }
 
-  // ----------------------------------------
-  // Escape HTML
-  // ----------------------------------------
-
-  function escapeHTML(value) {
-
-    return String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-  // ----------------------------------------
-  // Current year
-  // ----------------------------------------
-
-  document.querySelectorAll("[data-year]").forEach(element => {
+  yearElements.forEach(function (element) {
     element.textContent = new Date().getFullYear();
   });
 
-  // ----------------------------------------
-  // Initial setup
-  // ----------------------------------------
-
-  setLanguage(currentLanguage);
-
-  setupContinueReading();
+  updateLanguage();
 
 });
